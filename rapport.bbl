@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{njordgit}
+Réperoire \textsc{G}it du projet \textsc{N}jord.
+\newblock https://github.com/NjordProject.
+
+\bibitem{njordblog}
+Blog du projet \textsc{N}jord.
+\newblock http://njordproject.github.io/.
+
+\bibitem{faclab}
+Site \textsc{I}nternet du \textsc{F}aclab.
+\newblock http://www.faclab.org/.
+
+\bibitem{bitcraze}
+Site \textsc{I}nternet de \textsc{B}itcraze.
+\newblock http://www.bitcraze.se/.
+
+\end{thebibliography}
