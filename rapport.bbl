@@ -1,5 +1,29 @@
 \begin{thebibliography}{1}
 
+\bibitem{python}
+Site \textsc{I}nternet de \textsc{P}ython.
+\newblock https://www.python.org/.
+
+\bibitem{redis}
+Site \textsc{I}nternet de \textsc{R}edis.
+\newblock http://redis.io/.
+
+\bibitem{numpy}
+Site \textsc{I}nternet de \textsc{N}umpy.
+\newblock http://www.numpy.org/.
+
+\bibitem{matplotlib}
+Site \textsc{I}nternet de \textsc{M}at\textsc{P}lot\textsc{L}ib.
+\newblock http://matplotlib.org/.
+
+\bibitem{bitcraze}
+Site \textsc{I}nternet de \textsc{B}itcraze.
+\newblock http://www.bitcraze.se/.
+
+\bibitem{faclab}
+Site \textsc{I}nternet du \textsc{F}aclab.
+\newblock http://www.faclab.org/.
+
 \bibitem{njordgit}
 Réperoire \textsc{G}it du projet \textsc{N}jord.
 \newblock https://github.com/NjordProject.
@@ -7,13 +31,5 @@ Réperoire \textsc{G}it du projet \textsc{N}jord.
 \bibitem{njordblog}
 Blog du projet \textsc{N}jord.
 \newblock http://njordproject.github.io/.
-
-\bibitem{faclab}
-Site \textsc{I}nternet du \textsc{F}aclab.
-\newblock http://www.faclab.org/.
-
-\bibitem{bitcraze}
-Site \textsc{I}nternet de \textsc{B}itcraze.
-\newblock http://www.bitcraze.se/.
 
 \end{thebibliography}

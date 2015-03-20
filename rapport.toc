@@ -1,13 +1,24 @@
 \select@language {french}
-\contentsline {chapter}{\numberline {1}Environnement}{3}
-\contentsline {section}{\numberline {1.1}Gestionnaire de version}{3}
-\contentsline {section}{\numberline {1.2}Communication}{3}
-\contentsline {section}{\numberline {1.3}Fabrication}{3}
-\contentsline {chapter}{\numberline {2}Premier drone}{5}
-\contentsline {section}{\numberline {2.1}Composants}{5}
-\contentsline {subsection}{\numberline {2.1.1}Microcontr\IeC {\^o}lleur}{5}
-\contentsline {subsection}{\numberline {2.1.2}Equilibrage et localisation}{6}
-\contentsline {subsection}{\numberline {2.1.3}Communication avec le serveur}{7}
-\contentsline {subsection}{\numberline {2.1.4}Contr\IeC {\^o}le moteur}{7}
-\contentsline {section}{\numberline {2.2}Circuit}{8}
-\contentsline {chapter}{\numberline {3}Deuxi\IeC {\`e}me drone}{10}
+\contentsline {chapter}{\numberline {1}Serveur}{3}
+\contentsline {section}{\numberline {1.1}Principe de fonctionnement}{3}
+\contentsline {subsection}{\numberline {1.1.1}Mod\IeC {\`e}le du r\IeC {\'e}seau}{3}
+\contentsline {subsection}{\numberline {1.1.2}Fonctionnement interne du serveur}{4}
+\contentsline {section}{\numberline {1.2}Impl\IeC {\'e}mentation}{5}
+\contentsline {section}{\numberline {1.3}R\IeC {\'e}sultat}{6}
+\contentsline {section}{\numberline {1.4}Envoi d'ordres}{7}
+\contentsline {chapter}{\numberline {2}Premier drone}{8}
+\contentsline {section}{\numberline {2.1}Composants}{8}
+\contentsline {subsection}{\numberline {2.1.1}Microcontr\IeC {\^o}leur}{9}
+\contentsline {subsection}{\numberline {2.1.2}Equilibrage et localisation}{9}
+\contentsline {subsection}{\numberline {2.1.3}Communication avec le serveur}{10}
+\contentsline {subsection}{\numberline {2.1.4}Contr\IeC {\^o}le moteur}{10}
+\contentsline {section}{\numberline {2.2}Circuit}{10}
+\contentsline {subsection}{\numberline {2.2.1}Fabrication}{11}
+\contentsline {subsection}{\numberline {2.2.2}Premiers essais}{11}
+\contentsline {chapter}{\numberline {3}Analyse}{12}
+\contentsline {chapter}{\numberline {4}Deuxi\IeC {\`e}me drone}{13}
+\contentsline {chapter}{\numberline {5}Conclusion}{14}
+\contentsline {chapter}{\numberline {A}Suivi de projet}{15}
+\contentsline {section}{\numberline {A.1}Gestionnaire de version}{15}
+\contentsline {section}{\numberline {A.2}Communication}{15}
+\contentsline {chapter}{\numberline {B}Fonctionnement d'un gyroscope}{16}
