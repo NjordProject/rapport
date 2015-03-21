@@ -62,9 +62,21 @@ Site \textsc{I}nternet de \textsc{P}olytech \textsc{I}nstrumentation.
 Site \textsc{I}nternet de \textsc{J}eulin.
 \newblock http://www.jeulin.fr/fr/p-idp1024135/accueil.html.
 
+\bibitem{pontdiviseur}
+Page \textsc{W}ikipédia expliquant le principe du pont diviseur de tension.
+\newblock http://fr.wikipedia.org/wiki/Diviseur\_de\_tension.
+
+\bibitem{git}
+Site \textsc{I}nternet de \textsc{G}it.
+\newblock http://git-scm.com/.
+
 \bibitem{njordgit}
 Réperoire \textsc{G}it du projet \textsc{N}jörd.
 \newblock https://github.com/NjordProject.
+
+\bibitem{github}
+Site \textsc{I}nternet de \textsc{G}ithub.
+\newblock https://github.com/.
 
 \bibitem{njordblog}
 Blog du projet \textsc{N}jörd.

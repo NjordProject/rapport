@@ -373,12 +373,11 @@ pourra utiliser en programmant le micro-processeur.
 pour nous apprendre le langage \textit{Arduino}. Nous avons pu découvrir un 
 langage vraiment simple à prendre en main lorsque l'on a déjà quelques bases en 
 programmation avec des langages comme le \textit{C}, ou le \textit{C++}. Nous 
-nous sommes donc tournés vers les technologies proposées par \textit{Arduino} 
-pour le choix du microcontrôleur. Finalement, nous avons opté pour une 
-\textit{Arduino Pro Mini}. Le principal intérêt de cette carte se trouve dans 
-sa petite taille et sa légèreté, 18 sur 33 millimètres pour seulement deux 
-grammes. De plus elle propose un nombre suffisant de broches pour l'ensemble de 
-notre montage.
+nous sommes donc tournés vers les technologies proposées par Arduino pour le 
+choix du microcontrôleur. Finalement, nous avons opté pour une \textit{Arduino 
+Pro Mini}. Le principal intérêt de cette carte se trouve dans sa petite taille 
+et sa légèreté, 18 sur 33 millimètres pour seulement deux grammes. De plus elle 
+propose un nombre suffisant de broches pour l'ensemble de notre montage.
 	
 	\begin{figure}
 	  \begin{subfigure}{.5\textwidth}
@@ -408,7 +407,7 @@ physiquement.
 	Il est important de disposer d'une technologie pour assister le drone à 
 se stabiliser. Pour cela, ce dernier doit connaître "en permanence" son angle 
 d'inclinaison. Nous avons donc besoin d'un gyroscope. Le large catalogue de 
-modules \textit{Arduino} propose une pièce qui fournit un gyroscope et un 
+modules Arduino propose une pièce qui fournit un gyroscope et un 
 accéléromètre, le \textit{MPU-6050} (voir Figure \ref{mpu6050}). Ce module a 
 une taille et un poids similaires à ceux du microcontrôleur, 25.5 sur 15.2 
 millimètres pour 1.5 grammes. Un autre point fort de ce circuit est qu'il est 
@@ -776,68 +775,246 @@ pourrait pas contrôler leur vitesse. Ainsi, le drone ne pourrait que s'élever
 verticalement. Nous ne pourrions pas le faire avancer ou aller sur les côtés. 
 De plus on serait dans l'incapacité de le faire s'arrêter.
 
-	  Nous avons alors compris que nous ne pourris pas faire décoller ce 
+	  Nous avons alors compris que nous ne pourrions pas faire décoller ce 
 prototype. De plus, la soutenance approchait à grand pas. Nous n'étions qu'à 
 deux semaines de la présentation alors nous n'avions pas le temps de préparer un 
 second drone à partir d'autres composants. Nous avons toutefois préparé un code 
-pour la présentation, qui servait à montré l'influence du gyroscope sur le 
+pour la présentation, qui servait à montrer l'influence du gyroscope sur le 
 contrôle des moteurs. Lorsqu'on incline le drone, on peut voir que certains 
 moteurs réagissent à cette inclinaison afin d'essayer le stabiliser. Par 
 exemple, si on penche le drone vers l'avant, les moteurs avant vont accélérer 
 afin d'essayer de replacer le drone parallèlement au sol. De plus on peut 
 remarquer que plus l'angle d'inclinaison est important, plus les moteurs 
-accélère afin de produire plus de puissance pour essayer de stabiliser 
+accélèrent afin de produire plus de puissance pour essayer de stabiliser 
 l'appareil.
 
   \chapter{Analyse}
+    Le but de ce chapitre est de faire une analyse complète de nos erreurs et 
+des problèmes que nous avons rencontrés. Cette analyse pourra alors nous servir 
+de point de départ pour la mise en place d'un nouveau drone. Dans n'importe 
+quel projet il est important de faire le point sur les erreurs commises afin de 
+ne plus les reproduire à l'avenir.
+
+    Cette analyse parcourera l'ensemble des étapes du projet, allant de nos 
+premières réflexions jusqu'à l'assemblage de l'appareil, en passant par les 
+problèmes qui ne dépendent pas de nous mais de nos fournisseurs.
+
+    \section{Conception}
+      Dans cette section nous allons aborder les erreurs commises dès la 
+conception du drone. C'est à dire lorsque nous avons fait le choix de nos 
+composants.
+
+      \subsection{Poids}
+	Comme expliqué dans le chapitre 2, nous avons choisi de nous inspirer 
+du Crazyflie. Ce drone a un type de vol très rapide et agile, alors que nous 
+souhaitions que notre drone ait un type de vol plutôt hybride. Nous avons 
+choisi les mêmes moteurs que le Crazyflie, mais le reste des composants étaient 
+différents. En choisissant nos composants nous avons aussi calculé la somme du 
+poids de chaque composant. Cependant, afin de connaître le poids total de 
+notre drone nous avons dû estimer le poids de certains éléments (comme les 
+transistor, les diodes, les soudures, le circuit, etc...). Pour cela nous avons 
+pensé que le poids de ces éléments ne dépasserait pas 10\% de la somme calculée 
+précédement. Nous arrivions donc à un poids total de 35 grammes contre 19 
+grammes pour le Crazyflie. Nous espérions donc que cette différence de poids 
+irait à notre avantage, en ramenant le vol du drone à celui que nous 
+attendions.
+	L'erreur que nous avons commise à ce moment là, c'est d'avoir confiance 
+en nos choix. Les moteurs du Crazyflie ont une documentation vraiment très 
+pauvre. À tel point que leur puissance n'est pas même pas mentionnée. Les 
+acheter en espérant que leur couple serait suffisant était vraiment une erreur 
+naïve de notre part.
+	Comme nous avons pu le constater lors de nos premiers essais, le couple 
+de ces moteurs ne suffit pas si l'on passe par l'Arduino car notre drone est 
+beaucoup trop lourd. Par contre il semble suffire s'ils sont directement reliés 
+à l'alimentation. Nous en avons donc conclu que nous aurions dû choisir des 
+moteurs plus puissant.
+      
+      \subsection{Alimentation}
+	Après avoir commandé l'ensemble de nos composants nous nous sommes 
+rendu compte d'un problème au point de vu de l'alimentation. Les moteurs du 
+Crazyflie nécessitent une alimentation 3.3V. Nous avons établit le fait que 
+l'ensemble de notre circuit serait alimenté en 3.3V. Nous avons donc choisi la 
+même batterie que le Crazyflie, l'Arduino Pro Mini dans sa version 3.3V (et non 
+5V), etc... Cependant nous nous sommes aperçu, par la suite, que les capteurs 
+ultrasons que nous avions en notre possession demandait une alimentation de 5V. 
+Ainsi, nous savions que le premier drone que nous allions construire ne 
+pourrait pas nous permettre de faire l'application que nous avions prévue. Nous 
+aurions pu éviter ce problème en achetant que des composants fonctionnant en 5V 
+(et donc en choisissant une batterie autre que celle du Crazyflie). Nous 
+aurions pu garder les moteurs que nous avions choisis, il aurait juste fallu 
+créer un pont diviseur de tension\cite{pontdiviseur} à l'entrée de chaque 
+moteur. Un pont diviseur de tension est un montage de deux résistances très 
+simple à mettre en place, permettant de réduire une tension. Ainsi nous aurions 
+pu avoir un circuit qui fonctionne en 5V, sauf à l'entrée des moteurs où cette 
+tension aurait été réduite à 3.3V.
+
+	Nous avons tout de même pensé qu'il serait intéressant de monter ce 
+premier drone tout en sachant qu'il ne pourrait pas remplir notre cahier des 
+charges. En effet, nous avons pensé qu'il pourrait nous permettre de vérifier 
+nos calculs (autonomie de la batterie, poussé des moteurs, puissance requise, 
+...). Finalement, les résultats de nos calculs étaient plutôt proche de la 
+réalité. Nous avions estimé l'autonomie de la batterie à sept minutes. Et en 
+réalité elle se décharge en cinq minutes en faisant tourner les moteurs à plein 
+régime. Aussi, lorsque les moteurs tournent à plein régime on peut remarquer 
+que le drone se soulève et que ce qui l'empêche de décoller est le moteur 
+défectueux. On peut donc en conclure que nos calculs mécaniques étaient plutôt 
+bons.
+    
+    \section{Fournisseurs}
+      Le rôle de cette section est de présenter les problèmes venant des 
+différents fournisseur et qui donc ne dépendent pas de nous.
+      \subsection{Délais}
+	Comme nous l'avons expliqué précédement, notre école étant une école 
+d'informatique est donc peu adaptée à des projets qui ont pour objectif de 
+faire une réalisation matérielle. Nous avons alors eu besoin d'un support 
+extérieur pour les fixations moteur, la réalisation du circuit imprimé et sa 
+découpe. Mais la recherche de ces entités prend un certain temps, auquel il 
+faut ajouter le temps de création des éléments. Nous arrivons alors à un délai 
+conséquent, qui peut prendre plusieurs mois suivant l'entité. Par exemple si 
+l'on passe pas un faclab, il faut ajouter à cela le temps qu'il faut pour 
+apprendre à se servir des machines. En ce qui nous concerne nous avons eu un 
+peu de chance en rencontrant Polytech Instrumentation. Car sans eux nous 
+aurions peut-être pris encore plus de temps pour trouver des imprimantes 3D. 
+De plus, il est important de noter que le temps de réceptions des différents 
+composants électronique prend un temps considérable (de l'ordre d'un mois). Par 
+fois ce temps peut être utilisé pour avancer d'autres parties du projet (comme 
+le serveur). Mais dans l'autre cas, c'est du temps de perdu car nous avons 
+besoin des composants pour apprendre à nous en servir, développer leur 
+librairie et donc tout simplement avancer dans le projet.
+
+	Nos premiers essais ont été fait fin février. La soutenance étant 
+prévue pour le 16 mars, cela nous a laissé deux semaines de marge. Cependant, 
+ce laps de temps est loin d'être suffisant pour concevoir un second drone. 
+Ainsi, nous n'avons pas pu profiter de l'expérience aquise tout au long du 
+projet, pour mettre en place une seconde version du drone. Nous pensons alors 
+que les premiers essais auraient dû être fait fin 2014 pour nous laisser le 
+temps de produire un drone fonctionnel. Malheureusement, le projet de fin 
+d'étude, commençant en septembre, cela ne laisse que quatre mois pour produire 
+un premier drone. Ce qui est un délai vraiment trop court. Ainsi, nous pensons 
+qu'une telle application ne peut pas être faite en sept mois, avec nos moyens.
+      
+      \subsection{Fiabilité}
+	Un des avantages d'Arduino (et du Crazyflie) est que ce soit un projet 
+libre. Cependant, ceci peut devenir un désavantage. En effet, n'importe qui 
+peut produire les composants. Ainsi il est possible d'acheter des composans à 
+un prix vraiment faible comparé aux fournisseurs officiels. Mais, il n'existe 
+aucune garantie de fiabilié si on ne passe pas par ces fournisseurs et bien 
+trop souvent ce coût réduit se ressent sur la qualité des composants.
+	
+	Par exemple, nous pouvons citer les problèmes d'Arduino que nous avons 
+rencontrés. Après avoir reçu tous les composants commandés, l'Arduino manquait 
+toujours à l'appel. Ainsi après avoir attendu plus de deux mois, nous avons 
+recontacté le vendeur qui nous a assuré que le composant était arrivé chez 
+nous. Nous avons alors demandé un remboursement et commandé chez un autre 
+fournisseur. Aussi, comme nous l'avons expliqué précédement, lors de 
+l'assemblage du drone, nous nous sommes rendus compte que l'Arduino que nous 
+avions commandé n'était pas une "Arduino Pro Mini" mais une "Arduino Mini Pro" 
+(donc une contrefaçon). Et les broches de l'alimentation étaient inversées, ce 
+qui faussait tout notre circuit.
+
+      Nous pouvons citer un autre exemple, les quatres moteurs que nous avons 
+achetés proviennent du même fournisseur. Cependant, il y a un moteur défectueux 
+dans le lot.
+
+      Un dernier exemple en citant le manque de qualité du côté des composants 
+radio. Nous ne pouvons recevoir tous les messages envoyés (de l'ordre de un 
+message sur deux). Si nous utilisions ces composants dans une application 
+réelle nous ne pourrions pas parler d'une transmission fiable. De plus cela 
+pourrait être dangereux, si par exemple on demandait à un drone de se poser et 
+qu'il ne recevait pas le message. Il est important de noter qu'au début du 
+développement de la librairie, la fiabilité était encore plus médiocre. Mais en 
+recherchant sur Internet, nous avons vu des sites webs qui expliquaient qu'il 
+faut brancher un condensateur entre les deux broches de l'alimentation. Le 
+fournisseur vend donc un produit qui n'est pas du tout fiable.
+
+      Ainsi, nous avons compris que faire des économies peut être un avantage 
+(nous avons pu monter un drone pour un peu moins de 30 \euro, tandis que le 
+Crazyflie vaut plus de 120 \euro). Mais à vouloir trop chercher le moins cher, 
+on prend des risques sur la qualité des produits. Il faut donc mieux 
+rechercher, se méfier de la contrefaçon  et faire plus d'essais lors de la 
+réception des pièces.
+    
+    \section{Assemblage}
+      En ce qui concerne l'assemblage, il y a une problématique que nous 
+n'avons pas prise en compte au moment de la conception. En effet, en 
+choisissant les moteurs du Crazyflie, nous étions dépendant de leur dimension 
+atypique. Aussi, les moteurs de drones possèdent généralement des pas de vis 
+afin d'être vissés au châssis. Ce qui n'est pas le cas des moteurs que nous 
+possédons. Ainsi, nous avons plus ou moins été contraint d'utiliser le même 
+système de fixation que le Crazyflie. Cependant, nous avons omis le fait que le 
+Crazyflie est assemblé par des machines et que pour notre drone c'est nous qui 
+allions devoir le monter. Or, les machines peuvent placer des éléments avec un 
+degré de précision proche de la perfection, ce qui n'est pas le cas de l'être 
+humain. Donc, outre le fait que nos fixations risquaient de ne pas être 
+parfaitement fiables (les imprimantes 3D étant une technologie assez récente) 
+nous serions incapable de fixer les moteurs parfaitement verticaux. Ce qui 
+entraînerait un défaut dans le vol de l'appareil. En effet, si un moteur était 
+pencher plus d'un côté que les autres, cela produirait une dérive dans la 
+direction du drone. Aussi, suivant le défaut d'inclinaison des moteurs, cela 
+peut entraîner une perte de poussé des moteurs et donc rendre le décollage de 
+l'appareil plus difficile.
+    
+    \section{Expérience}
+      Il est important de noter le côté ambitieux de notre projet. En effet, 
+nous avons jusqu'à cette année suivi une formation orientée dans l'ingénerie 
+informatique. En nous spécialisant dans l'informatique embarquée, nous avons 
+mis un pied dans l'ingénerie système. Cependant, nous ne sommes pas des 
+ingénieurs système. Ainsi même pour des personnes de cette profession, un tel 
+projet nécessite plusieurs années.
+
+      De plus nous avons eu affaire à des contraintes et réfléchir à des 
+problématiques auxquelles nous ne sommes pas habitué (comparer du matériel, 
+prendre en compte des délais de livraison, contraintes système telles que la 
+tension, le courant, le poids, la puissance délivrée...). Nous avons commis 
+beaucoup de petites erreurs pour cette raison, mais si nous devions réfléchir à 
+une seconde version nous serions probablement mieux préparé car nous avons 
+appris beaucoup de ces erreurs.
   
   \chapter{Deuxième drone}
   
   \chapter{Conclusion}
-  	   Avec les technologies choisies, nous nous en sortons pour environ 23 
-\euro \space de composants pour un drone. Le kit complet du crazyflie coûte à 
-peu près 120 \euro. Nous comptions sur le fait que notre drone soit plus lourd 
-(environ 35 grammes) que le \textit{Crazyflie} (19 grammes) pour se ramener à 
-un vol un peu moins agressif. Aussi la batterie utilisée n'est pas
-      intéressante en terme d'autonomie et fournit une tension de 3.3 Volts. 
-Cependant les capteurs ultrason que nous comptions utiliser
-      fonctionnent en 5 volts. Il nous a donc fallu changer aussi de batterie, 
-ce qui nous a obligé à revoir beaucoup de choses. Car le type
-      de batterie qu'il nous faut est plus lourd, ce qui implique de changer 
-les 
-moteurs. Ceci nous entraîne à la création d'un deuxième
-      drone.
   
   \appendix
     \chapter{Suivi de projet}
       \section{Gestionnaire de version}
 	Pour ce projet nous avons choisi de former un groupe de trois 
 personnes. Travailler en équipe a ses avantages, notamment pour le partage de 
-tâches. Mais ceci peut entraîner des   problèmes de version entre les travaux de 
+tâches. Mais ceci peut entraîner des problèmes de version entre les travaux de 
 chacun. Pour palier ce problème nous avons choisi d'utiliser le gestionnaire 
-de version Git. Cet outil est vraiment pratique, puisqu'il permet de travailler 
-à distance, de mettre à jour le code de chacun des membres, d'avoir un suivi de 
-chaque implémentation, de faire des versions tests (sans toucher à la version 
-fonctionnelle) ou encore de revenir à des versions précédentes du projet. Aussi 
-cet outil nous permet de donner une visibilité à notre travail. Ainsi, si une 
-personne compte faire un projet semblable au nôtre il pourra consulter, 
-reprendre, modifier, améliorer... ce que nous avons fait. Notre répertoire Git 
-est accéssible depuis cette adresse\cite{njordgit}.
+de version Git\cite{git}. Cet outil est vraiment pratique, puisqu'il permet de 
+travailler à distance, de mettre à jour le code de chacun des membres, d'avoir 
+un suivi de chaque implémentation, de faire des versions tests (sans toucher à 
+la version fonctionnelle) ou encore de revenir à des versions précédentes du 
+projet. Aussi cet outil nous permet de donner une visibilité à notre travail. 
+Ainsi, si une personne compte faire un projet semblable au nôtre il pourra 
+consulter, reprendre, modifier, améliorer... ce que nous avons fait.
+
+	Plus précisément nous avons créé une "organization"\cite{njordgit} sur 
+\textit{GitHub}\cite{github}. Ceci nous as permis de décomposer l'ensemble du 
+projet en plusieurs répertoires. Ainsi chacun peut accéder à la partie du 
+projet qui l'intéresse sans avoir à récupérer l'ensemble de l'application. Par 
+exemple si un utilisateur souhaite ne travailler que sur le drone, il peut le 
+faire sans avoir à télécharger en plus la partie qui s'occupe du serveur. Aussi 
+un projet bien découpé est plus compréhensible et plus facilement réutilisable. 
+De plus, une "organization" peut héberger un petit site web statique. Ce qui 
+nous as permis de mettre en place notre blog\cite{njordblog}. 
 	
       \section{Communication}
 	Dès le début du projet nous avons pensé qu'il serait intéressant de 
-tenir un blog\cite{njordblog} pour communiquer notre progression. Lorsque l'on 
-se lance dans un projet de cette envergure il est toujours utile de trouver 
-des ressources sur Internet. Cela peut donner des idées et résoudre des 
-problématiques que l'on rencontre. Afin de pouvoir communiquer avec le plus de 
-monde possible, il est rédigé dans trois langues : anglais, français et 
-japonais. Il présente l'avancée du projet, nos choix de développement, quelques 
-notions de physique et les résultats de nos essais afin de guider les lecteur 
-qui veulent créer une application similaire. Nous avons souhaité présenter le 
-processus de construction d'un drone, sous une forme simple, en expliquant 
-comment les choses fonctionnent.
+tenir un blog pour communiquer notre progression. Lorsque l'on se lance dans un 
+projet de cette envergure il est toujours utile de trouver des ressources sur 
+Internet. Cela peut donner des idées et résoudre des problématiques que l'on 
+rencontre. Afin de pouvoir communiquer avec le plus de monde possible, il est 
+rédigé dans trois langues : anglais, français et japonais. Il présente 
+l'avancée du projet, nos choix de développement, quelques notions de physique 
+et les résultats de nos essais afin de guider les lecteur qui veulent créer une 
+application similaire. Nous avons souhaité présenter le processus de 
+construction d'un drone, sous une forme simple, en expliquant comment les 
+choses fonctionnent.
 	
     \chapter{Fonctionnement d'un gyroscope}
+    
+    \chapter{Calculs mécaniques}
 
   \listoffigures
   
