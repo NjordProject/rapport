@@ -1,18 +1,23 @@
 \select@language {french}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Sch\IeC {\'e}ma du r\IeC {\'e}seau}}{3}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Transitions des donn\IeC {\'e}es}}{4}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Montage mat\IeC {\'e}riel du serveur}}{5}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Repr\IeC {\'e}sentation d'un message de drone}}{5}
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Repr\IeC {\'e}sentation d'un ordre}}{6}
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Exemple de topographie}}{7}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Sch\IeC {\'e}ma du r\IeC {\'e}seau\relax }}{3}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Transitions des donn\IeC {\'e}es\relax }}{4}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Montage mat\IeC {\'e}riel du serveur\relax }}{5}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Repr\IeC {\'e}sentation d'un message de drone\relax }}{5}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Repr\IeC {\'e}sentation d'un ordre\relax }}{6}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Exemple de topographie\relax }}{7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Crazyflie}}{8}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Arduino Pro Mini}}{9}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces MPU-6050}}{9}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Module de communication sans fil NRF24L01}}{10}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Sch\IeC {\'e}ma du premier drone}}{10}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces PCB du premier drone}}{11}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Crazyflie\relax }}{8}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Image et photographie de l'Arduino Pro Mini\relax }}{9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Image et photographie du MPU6050\relax }}{10}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Image et photographie du NRF24L01\relax }}{11}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Comparaison des fiabilit\IeC {\'e}s de mesure\relax }}{11}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Image et photographie du HC-SR04\relax }}{12}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces PCB du drone\relax }}{13}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Mod\IeC {\`e}le de fixation moteur\relax }}{13}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Photographie des fixations moteur\relax }}{14}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Photographie de notre circuit avant et apr\IeC {\`e}s d\IeC {\'e}coupe\relax }}{15}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Photographie du r\IeC {\'e}sultat final\relax }}{15}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

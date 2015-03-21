@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{python}
 Site \textsc{I}nternet de \textsc{P}ython.
@@ -20,16 +20,54 @@ Site \textsc{I}nternet de \textsc{M}at\textsc{P}lot\textsc{L}ib.
 Site \textsc{I}nternet de \textsc{B}itcraze.
 \newblock http://www.bitcraze.se/.
 
+\bibitem{triangulation}
+Page \textsc{W}ikipédia sur le principe de triangulation.
+\newblock http://fr.wikipedia.org/wiki/Triangulation.
+
+\bibitem{jeff_rowberg_lib}
+Github de \textsc{Jeff} \textsc{Rowberg}.
+\newblock https://github.com/jrowberg.
+
+\bibitem{radiohead}
+Site \textsc{I}nternet de la bibliothèque \textsc{R}adio\textsc{H}ead.
+\newblock http://www.airspayce.com/mikem/arduino/RadioHead/.
+
+\bibitem{newping}
+Tim Eckel.
+\newblock Présentation de la bibliothèque \textsc{N}ew\textsc{P}ing.
+\newblock http://playground.arduino.cc/Code/NewPing.
+
+\bibitem{fritzing}
+Site \textsc{I}nternet du logiciel \textsc{F}ritzing.
+\newblock http://fritzing.org/home/.
+
+\bibitem{gitbit}
+Git\textsc{H}ub de \textsc{B}itcraze.
+\newblock https://github.com/bitcraze.
+
 \bibitem{faclab}
 Site \textsc{I}nternet du \textsc{F}aclab.
 \newblock http://www.faclab.org/.
 
+\bibitem{robafis}
+Site \textsc{I}nternet de \textsc{R}ob\textsc{AFIS}.
+\newblock http://www.robafis.fr/RobAFIS/Bienvenue.html.
+
+\bibitem{polytechinstru}
+Site \textsc{I}nternet de \textsc{P}olytech \textsc{I}nstrumentation.
+\newblock
+  http://www.polytech-instrumentation.fr/fr/p-idp1000000074/accueil.html.
+
+\bibitem{jeulin}
+Site \textsc{I}nternet de \textsc{J}eulin.
+\newblock http://www.jeulin.fr/fr/p-idp1024135/accueil.html.
+
 \bibitem{njordgit}
-Réperoire \textsc{G}it du projet \textsc{N}jord.
+Réperoire \textsc{G}it du projet \textsc{N}jörd.
 \newblock https://github.com/NjordProject.
 
 \bibitem{njordblog}
-Blog du projet \textsc{N}jord.
+Blog du projet \textsc{N}jörd.
 \newblock http://njordproject.github.io/.
 
 \end{thebibliography}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.26)  20 MAR 2015 10:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.26)  21 MAR 2015 14:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -248,13 +248,6 @@ Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks16
-)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
@@ -277,6 +270,13 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count88
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
@@ -312,33 +312,55 @@ Package babel Info: Making ? an active character on input line 247.
 \leftmarginFB=\skip46
 \parindentFFN=\dimen107
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty) (./rapport.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen108
+\captionmargin@=\dimen109
+\captionwidth=\dimen110
+\caption@tempdima=\dimen111
+\caption@indent=\dimen112
+\caption@parindent=\dimen113
+\caption@hangindent=\dimen114
+)
+\c@ContinuedFloat=\count93
+)
+\c@subfigure=\count94
+\c@subtable=\count95
+) (./rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count93
-\scratchdimen=\dimen108
+\scratchcounter=\count96
+\scratchdimen=\dimen115
 \scratchbox=\box27
-\nofMPsegments=\count94
-\nofMParguments=\count95
+\nofMPsegments=\count97
+\nofMParguments=\count98
 \everyMPshowfont=\toks17
-\MPscratchCnt=\count96
-\MPscratchDim=\dimen109
-\MPnumerator=\count97
-\makeMPintoPDFobject=\count98
+\MPscratchCnt=\count99
+\MPscratchDim=\dimen116
+\MPnumerator=\count100
+\makeMPintoPDFobject=\count101
 \everyMPtoPDFconversion=\toks18
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -388,15 +410,17 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \degres on input line 13.
-LaTeX Info: Redefining \dots on input line 13.
-LaTeX Info: Redefining \up on input line 13.
+LaTeX Info: Redefining \degres on input line 15.
+LaTeX Info: Redefining \dots on input line 15.
+LaTeX Info: Redefining \up on input line 15.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 14.
+(Font)              <12> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 14.
+(Font)              <8> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 14.
+(Font)              <6> on input line 16.
 
 [1
 
@@ -419,7 +443,7 @@ Chapitre 1.
 <img/projet_schema.png, id=18, 803.0pt x 602.25pt>
 File: img/projet_schema.png Graphic file (type png)
  <use img/projet_schema.png>
-Package pdftex.def Info: img/projet_schema.png used on input line 65.
+Package pdftex.def Info: img/projet_schema.png used on input line 67.
 (pdftex.def)             Requested size: 321.1943pt x 240.89572pt.
 
 [3
@@ -428,7 +452,7 @@ Package pdftex.def Info: img/projet_schema.png used on input line 65.
 <img/server_model.png, id=28, 798.985pt x 441.65pt>
 File: img/server_model.png Graphic file (type png)
  <use img/server_model.png>
-Package pdftex.def Info: img/server_model.png used on input line 103.
+Package pdftex.def Info: img/server_model.png used on input line 105.
 (pdftex.def)             Requested size: 359.53993pt x 198.74066pt.
 
 [4 <./img/server_model.png>]
@@ -436,21 +460,21 @@ Package pdftex.def Info: img/server_model.png used on input line 103.
 File: img/montage_serveur.png Graphic file (type png)
 
 <use img/montage_serveur.png>
-Package pdftex.def Info: img/montage_serveur.png used on input line 155.
+Package pdftex.def Info: img/montage_serveur.png used on input line 157.
 (pdftex.def)             Requested size: 199.78665pt x 262.09953pt.
  [5 <./img/montage_serveur.png>]
 <img/topography_example.png, id=43, 652.4375pt x 553.06625pt>
 File: img/topography_example.png Graphic file (type png)
 
 <use img/topography_example.png>
-Package pdftex.def Info: img/topography_example.png used on input line 271.
+Package pdftex.def Info: img/topography_example.png used on input line 273.
 (pdftex.def)             Requested size: 260.97037pt x 221.22258pt.
  [6] [7 <./img/topography_example.png>]
 Chapitre 2.
 <img/crazyflie.png, id=52, 592.2125pt x 540.0175pt>
 File: img/crazyflie.png Graphic file (type png)
  <use img/crazyflie.png>
-Package pdftex.def Info: img/crazyflie.png used on input line 354.
+Package pdftex.def Info: img/crazyflie.png used on input line 356.
 (pdftex.def)             Requested size: 148.05275pt x 135.00404pt.
 
 [8
@@ -460,72 +484,164 @@ Package pdftex.def Info: img/crazyflie.png used on input line 354.
 File: img/arduinopromini.jpg Graphic file (type jpg)
 
 <use img/arduinopromini.jpg>
-Package pdftex.def Info: img/arduinopromini.jpg used on input line 382.
-(pdftex.def)             Requested size: 120.45091pt x 67.75363pt.
- <img/mpu-6050.jpg, id=57, 367.3725pt x 481.8pt>
+Package pdftex.def Info: img/arduinopromini.jpg used on input line 386.
+(pdftex.def)             Requested size: 80.29857pt x 45.16794pt.
+ <img/arduino.JPG, id=57, 3854.4pt x 2168.1pt>
+File: img/arduino.JPG Graphic file (type jpg)
+
+<use img/arduino.JPG>
+Package pdftex.def Info: img/arduino.JPG used on input line 392.
+(pdftex.def)             Requested size: 231.25403pt x 130.08038pt.
+
+Overfull \hbox (4.77008pt too wide) in paragraph at lines 392--393
+ [][] 
+ []
+
+[9 <./img/arduinopromini.jpg> <./img/arduino.JPG>]
+<img/mpu-6050.jpg, id=62, 367.3725pt x 481.8pt>
 File: img/mpu-6050.jpg Graphic file (type jpg)
-
-<use img/mpu-6050.jpg>
-Package pdftex.def Info: img/mpu-6050.jpg used on input line 412.
+ <use img/mpu-6050.jpg>
+Package pdftex.def Info: img/mpu-6050.jpg used on input line 448.
 (pdftex.def)             Requested size: 73.47319pt x 96.35829pt.
- [9 <./img/arduinopromini.jpg> <./img/mpu-6050.jpg>]
-<img/nrf24l01.jpg, id=61, 252.945pt x 189.70876pt>
+
+<img/mpu6050.jpg, id=63, 3854.4pt x 2168.1pt>
+File: img/mpu6050.jpg Graphic file (type jpg)
+ <use img/mpu6050.jpg>
+Package pdftex.def Info: img/mpu6050.jpg used on input line 454.
+(pdftex.def)             Requested size: 231.25403pt x 130.08038pt.
+
+Overfull \hbox (4.77008pt too wide) in paragraph at lines 454--455
+ [][] 
+ []
+
+<img/image_nrf24l01.jpg, id=64, 252.945pt x 189.70876pt>
+File: img/image_nrf24l01.jpg Graphic file (type jpg)
+
+<use img/image_nrf24l01.jpg>
+Package pdftex.def Info: img/image_nrf24l01.jpg used on input line 499.
+(pdftex.def)             Requested size: 101.17621pt x 75.88214pt.
+ <img/nrf24l01.jpg, id=65, 3854.4pt x 2168.1pt>
 File: img/nrf24l01.jpg Graphic file (type jpg)
- <use img/nrf24l01.jpg>
-Package pdftex.def Info: img/nrf24l01.jpg used on input line 426.
-(pdftex.def)             Requested size: 88.53207pt x 66.39905pt.
 
-<img/drone1_circuit_schema.png, id=62, 1116.17pt x 558.888pt>
-File: img/drone1_circuit_schema.png Graphic file (type png)
+<use img/nrf24l01.jpg>
+Package pdftex.def Info: img/nrf24l01.jpg used on input line 505.
+(pdftex.def)             Requested size: 231.25403pt x 130.08038pt.
 
-<use img/drone1_circuit_schema.png>
-Package pdftex.def Info: img/drone1_circuit_schema.png used on input line 449.
-(pdftex.def)             Requested size: 334.85358pt x 167.66768pt.
+Overfull \hbox (4.77008pt too wide) in paragraph at lines 505--506
+ [][] 
+ []
 
-<img/drone1_circuit_pcb.png, id=63, 215.204pt x 240.097pt>
-File: img/drone1_circuit_pcb.png Graphic file (type png)
+[10 <./img/mpu-6050.jpg> <./img/mpu6050.jpg>]
+<img/sonarwave.png, id=70, 347.2975pt x 250.9375pt>
+File: img/sonarwave.png Graphic file (type png)
+ <use img/sonarwave.png>
+Package pdftex.def Info: img/sonarwave.png used on input line 563.
+(pdftex.def)             Requested size: 173.64832pt x 125.46843pt.
 
-<use img/drone1_circuit_pcb.png>
-Package pdftex.def Info: img/drone1_circuit_pcb.png used on input line 456.
-(pdftex.def)             Requested size: 172.16342pt x 192.07785pt.
- [10 <./img/nrf24l01.jpg> <./img/drone1_circuit_schema.png>] [11 <./img/drone1_
-circuit_pcb.png>]
+[11 <./img/image_nrf24l01.jpg> <./img/nrf24l01.jpg> <./img/sonarwave.png>]
+<img/image_hcsr04.jpg, id=75, 762.85pt x 552.0625pt>
+File: img/image_hcsr04.jpg Graphic file (type jpg)
+
+<use img/image_hcsr04.jpg>
+Package pdftex.def Info: img/image_hcsr04.jpg used on input line 574.
+(pdftex.def)             Requested size: 152.56729pt x 110.41054pt.
+ <img/hcsr04.JPG, id=76, 3854.4pt x 2168.1pt>
+File: img/hcsr04.JPG Graphic file (type jpg)
+
+<use img/hcsr04.JPG>
+Package pdftex.def Info: img/hcsr04.JPG used on input line 580.
+(pdftex.def)             Requested size: 231.25403pt x 130.08038pt.
+
+Overfull \hbox (4.77008pt too wide) in paragraph at lines 580--581
+ [][] 
+ []
+
+<img/nouveau_drone_circuit_pcb.png, id=77, 269.808pt x 288.277pt>
+File: img/nouveau_drone_circuit_pcb.png Graphic file (type png)
+
+<use img/nouveau_drone_circuit_pcb.png>
+Package pdftex.def Info: img/nouveau_drone_circuit_pcb.png used on input line 6
+17.
+(pdftex.def)             Requested size: 242.82495pt x 259.4469pt.
+ [12 <./img/image_hcsr04.jpg> <./img/hcsr04.JPG>] <img/model_fixation.png, id=8
+2, 915.42pt x 459.7175pt>
+File: img/model_fixation.png Graphic file (type png)
+
+<use img/model_fixation.png>
+Package pdftex.def Info: img/model_fixation.png used on input line 655.
+(pdftex.def)             Requested size: 366.16151pt x 183.88373pt.
+ [13 <./img/nouveau_drone_circuit_pcb.png> <./img/model_fixation.png>] <img/fix
+ations.jpg, id=88, 3854.4pt x 2168.1pt>
+File: img/fixations.jpg Graphic file (type jpg)
+
+<use img/fixations.jpg>
+Package pdftex.def Info: img/fixations.jpg used on input line 700.
+(pdftex.def)             Requested size: 385.46259pt x 216.8227pt.
+ <img/carte_avant.jpg, id=89, 3854.4pt x 2168.1pt>
+File: img/carte_avant.jpg Graphic file (type jpg)
+
+<use img/carte_avant.jpg>
+Package pdftex.def Info: img/carte_avant.jpg used on input line 722.
+(pdftex.def)             Requested size: 269.83557pt x 151.7825pt.
+
+Overfull \hbox (43.35162pt too wide) in paragraph at lines 722--723
+ [][] 
+ []
+
+<img/carte_apres.jpg, id=90, 3854.4pt x 2168.1pt>
+File: img/carte_apres.jpg Graphic file (type jpg)
+ <use img/carte_apres.jpg>
+Package pdftex.def Info: img/carte_apres.jpg used on input line 728.
+(pdftex.def)             Requested size: 269.83557pt x 151.7825pt.
+
+Overfull \hbox (43.35162pt too wide) in paragraph at lines 728--729
+ [][] 
+ []
+
+[14 <./img/fixations.jpg>] <img/drone_photo.jpg, id=94, 3854.4pt x 2168.1pt>
+File: img/drone_photo.jpg Graphic file (type jpg)
+
+<use img/drone_photo.jpg>
+Package pdftex.def Info: img/drone_photo.jpg used on input line 749.
+(pdftex.def)             Requested size: 385.46259pt x 216.8227pt.
+ [15 <./img/carte_avant.jpg> <./img/carte_apres.jpg> <./img/drone_photo.jpg>] [
+16]
 Chapitre 3.
-[12
+[17
 
 ]
 Chapitre 4.
-[13
+[18
 
 ]
 Chapitre 5.
-[14
+[19
 
 ]
 Annexe A.
-[15
+[20
 
 ]
 Annexe B.
-[16
+[21
 
 ] (./rapport.lof)
 \tf@lof=\write4
 \openout4 = `rapport.lof'.
 
- (./rapport.bbl [17
+ (./rapport.bbl [22
 
-]) [18
+]) [23
 
 ] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 2955 strings out of 494999
- 39800 string characters out of 6180228
- 101510 words of memory out of 5000000
- 6106 multiletter control sequences out of 15000+600000
- 17115 words of font info for 38 fonts, out of 8000000 for 9000
+ 4134 strings out of 494999
+ 61063 string characters out of 6180228
+ 123790 words of memory out of 5000000
+ 7264 multiletter control sequences out of 15000+600000
+ 17880 words of font info for 39 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,8n,23p,239b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,8n,40p,247b,443s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/te
@@ -537,13 +653,14 @@ m-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 onts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm
 -super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb>
 </usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fo
-nts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-
-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb><
-/usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on rapport.pdf (19 pages, 1679187 bytes).
+nts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb><
+/usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fon
+ts/type1/public/cm-super/sfti1000.pfb>
+Output written on rapport.pdf (24 pages, 10159916 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 179 PDF objects out of 1000 (max. 8388607)
+ 107 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 
