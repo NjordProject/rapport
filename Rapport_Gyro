@@ -1,0 +1,98 @@
+1/ Historique
+Le gyroscope est un appareil inventé par Foucault en 1852. Suite à ses travaux sur la rotation de la terre, avec notamment son pendule, Foucault cherche à créer un système plus simple de démonstration de rotation terrestre. A l'aide de Froment, il réalise ce qu'on appelle maintenant le gyroscope. 
+
+2/ Principe de fonctionnement
+Le gyroscope est un appareil fonctionnant grâce à un phénomène physique appelé conservation du moment angulaire. 
+	1. Description de l'appareil. 
+
+On peut le décomposer en plusieurs parties. 
+Une partie centrale (rotor) est une tore avec une cavité centrale. Cette cavité est traversée par un axe en acier (spin axis). 
+Cet axe est alors inséré dans un cadran en métal (Gimbal). Un enchainement de cadrans est alors présent (Gyroscope frame), permettant à notre tore centrale d'avoir 3 degrées de libertés. (3 rotations)
+
+\begin{figure}[position]
+\includegraphics [width=1.2\textwidth]{./3D_Gyroscope.png} 
+   \caption{\label{\'{e}tiquette} Gyroscope}
+\end{figure}
+
+	2. Principe
+
+Le gyroscope profite d'un principe physique appelé principe de conservation du moment cinétique, ou effet gyroscopique. 
+Cet effet implique que lorsqu'on applique une force sur un solide en rotation (le rotor dans notre cas), il se crée un couple (wp) perpendiculaire à cette force. Ce couple permet à notre système d'effectuer une rotation autour d'un axe (axe défini par un point en contact avec un repère fixe) ce qui a pour effet d'annuler la portée instable de la pesanteur.
+On obtient alors un système en rotation parfaitement stable malgrè des angles d'inclinaisons importants  
+
+\begin{figure}[position]
+\includegraphics [width=1.2\textwidth]{./schema_gyro.png} 
+   \caption{\label{\'{e}tiquette} Descriptif des forces appliquées sur un gyroscope}
+\end{figure}
+
+\begin{figure}[position]
+\includegraphics [width=1.2\textwidth]{./inclinaison.jpg} 
+   \caption{\label{\'{e}tiquette} Inclinaison maximale}
+\end{figure}
+
+
+Dans le cas de notre gyroscope, le cas est légèrement différent. En effet, si le fonctionnement est le même, notre système est inversé. Ainsi, les parties extérieures du gyroscope, fixées à notre drone seront mobiles. Elles absorberont les couples et forces énoncées précédemment, permettant au rotor de conserver une inclinaison fixe par rapport au repère Galiléen. 
+En étudiant les variations d'angles des anneaux extérieurs (puisque l'axe du tore central est fixe par rapport au repère terrestre, il est possible de connaitre la variation d'angle des cadrans) nous sommes en mesure de connaitre l'orientation de l'appareil par rapport au sol.
+ 
+
+
+3/ Le gyroscope dans notre montage
+
+Le gyroscope choisi pour intégré notre drone est un MPU6050. Ce type de gyroscope, particulièrement répandu dans l'industrie, présente l'avantage d'être compatible avec notre montage, d'être relativement abordable financièrement et de posséder un accéléromètre. Cet accéléromètre étant destiné à nous fournir des informations sur le déplacement, et la position de notre drone. 
+
+	Description du MPU6050. (axes, rotations, etc..)  
+Ce capteur est constitué de 3 axes (les axes X et Y étant indiqués sur la carte, l'axe Z étant perpendiculaire à la plaque (voir figure 1),
+Puisqu'il faut que l'effet gyroscopique puisse s'appliquer sur le gyroscope, l'ensemble des angles pouvant être mesurés appartiennent à [-80,80]. . Passé cette valeur, la gravité serait trop proche de la composante crée par l'effet gyroscopique, ce qui fausserait les mesures. 
+Les mesures de rotations autour de l'axe Z varient quand à eux entre -180 et 180°. 
+
+Afin d'utiliser le MPU6050 dans notre montage, nous nous sommes largement inspiré des travaux de jeff Rowberg (http://www.i2cdevlib.com/devices/mpu6050) qui propose un code permettant de mesurer les valeurs obtenus par les capteurs. 
+Fort de ces informations, une analyse est effectuée afin de définir l'inclinaison de notre drone. Il convient ensuite de piloter les moteurs afin d'effectue le traitement adéquat. Puisque notre drone à pour but de mesurer une topographie, il est nécessaire d'obtenir un drone en vol stationnaire, soit parallèle au sol. les moteurs sont donc gouvernés par le gyroscope afin se stabiliser. 
+
+
+4/ Implementation / code
+
+
+Le programme est divisé en plusieurs parties : 
+Le fichier call_gyroscope permet d'appeler les diverses fonctions nécessaires au bon fonctionnement du gyroscope. 
+
+Les fichiers I2Cdev.cpp et MPU6050.cpp sont des fichiers disponibles sur le git de jeff roswberg. Ces fichiers permettent la gestion hardware du gyroscope. Ainsi, d'un signal purement électrique et sans grande signification, ces package permettent d'obtenir des valeurs plus intuitives (angles, différentiels de forces, ... ) 
+
+gyro_lib est l'application développée afin d'assurer la gestion du gyroscope. 
+
+Elle est divisée en plusieurs fonctions: 
+la fonction initialise permet de préparer le gyroscope à la prise de mesure. Ainsi, suite à cette fonction, le système est opérationnel pour prendre des mesures, et les stockera dans les variables gravity, ypr, aa et aaReal (respectivement variable permettant de se rendre compte de la valeur de la gravité, de la rotation autour des axes (appelés axes Yaw, pitch et Roll) et d'accélération.
+Le seconde fonction (fonction loop (Nom à changer)) gère la stabilité du drone. 
+
+Cette fonction est appelée lorsque le drone cherche à stabiliser sa position à une position particulière. On doit avoir une idée des actions à mener sur les moteurs
+
+Par conséquent, lorsqu'elle sera appelée, cette fonction retournera une table de 5 entiers, les 4 premiers représentant l'action à effectuer sur un moteur (variable "moteur[]"), et le dernier renseignant sur la stabilité du drone. 
+Ainsi, si la valeur retournée est positive (resp négative), il sera nécessaire d'augmenter(resp diminuer) la vitesse des moteurs. 
+
+
+Pour avoir une idée de l'action à mener sur chaque moteur, on décide d'acquérir la valeur des angles d'orientations, grâce aux commandes suivantes : 
+
+"
+       mpu.dmpGetQuaternion(&q, fifoBuffer);
+       mpu.dmpGetGravity(&gravity, &q);
+       mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);"
+
+Puis on évalue la valeur de ces angles en testant : 
+"ypr[1]*18/M_PI*ypr[1]*90/M_PI*3"
+
+avec ypr une table renvoyant le YawPitchRoll (angle d'inclinaison) de notre drone.
+Les facteurs 18, M_PI, 90 sont des facteurs permettant d'obtenir des valeurs en degrés (et non radians). Enfin le facteur 3 permet d'obtenir des actions ayant une influence sur la rotation des moteurs. 
+
+On peut remarquer que l'action sur les moteurs implique une modification coordonnée de différents moteurs. En effet, si le drone est incliné avec un moteur 1 trop bas, il sera nécessaire d'augmenter sa vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il est aussi nécessaire de diminuer la vitesse du moteur 3 afin de conserver une altitude plus ou moins stable. 
+
+\begin{figure}[position]
+\includegraphics [width=1.2\textwidth]{./quadcopter.jpg} 
+   \caption{\label{\'{e}tiquette} Inclinaison du drone, les moteurs 1 et 4 seront accelérés, alors que les 2 et 3 seront ralentis}
+\end{figure}
+
+
+
+En évaluant la valeur de ypr, on est en mesure de connaitre l'inclinaison du drone afin de réévaluer la vitesse des bon moteurs. Une fois ceci effectuer, on peut renvoyer notre table à l'arduino qui n'aura alors qu'à modifier la vitesse des moteurs
+
+
+
+

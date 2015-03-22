@@ -82,4 +82,12 @@ Site \textsc{I}nternet de \textsc{G}ithub.
 Blog du projet \textsc{N}jörd.
 \newblock http://njordproject.github.io/.
 
+\bibitem{dronecalc}
+Calculateur de caractéristiques d'un drone.
+\newblock http://www.ecalc.ch/xcoptercalc.php\textsc{?}ecalc\&lang=fr.
+
+\bibitem{jeffrwork}
+Travaux de jeff rowberg sur le mpu6050.
+\newblock http://www.i2cdevlib.com/devices/mpu6050.
+
 \end{thebibliography}
