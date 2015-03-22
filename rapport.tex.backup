@@ -976,6 +976,36 @@ appris beaucoup de ces erreurs.
   \chapter{Deuxième drone}
   
   \chapter{Conclusion}
+    Pour conclure ce rapport nous pouvons commencer par dire que divers 
+éléments ont été implémentés. Premièrement nous pouvons discuter du serveur. 
+Celui-ci est quasiment fonctionnel, dans le sens où il remplit bien sa fonction 
+première à savoir, dessiner la topographie de la zone étudiée. Cependant, il 
+n'est pas entièrement fonctionnel puisque sa deuxième fonction, envoyer des 
+ordres aux drones, ne fonctionne pas encore. En effet, le serveur arrive bien à 
+déterminer si un ordre doit être envoyé puis à faire remonter cet ordre jusqu'à 
+la première tâche (c'est-à-dire, écrire l'ordre sur le port série de la 
+machine). Cependant, nous n'arrivons pas à faire en sorte que la première tâche 
+écrive les messages des drones sur le port série puis simultanément lise les 
+ordres sur le port série. Pour le moment on n'arrive qu'à faire l'un ou l'autre.
+
+    En admettant que le serveur soit fonctionnel. Il nous faudrait quand même 
+un drone opérationel afin de faire de vrais essais. Ce qui nous permettrait 
+alors d'établir une liste complète des états du drone qui nécessitent un envoi 
+d'ordre.
+
+    Dans un deuxième temps nous pouvons parler de la construction du drone. 
+Ceci représentait un challenge énorme. En effet, ce projet requiert des 
+connaissances pluridisciplinaires et complexes (mécanique, électronique, 
+informatique, physique, ...). Au vu de notre formation orientée informatique, 
+nous avons fait beaucoup trop de petites erreurs dans les domaines qui ne sont 
+pas notre spécialisation. Ces erreurs ont conduites à un drone ne pouvant pas 
+voler. Cependant, nous avons beaucoup appris de nos erreurs. Mais ce projet 
+était un peu trop ambitieux. Nous ne disposions que de sept mois pour le 
+réaliser, alors qu'il faudrait plutôt partir sur un ou deux ans. De plus ce 
+manque de temps, ne nous a pas permis de profiter de l'expérience aquise durant 
+le projet.
+
+    
     
   
   \appendix
@@ -1033,9 +1063,9 @@ l'utilisateur ne sont pas connus par le calculateur.
     \chapter{Fonctionnement d'un gyroscope et utilisation du MPU6050}
       \section{Historique}
 	Le gyroscope est un appareil inventé par Foucault en 1852. Suite à ses 
-travaux sur la rotation de la terre, avec notamment son pendule, Foucault 
-cherche à créer un système plus simple de démonstration de rotation terrestre. A 
-l'aide de Froment, ils réalisent ce qu'on appelle maintenant le gyroscope.
+travaux sur la rotation de la terre, avec notamment son pendule, il cherche à 
+créer un système plus simple de démonstration de rotation terrestre. À l'aide 
+de Froment, ils réalisent ce qu'on appelle maintenant le gyroscope.
 
       \section{Principe de fonctionnement}
 	Le gyroscope est un appareil fonctionnant grâce à un phénomène physique 
@@ -1043,11 +1073,11 @@ appelé conservation du moment angulaire.
       
 	\subsection{Description de l'appareil}
 	  On peut décomposer le gyroscope en plusieurs parties. Une partie 
-centrale (rotor) est une tore avec une cavité centrale. Cette cavité est 
-traversée par un axe en acier (spin axis). Cet axe est alors inséré dans un 
-cadran en métal (Gimbal). Un enchainement de cadrans est alors présent 
-(Gyroscope frame), permettant à notre tore centrale d'avoir trois degrées de 
-libertés (trois rotations).
+centrale (\textit{rotor}) qui est un tore avec une cavité centrale. Cette 
+cavité est traversée par un axe en acier (\textit{spin axis}). Cet axe est 
+alors inséré dans un cadran en métal (\textit{gimbal}). Un enchainement de 
+cadrans est alors présent (\textit{gyroscope frame}), permettant à notre tore 
+centrale d'avoir trois degrées de libertés (trois rotations).
 
 	  \begin{figure}[htbp]
 	    \centering
@@ -1060,11 +1090,11 @@ libertés (trois rotations).
 	  Le gyroscope profite d'un principe physique appelé principe de 
 conservation du moment cinétique, ou effet gyroscopique. Cet effet implique que 
 lorsqu'on applique une force sur un solide en rotation (le rotor dans notre 
-cas), il se crée un couple (wp) perpendiculaire à cette force. Ce couple permet 
-à notre système d'effectuer une rotation autour d'un axe (axe défini par un 
-point en contact avec un repère fixe) ce qui a pour effet d'annuler la portée 
-instable de la pesanteur. On obtient alors un système en rotation parfaitement 
-stable malgrè des angles d'inclinaisons importants.
+cas), il se crée un couple ($\omega_{p}$) perpendiculaire à cette force. Ce 
+couple permet à notre système d'effectuer une rotation autour d'un axe (axe 
+défini par un point en contact avec un repère fixe) ce qui a pour effet 
+d'annuler la portée instable de la pesanteur. On obtient alors un système en 
+rotation parfaitement stable malgrè des angles d'inclinaisons importants.
 
 	  \begin{figure}[htbp]
 	    \centering
@@ -1080,11 +1110,12 @@ stable malgrè des angles d'inclinaisons importants.
 	    \label{inclinaisonmax}
 	  \end{figure}
 	  
-	  Dans le cas de notre gyroscope, le cas est légèrement différent. En 
-effet, si le fonctionnement est le même, notre système est inversé. Ainsi, les 
-parties extérieures du gyroscope, fixées à notre drone seront mobiles. Elles 
-absorberont les couples et forces énoncées précédemment, permettant au rotor de 
-conserver une inclinaison fixe par rapport au repère Galiléen.
+	  Dans le cas de notre gyroscope, la situation est légèrement 
+différente. En effet, si le fonctionnement est le même, notre système est 
+inversé. Ainsi, les parties extérieures du gyroscope, fixées à notre drone 
+seront mobiles. Elles absorberont les couples et forces énoncées précédemment, 
+permettant au rotor de conserver une inclinaison fixe par rapport au repère 
+Galiléen.
 
 	  En étudiant les variations d'angles des anneaux extérieurs (puisque 
 l'axe du tore central est fixe par rapport au repère terrestre, il est possible 
@@ -1094,22 +1125,21 @@ connaitre l'orientation de l'appareil par rapport au sol.
 	\subsection{Le gyroscope dans notre montage}
 	  Le gyroscope choisi pour intégré notre drone est un MPU6050. Ce type 
 de gyroscope, particulièrement répandu dans l'industrie, présente l'avantage 
-d'être compatible avec notre montage, d'être relativement abordable 
-financièrement et de posséder un accéléromètre. Cet accéléromètre étant destiné 
-à nous fournir des informations sur le déplacement, et la position de notre 
-drone. 
+d'être compatible avec notre montage, relativement abordable financièrement et 
+de posséder un accéléromètre. Cet accéléromètre étant destiné à nous fournir 
+des informations sur le déplacement, et la position de notre drone. 
  
 	  Ce capteur est constitué de trois axes (les axes X et Y étant 
 indiqués sur la carte, l'axe Z étant perpendiculaire à la plaque (voir figure 
-1), Puisqu'il faut que l'effet gyroscopique puisse s'appliquer sur le 
+1)). Puisqu'il faut que l'effet gyroscopique puisse s'appliquer sur le 
 gyroscope, l'ensemble des angles pouvant être mesurés appartiennent à [-80,80]. 
 Passé cette valeur, la gravité serait trop proche de la composante crée par 
 l'effet gyroscopique, ce qui fausserait les mesures. Les mesures de rotations 
-autour de l'axe Z varient quant à eux entre -180 et 180.
+autour de l'axe Z varient quant à elles entre -180 et 180.
 
 	  Afin d'utiliser le MPU6050 dans notre montage, nous nous sommes 
 largement inspiré des travaux de Jeff Rowberg\cite{jeffrwork}, qui propose un 
-code permettant de mesurer les valeurs obtenus par les capteurs. Fort de ces 
+code permettant de mesurer les valeurs obtenues par les capteurs. Fort de ces 
 informations, une analyse est effectuée afin de définir l'inclinaison de notre 
 drone. Il convient ensuite de piloter les moteurs afin d'effectuer le 
 traitement adéquat. Puisque notre drone à pour but de mesurer une topographie, 
@@ -1133,18 +1163,19 @@ intuitives (angles, différentiels de forces, ...).
 gestion du gyroscope. Elle est divisée en plusieurs fonctions. La fonction 
 \textit{initialise} permet de préparer le gyroscope à la prise de mesure. 
 Ainsi, suite à cette fonction, le système est opérationnel pour prendre des 
-mesures, et les stockera dans les variables \textit{gravity}, \textit{ypr}, 
+mesures et les stockera dans les variables \textit{gravity}, \textit{ypr}, 
 \textit{aa} et \textit{aaReal} (variables permettant de se rendre 
 compte de la valeur de la gravité, de la rotation autour des axes appelés 
-\textit{Yaw}, \textit{Pitch} et \textit{Roll}, et d'accélération). La seconde 
-fonction, \textit{loop},  gère la stabilité du drone. Cette fonction est 
-appelée lorsque le drone cherche à stabiliser sa position à une position 
+\textit{Yaw}, \textit{Pitch} et \textit{Roll}, et de l'accélération). La 
+seconde fonction, \textit{loop},  gère la stabilité du drone. Cette fonction 
+est appelée lorsque le drone cherche à stabiliser sa position à une position 
 particulière. On doit avoir une idée des actions à mener sur les moteurs. Par 
 conséquent, lorsqu'elle sera appelée, cette fonction retournera une table de 
 cinq entiers, les quatre premiers représentant l'action à effectuer sur un 
-moteur (variable \textit{moteur[]}), et le dernier renseignant sur la stabilité 
+moteur (variable \textit{moteur[]}) et le dernier renseignant sur la stabilité 
 du drone. Ainsi, si la valeur retournée est positive (respectivement négative), 
-il sera nécessaire d'augmenter(respectivement diminuer) la vitesse des moteurs. 
+il sera nécessaire d'augmenter (respectivement diminuer) la vitesse des 
+moteurs. 
 
 	  Pour avoir une idée de l'action à mener sur chaque moteur, on décide 
 d'acquérir la valeur des angles d'orientations, grâce aux commandes suivantes : 
@@ -1158,11 +1189,11 @@ d'acquérir la valeur des angles d'orientations, grâce aux commandes suivantes 
 	  Puis on évalue la valeur de ces angles en testant :
 	  
 	  \begin{equation}
-	    ypr[1] * 18 / M_PI * ypr[1] * 90 /M_PI * 3
+	    \frac{ypr[1] * 18}{M_{PI}} * \frac{ypr[1] * 90}{M_{PI}} * 3
 	  \end{equation}
 
 	  Avec $ypr$ une table renvoyant le \textit{YawPitchRoll} (angle 
-d'inclinaison) de notre drone. Les facteurs $18$, $M_PI$ et $90$ sont des 
+d'inclinaison) de notre drone. Les facteurs $18$, $M_{PI}$ et $90$ sont des 
 facteurs permettant d'obtenir des valeurs en degrés (et non radians). Enfin le 
 facteur $3$ permet d'obtenir des actions ayant une influence sur la rotation 
 des moteurs. 

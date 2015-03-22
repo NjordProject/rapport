@@ -10,7 +10,7 @@
 
 \title{\textbf{Projet Njörd}\\ Topographie d'une zone \\ par communication avec 
 une équipe de drones}
-\author{AIGREAUL Clément - HENRIO Jordan - PHAM Chitin}
+\author{AIGREAULT Clément - HENRIO Jordan - PHAM Chitin}
 
 \begin{document}
   \maketitle
@@ -976,8 +976,71 @@ appris beaucoup de ces erreurs.
   \chapter{Deuxième drone}
   
   \chapter{Conclusion}
-    
-  
+    Pour conclure ce rapport nous pouvons commencer par dire que divers 
+éléments ont été implémentés. Premièrement nous pouvons discuter du serveur. 
+Celui-ci est quasiment fonctionnel, dans le sens où il remplit bien sa fonction 
+première à savoir, dessiner la topographie de la zone étudiée. Cependant, il 
+n'est pas entièrement fonctionnel puisque sa deuxième fonction, envoyer des 
+ordres aux drones, ne fonctionne pas encore. En effet, le serveur arrive bien à 
+déterminer si un ordre doit être envoyé puis à faire remonter cet ordre jusqu'à 
+la première tâche (c'est-à-dire, écrire l'ordre sur le port série de la 
+machine). Cependant, nous n'arrivons pas à faire en sorte que la première tâche 
+écrive les messages des drones sur le port série puis simultanément lise les 
+ordres sur le port série. Pour le moment on n'arrive qu'à faire l'un ou l'autre.
+
+    En admettant que le serveur soit fonctionnel. Il nous faudrait quand même 
+un drone opérationel afin de faire de vrais essais. Ce qui nous permettrait 
+alors d'établir une liste complète des états du drone qui nécessitent un envoi 
+d'ordre.
+
+    Dans un deuxième temps nous pouvons parler de la construction du drone. 
+Ceci représentait un challenge énorme. En effet, ce projet requiert des 
+connaissances pluridisciplinaires et complexes (mécanique, électronique, 
+informatique, physique, ...). Au vu de notre formation orientée informatique, 
+nous avons fait beaucoup trop de petites erreurs dans les domaines qui ne sont 
+pas notre spécialisation. Ces erreurs ont conduites à un drone ne pouvant pas 
+voler. Cependant, nous avons beaucoup appris de nos erreurs. Mais ce projet 
+était un peu trop ambitieux. Nous ne disposions que de sept mois pour le 
+réaliser, alors qu'il faudrait plutôt partir sur un ou deux ans. De plus ce 
+manque de temps, ne nous a pas permis de profiter de l'expérience aquise durant 
+le projet.
+
+    Même si nous avions réussi à produire un drone qui est capable de voler. 
+Nous serions encore bloqué à la problématique de la détermination de la 
+position du drone dans l'espace étudié. Il plutôt simple de localiser un drone 
+sur une grande étendue (c'est-à-dire, lorsque l'on ne cherche pas à obtenir une 
+précision au décimètre près) en extérieur grâce au GPS. Cependant, nous savions 
+que nous devrions présenter le projet dans une pièce. Ainsi, la précision d'un 
+GPS n'est pas assez suffisante (de l'ordre de trois à cinq mètre). Donc, le GPS 
+ne détecterait quasiment aucun déplacement. C'est pour cette raison que nous 
+avons cherché d'autres solutions et que l'idée de calculer la position du drone 
+en mesurant et en intégrant deux fois son accélération (à l'aide d'un 
+accéléromètre) nous est venue. Cependant, chaque intégration introduit une 
+erreur et dû à la double intégration, cela produit une erreur quadratique. 
+Ainsi, nous serions peut-être capable de localiser à peu près le drone au début 
+de l'application, mais tout au long de son déroulement l'erreur introduite par 
+l'intégration fausserait complètement nos résultats. Il est important de noter 
+que cette problématique est encore au stade de la recherche. Et que pour le 
+moment il n'existe peu (voir pas) de moyens fiable de localiser un objet en 
+mouvement avec beaucoup de précision.
+
+    Bien que ce projet n'est pu aboutir à l'objectif initialement prévu, cela a 
+été un plaisir de travailler sur ce sujet. Du fait des nombreuses connaissances 
+qu'il demande dans des domaines variés, nous pouvons dire que c'est un projet 
+très enrichissant techniquement parlant. Et puisque nous avons dû faire appel à 
+de l'aide extérieure à l'EISTI afin d'obtenir certains de nos composants, nous 
+pouvons aussi dire que c'était enrichissant sur le plan relationnel. Car nous 
+avons dû faire de nombreuses démarche vers des entités extérieures à notre 
+école afin d'obtenir les derniers éléments qu'il nous manquait.
+
+    Mais nous n'aurions peut-être pas pu réussir ces démarches sans l'aide de 
+madame \textit{Nga Nguyen}, pour obtenir la participation de Polytech 
+Instrumentation et sans l'aide de madame \textit{Besma Zeddini}, pour obtenir 
+la participation de l'ENSEA. C'est pour cette raison que nous souhaitons 
+remercier les quatre noms cités ci-dessus, ainsi que les divers connaissances 
+qui nous ont aidé dans notre projet, à savoir pour la découpe du circuit et pour 
+divers conseils techniques.
+   
   \appendix
     \chapter{Suivi de projet}
       \section{Gestionnaire de version}
