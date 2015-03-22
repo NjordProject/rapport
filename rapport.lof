@@ -20,11 +20,14 @@
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Photographie du r\IeC {\'e}sultat final\relax }}{16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Image d'un moteur DYS BE1806-13\relax }}{21}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Image d'une pale APC 6x2 .049\relax }}{22}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Image d'une batterie Turnigy 1700Mah 7.4v\relax }}{22}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Composition d'un gyroscope\relax }}{25}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Descriptif des forces appliqu\IeC {\'e}es sur un gyroscope\relax }}{26}
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Inclinaison maximale\relax }}{26}
-\contentsline {figure}{\numberline {B.4}{\ignorespaces Inclinaison du drone, les moteurs 1 et 4 seront accel\IeC {\'e}r\IeC {\'e}s, alors que les 2 et 3 seront ralentis\relax }}{28}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Composition d'un gyroscope\relax }}{27}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Descriptif des forces appliqu\IeC {\'e}es sur un gyroscope\relax }}{28}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Inclinaison maximale\relax }}{28}
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Exemple d'action des moteurs suivant l'inclinaison du drone\relax }}{30}
 \addvspace {10\p@ }

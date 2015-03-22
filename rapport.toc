@@ -29,16 +29,19 @@
 \contentsline {section}{\numberline {3.3}Assemblage}{20}
 \contentsline {section}{\numberline {3.4}Exp\IeC {\'e}rience}{20}
 \contentsline {chapter}{\numberline {4}Deuxi\IeC {\`e}me drone}{21}
-\contentsline {chapter}{\numberline {5}Conclusion}{22}
-\contentsline {chapter}{\numberline {A}Suivi de projet}{24}
-\contentsline {section}{\numberline {A.1}Gestionnaire de version}{24}
-\contentsline {section}{\numberline {A.2}Communication}{24}
-\contentsline {section}{\numberline {A.3}Calculateur}{24}
-\contentsline {chapter}{\numberline {B}Fonctionnement d'un gyroscope et utilisation du MPU6050}{25}
-\contentsline {section}{\numberline {B.1}Historique}{25}
-\contentsline {section}{\numberline {B.2}Principe de fonctionnement}{25}
-\contentsline {subsection}{\numberline {B.2.1}Description de l'appareil}{25}
-\contentsline {subsection}{\numberline {B.2.2}Principe}{25}
-\contentsline {subsection}{\numberline {B.2.3}Le gyroscope dans notre montage}{27}
-\contentsline {subsection}{\numberline {B.2.4}Impl\IeC {\'e}mentation}{27}
-\contentsline {chapter}{\numberline {C}Calculs m\IeC {\'e}caniques}{29}
+\contentsline {section}{\numberline {4.1}Moteurs}{21}
+\contentsline {section}{\numberline {4.2}Batterie}{22}
+\contentsline {section}{\numberline {4.3}Co\IeC {\^u}t total}{22}
+\contentsline {chapter}{\numberline {5}Conclusion}{24}
+\contentsline {chapter}{\numberline {A}Suivi de projet}{26}
+\contentsline {section}{\numberline {A.1}Gestionnaire de version}{26}
+\contentsline {section}{\numberline {A.2}Communication}{26}
+\contentsline {section}{\numberline {A.3}Calculateur}{26}
+\contentsline {chapter}{\numberline {B}Fonctionnement d'un gyroscope et utilisation du MPU6050}{27}
+\contentsline {section}{\numberline {B.1}Historique}{27}
+\contentsline {section}{\numberline {B.2}Principe de fonctionnement}{27}
+\contentsline {subsection}{\numberline {B.2.1}Description de l'appareil}{27}
+\contentsline {subsection}{\numberline {B.2.2}Principe}{27}
+\contentsline {subsection}{\numberline {B.2.3}Le gyroscope dans notre montage}{29}
+\contentsline {subsection}{\numberline {B.2.4}Impl\IeC {\'e}mentation}{29}
+\contentsline {chapter}{\numberline {C}Calculs m\IeC {\'e}caniques}{31}

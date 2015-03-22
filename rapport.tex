@@ -858,10 +858,13 @@ nos calculs (autonomie de la batterie, poussé des moteurs, puissance requise,
 ...). Finalement, les résultats de nos calculs étaient plutôt proche de la 
 réalité. Nous avions estimé l'autonomie de la batterie à sept minutes. Et en 
 réalité elle se décharge en cinq minutes en faisant tourner les moteurs à plein 
-régime. Aussi, lorsque les moteurs tournent à plein régime on peut remarquer 
-que le drone se soulève et que ce qui l'empêche de décoller est le moteur 
-défectueux. On peut donc en conclure que nos calculs mécaniques étaient plutôt 
-bons. Vous pouvez retrouver ces calculs dans l'Annexe C de ce rapport.
+régime. Cependant, il est important de noter qu'il n'y a ni les capteurs 
+ultrason ni le transmetteur/récepteur radio. L'autonomie est donc trop courte 
+pour notre application. Aussi, lorsque les moteurs tournent à plein régime on 
+peut remarquer que le drone se soulève et que ce qui l'empêche de décoller est 
+le moteur défectueux. On peut donc en conclure que nos calculs mécaniques 
+étaient plutôt bons. Vous pouvez retrouver ces calculs dans l'Annexe C de ce 
+rapport.
     
     \section{Fournisseurs}
       Le rôle de cette section est de présenter les problèmes venant des 
@@ -932,7 +935,7 @@ fournisseur vend donc un produit qui n'est pas du tout fiable.
 
       Ainsi, nous avons compris que faire des économies peut être un avantage 
 (nous avons pu monter un drone pour un peu moins de 30 \euro, tandis que le 
-Crazyflie vaut plus de 120 \euro). Mais à vouloir trop chercher le moins cher, 
+Crazyflie vaut environ 120 \euro). Mais à vouloir trop chercher le moins cher, 
 on prend des risques sur la qualité des produits. Il faut donc mieux 
 rechercher, se méfier de la contrefaçon  et faire plus d'essais lors de la 
 réception des pièces.
@@ -974,24 +977,134 @@ une seconde version nous serions probablement mieux préparé car nous avons
 appris beaucoup de ces erreurs.
   
   \chapter{Deuxième drone}
+    Bien que le temps ne nous permette pas de réaliser un second drone, nous 
+pouvons tout de même établir un nouveau devis afin d'utiliser une partie de 
+l'expérience que nous avons aquise.
+
+    Pour rappel, les principaux problèmes de notre premier drone sont :
+    
+      \begin{itemize}
+	\item Moteurs pas assez puissants
+	\item Voltage du circuit
+	\item Autonomie de la batterie
+      \end{itemize}
+      
+   Pour ce second drone nous changeront donc les moteurs et la batterie. Nous 
+garderont par contre les autres composants qui malgré leur manque de fiabilité 
+suffirait pour une simple présentation. Bien entendu, pour une application 
+réelle il faudrait voir à choisir des composants de meilleure qualité.
+
+    \section{Moteurs}
+      Le problème de nos moteurs actuels est le couple maximum qu'ils peuvent 
+fournir. En effet, celui-ci est sur la limite de ce dont notre drone à besoin. 
+Ainsi, à plein régime ils pourraient peut-être suffire, mais nous ne pourrions 
+pas vraiment jouer sur leur vitesse de rotation. 
+
+      C'est pour cette raison que nous avons cherché des moteurs plus 
+puissants. Nous avons alors choisi les \textit{DYS BE1806-13} (voir Figure 
+\ref{dys}). Ces moteurs n'ont plus rien avoir avec ceux que nous avions avant 
+puisqu'il sont environ trois fois plus gros et douze fois plus lourd. Ceci va 
+entraîner un changement radical dans la dimension de notre drone. En fait, un 
+drone de la dimension du Crazyflie n'est pas forcemment un bon point de départ 
+pour des débutants comme nous car les composants sont assez spécifiques. Ainsi, 
+en nous ramenant à une dimension plus "normale", nous élargissons notre 
+catalogue de composants. Ce deuxième drone devrait alors faire environ 30 
+centimètres de diamètre pour un peu moins de 370 grammes.
+
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.25]{img/dys.jpg}
+	\caption{Image d'un moteur DYS BE1806-13}
+	\label{dys}
+      \end{figure}
+
+      Pour ces moteurs nous disposons d'une documentation assez complète. 
+Ainsi, nous sommes capable de faire nos calculs sans faire d'estimation. Ces 
+moteurs sont capable de fournir une puissance maximum de 89 watts. Pour un 
+drone de 370 grammes il faut compter une puissance 9 watts par moteur. Nous 
+pouvons donc remarquer que les moteurs choisis sont bien supérieurs à ce que 
+le drone requiert. Mais, cela nous permettrait d'avoir une grande marge de 
+manoeuvre sur la vitesse de rotation des moteurs. Aussi, cela nous permettrait 
+d'éviter de faire tourner les moteurs à plein régime de manière constante, ce 
+qui augmenterait leur durée de vie et qui déchagerait moins vite la batterie.
+
+      Dû aux nouveaux moteurs qui sont beaucoup plus puissants et à la 
+nouvelle dimension de notre drone, il nous faut choisir de nouvelles pales 
+(plus longues). Nous avons alors choisi des \textit{APC 6*2 .049} (voir Figure 
+\ref{pale}). Ces pales font six pouces de longueur (environ 15 centimètres).
+
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.4]{img/pale.jpg}
+	\caption{Image d'une pale APC 6x2 .049}
+	\label{pale}
+      \end{figure}
+      
+      Grâce à ces nouvelles pales plus longues, le drone pourra plus facilement 
+brasser l'air et donc décoller plus facilement. Par contre, nous perdrons en 
+vitesse, mais pour rappel, nous cherchons justement à obtenir un vol hybride 
+afin d'obtenir le plus d'information possible sans être lent au point de 
+pouvoir faire des prises de vue.
+
+    \section{Batterie}
+      Comme nous l'expliquions dans le chapitre précédent, nous avons un 
+problème de voltage sur notre premier drone. Les capteurs ultrasons ont besoin 
+d'une tension de 5V, tandis que la batterie fournit du 3.3V. Il nous faut alors 
+un voltage plus élevé. C'est pour cette raison que nous avons sélectionné une 
+\textit{Turnigy 1700Mah 7.4v} (voir Figure \ref{batterie}). On peut remarqué 
+que la tension délivrée par cette batterie est supérieure à 5V, mais comme nous 
+l'avons expliqué une tension peut se réduire à l'aide d'un pont diviseur de 
+tension (par contre le problème inverse est plus compliqué à résoudre).
+
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.3]{img/nouvellebatterie.jpg}
+	\caption{Image d'une batterie Turnigy 1700Mah 7.4v}
+	\label{batterie}
+      \end{figure}
+
+      D'après nos calculs, le drone devrait avoir besoin de 1600mA par moteur 
+pour décoller et l'ensemble des autres composants demandent 124mA de manière 
+continue. Ainsi, avec cette batterie qui peut fournir 1700mAh, nous devrions 
+avoir une autonomie d'une quinzaine de minutes. L'autonomie de ce nouveau drone 
+est donc doublée par rapport au précédent, alors qu'il doit alimenter six 
+capteurs ultrasons ainsi que le transmetteur/récepteur radio (ce que ne faisait 
+pas l'ancien).
+
+    \section{Coût total}
+      Ce nouveau devis nous indique un prix beaucoup plus élevé que pour le 
+premier. En effet, nous arrivons à environ 75 \euro, tandis que le premier 
+drone nous a coûté environ 25 \euro. Ceci s'explique notamment que le prix des 
+batteries est proportionnel à leur capacité. Aussi, les moteurs du Crazyflie 
+sont vraiment bons marchés comparativement aux autres moteurs. Il n'est donc 
+pas étonnant d'aboutir à un prix plus élevé.
+
+      Aussi il ne faut pas oublier de changer l'Arduino Pro Mini 3.3V, en sa 
+version 5V. Cependant le prix est le même entre les deux versions.
   
   \chapter{Conclusion}
-    Pour conclure ce rapport nous pouvons commencer par dire que divers 
-éléments ont été implémentés. Premièrement nous pouvons discuter du serveur. 
-Celui-ci est quasiment fonctionnel, dans le sens où il remplit bien sa fonction 
-première à savoir, dessiner la topographie de la zone étudiée. Cependant, il 
-n'est pas entièrement fonctionnel puisque sa deuxième fonction, envoyer des 
-ordres aux drones, ne fonctionne pas encore. En effet, le serveur arrive bien à 
-déterminer si un ordre doit être envoyé puis à faire remonter cet ordre jusqu'à 
-la première tâche (c'est-à-dire, écrire l'ordre sur le port série de la 
-machine). Cependant, nous n'arrivons pas à faire en sorte que la première tâche 
-écrive les messages des drones sur le port série puis simultanément lise les 
-ordres sur le port série. Pour le moment on n'arrive qu'à faire l'un ou l'autre.
+    Maintenant que toutes les étapes du projet ont été abordées, nous pouvons 
+conclure ce rapport.
+
+    Nous pouvons commencer par dire que divers éléments ont été implémentés. 
+Premièrement nous pouvons discuter du serveur. Celui-ci est quasiment 
+fonctionnel, dans le sens où il remplit bien sa fonction première à savoir, 
+dessiner la topographie de la zone étudiée. Cependant, il n'est pas entièrement 
+fonctionnel puisque sa deuxième fonction, envoyer des ordres aux drones, ne 
+fonctionne pas encore. En effet, le serveur arrive bien à déterminer si un ordre 
+doit être envoyé puis à faire remonter cet ordre jusqu'à la première tâche 
+(c'est-à-dire, écrire l'ordre sur le port série de la machine). Cependant, nous 
+n'arrivons pas à faire en sorte que la première tâche écrive les messages des 
+drones sur le port série puis simultanément lise les ordres sur le port série. 
+Pour le moment on n'arrive qu'à faire l'un ou l'autre.
 
     En admettant que le serveur soit fonctionnel. Il nous faudrait quand même 
 un drone opérationel afin de faire de vrais essais. Ce qui nous permettrait 
 alors d'établir une liste complète des états du drone qui nécessitent un envoi 
-d'ordre.
+d'ordre. Car il est compliqué d'établir une liste exhaustive sans voir le 
+déroulement réel de notre application. Biensûr, nous pouvons commencer par 
+penser à quelques états. Mais il est quasiment certain que nous en oublirons. 
+C'est pour cette raison qu'un drone fonctionnel serait d'une grande utilité. 
 
     Dans un deuxième temps nous pouvons parler de la construction du drone. 
 Ceci représentait un challenge énorme. En effet, ce projet requiert des 
@@ -1233,16 +1346,17 @@ des moteurs.
 
 	  On peut remarquer que l'action sur les moteurs implique une 
 modification coordonnée de différents moteurs. En effet, si le drone est incliné 
-avec un $moteur_1$ trop bas, il sera nécessaire d'augmenter sa vitesse de 
-rotation afin qu'il gagne en altitude. Néanmoins, il est aussi nécessaire de 
-diminuer la vitesse du $moteur_3$ afin de conserver une altitude plus ou moins 
-stable. 
+avec un $moteur_1$ et un $moteur_4$ trop bas, il sera nécessaire d'augmenter sa 
+vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il est aussi 
+nécessaire de diminuer la vitesse du $moteur_2$ et du $moteur_3$ afin de 
+conserver une altitude plus ou moins stable. La Figure \ref{inclinaisondrone} 
+illustre cet exemple.
 
 	  \begin{figure}[htbp]
 	    \centering
 	    \includegraphics[scale = 0.5]{img/quadcopter.jpg}
-	    \caption{Inclinaison du drone, les moteurs 1 et 4 
-seront accelérés, alors que les 2 et 3 seront ralentis}
+	    \caption{Exemple d'action des moteurs suivant l'inclinaison du 
+drone}
 	    \label{inclinaisondrone}
 	  \end{figure}
 

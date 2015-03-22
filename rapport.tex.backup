@@ -10,7 +10,7 @@
 
 \title{\textbf{Projet Njörd}\\ Topographie d'une zone \\ par communication avec 
 une équipe de drones}
-\author{AIGREAUL Clément - HENRIO Jordan - PHAM Chitin}
+\author{AIGREAULT Clément - HENRIO Jordan - PHAM Chitin}
 
 \begin{document}
   \maketitle
@@ -858,10 +858,13 @@ nos calculs (autonomie de la batterie, poussé des moteurs, puissance requise,
 ...). Finalement, les résultats de nos calculs étaient plutôt proche de la 
 réalité. Nous avions estimé l'autonomie de la batterie à sept minutes. Et en 
 réalité elle se décharge en cinq minutes en faisant tourner les moteurs à plein 
-régime. Aussi, lorsque les moteurs tournent à plein régime on peut remarquer 
-que le drone se soulève et que ce qui l'empêche de décoller est le moteur 
-défectueux. On peut donc en conclure que nos calculs mécaniques étaient plutôt 
-bons. Vous pouvez retrouver ces calculs dans l'Annexe C de ce rapport.
+régime. Cependant, il est important de noter qu'il n'y a ni les capteurs 
+ultrason ni le transmetteur/récepteur radio. L'autonomie est donc trop courte 
+pour notre application. Aussi, lorsque les moteurs tournent à plein régime on 
+peut remarquer que le drone se soulève et que ce qui l'empêche de décoller est 
+le moteur défectueux. On peut donc en conclure que nos calculs mécaniques 
+étaient plutôt bons. Vous pouvez retrouver ces calculs dans l'Annexe C de ce 
+rapport.
     
     \section{Fournisseurs}
       Le rôle de cette section est de présenter les problèmes venant des 
@@ -932,7 +935,7 @@ fournisseur vend donc un produit qui n'est pas du tout fiable.
 
       Ainsi, nous avons compris que faire des économies peut être un avantage 
 (nous avons pu monter un drone pour un peu moins de 30 \euro, tandis que le 
-Crazyflie vaut plus de 120 \euro). Mais à vouloir trop chercher le moins cher, 
+Crazyflie vaut environ 120 \euro). Mais à vouloir trop chercher le moins cher, 
 on prend des risques sur la qualité des produits. Il faut donc mieux 
 rechercher, se méfier de la contrefaçon  et faire plus d'essais lors de la 
 réception des pièces.
@@ -974,24 +977,73 @@ une seconde version nous serions probablement mieux préparé car nous avons
 appris beaucoup de ces erreurs.
   
   \chapter{Deuxième drone}
+    Bien que le temps ne nous permette pas de réaliser un second drone, nous 
+pouvons tout de même établir un nouveau devis afin d'utiliser une partie de 
+l'expérience que nous avons aquise.
+
+    Pour rappel, les principaux problèmes de notre premier drone sont :
+    
+      \begin{itemize}
+	\item Moteurs pas assez puissants
+	\item Voltage du circuit
+	\item Autonomie de la batterie
+      \end{itemize}
+      
+   Pour ce second drone nous changeront donc les moteurs et la batterie. Nous 
+garderont par contre les autres composants qui malgré leur manque de fiabilité 
+suffirait pour une simple présentation. Bien entendu, pour une application 
+réelle il faudrait voir à choisir des composants de meilleure qualité.
+
+    \section{Moteurs}
+      Le problème de nos moteurs actuels est le couple maximum qu'ils peuvent 
+fournir. En effet, celui-ci est sur la limite de ce dont notre drone à besoin. 
+Ainsi, à plein régime ils pourraient peut-être suffire, mais nous ne pourrions 
+pas vraiment jouer sur leur vitesse de rotation. 
+
+      C'est pour cette raison que nous avons cherché des moteurs plus 
+puissants. Nous avons alors choisi les \textit{DYS BE1806-13} (voir Figure 
+\ref{dys}). Ces moteurs n'ont plus rien avoir avec ceux que nous avions avant 
+puisqu'il sont environ trois fois plus gros et douze fois plus lourd. Ceci va 
+entraîner un changement radical dans la dimension de notre drone. En fait, un 
+drone de la dimension du Crazyflie n'est pas forcemment un bon point de départ 
+pour des débutants comme nous car les composants sont assez spécifiques. Ainsi, 
+en nous ramenant à une dimension plus "normale", nous élargissons notre 
+catalogue de composants.
+
+    \section{Batterie}
+      Comme nous l'expliquions dans le chapitre précédent, nous avons un 
+problème de voltage sur notre premier drone. Les capteurs ultrasons ont besoin 
+d'une tension de 5V, tandis que la batterie fournit du 3.3V. Il nous faut alors 
+un voltage plus élevé. C'est pour cette raison que nous avons sélectionné une 
+\textit{Turnigy 1700Mah 7.4v}. On peut remarqué que la tension délivrée par 
+cette batterie est supérieure à 5V, mais comme nous l'avons expliqué une 
+tension peut se réduire à l'aide d'un pont diviseur de tension (par contre le 
+problème inverse est plus compliqué à résoudre).
+
   
   \chapter{Conclusion}
-    Pour conclure ce rapport nous pouvons commencer par dire que divers 
-éléments ont été implémentés. Premièrement nous pouvons discuter du serveur. 
-Celui-ci est quasiment fonctionnel, dans le sens où il remplit bien sa fonction 
-première à savoir, dessiner la topographie de la zone étudiée. Cependant, il 
-n'est pas entièrement fonctionnel puisque sa deuxième fonction, envoyer des 
-ordres aux drones, ne fonctionne pas encore. En effet, le serveur arrive bien à 
-déterminer si un ordre doit être envoyé puis à faire remonter cet ordre jusqu'à 
-la première tâche (c'est-à-dire, écrire l'ordre sur le port série de la 
-machine). Cependant, nous n'arrivons pas à faire en sorte que la première tâche 
-écrive les messages des drones sur le port série puis simultanément lise les 
-ordres sur le port série. Pour le moment on n'arrive qu'à faire l'un ou l'autre.
+    Maintenant que toutes les étapes du projet ont été abordées, nous pouvons 
+conclure ce rapport.
+
+    Nous pouvons commencer par dire que divers éléments ont été implémentés. 
+Premièrement nous pouvons discuter du serveur. Celui-ci est quasiment 
+fonctionnel, dans le sens où il remplit bien sa fonction première à savoir, 
+dessiner la topographie de la zone étudiée. Cependant, il n'est pas entièrement 
+fonctionnel puisque sa deuxième fonction, envoyer des ordres aux drones, ne 
+fonctionne pas encore. En effet, le serveur arrive bien à déterminer si un ordre 
+doit être envoyé puis à faire remonter cet ordre jusqu'à la première tâche 
+(c'est-à-dire, écrire l'ordre sur le port série de la machine). Cependant, nous 
+n'arrivons pas à faire en sorte que la première tâche écrive les messages des 
+drones sur le port série puis simultanément lise les ordres sur le port série. 
+Pour le moment on n'arrive qu'à faire l'un ou l'autre.
 
     En admettant que le serveur soit fonctionnel. Il nous faudrait quand même 
 un drone opérationel afin de faire de vrais essais. Ce qui nous permettrait 
 alors d'établir une liste complète des états du drone qui nécessitent un envoi 
-d'ordre.
+d'ordre. Car il est compliqué d'établir une liste exhaustive sans voir le 
+déroulement réel de notre application. Biensûr, nous pouvons commencer par 
+penser à quelques états. Mais il est quasiment certain que nous en oublirons. 
+C'est pour cette raison qu'un drone fonctionnel serait d'une grande utilité. 
 
     Dans un deuxième temps nous pouvons parler de la construction du drone. 
 Ceci représentait un challenge énorme. En effet, ce projet requiert des 
@@ -1005,9 +1057,42 @@ réaliser, alors qu'il faudrait plutôt partir sur un ou deux ans. De plus ce
 manque de temps, ne nous a pas permis de profiter de l'expérience aquise durant 
 le projet.
 
-    
-    
-  
+    Même si nous avions réussi à produire un drone qui est capable de voler. 
+Nous serions encore bloqué à la problématique de la détermination de la 
+position du drone dans l'espace étudié. Il plutôt simple de localiser un drone 
+sur une grande étendue (c'est-à-dire, lorsque l'on ne cherche pas à obtenir une 
+précision au décimètre près) en extérieur grâce au GPS. Cependant, nous savions 
+que nous devrions présenter le projet dans une pièce. Ainsi, la précision d'un 
+GPS n'est pas assez suffisante (de l'ordre de trois à cinq mètre). Donc, le GPS 
+ne détecterait quasiment aucun déplacement. C'est pour cette raison que nous 
+avons cherché d'autres solutions et que l'idée de calculer la position du drone 
+en mesurant et en intégrant deux fois son accélération (à l'aide d'un 
+accéléromètre) nous est venue. Cependant, chaque intégration introduit une 
+erreur et dû à la double intégration, cela produit une erreur quadratique. 
+Ainsi, nous serions peut-être capable de localiser à peu près le drone au début 
+de l'application, mais tout au long de son déroulement l'erreur introduite par 
+l'intégration fausserait complètement nos résultats. Il est important de noter 
+que cette problématique est encore au stade de la recherche. Et que pour le 
+moment il n'existe peu (voir pas) de moyens fiable de localiser un objet en 
+mouvement avec beaucoup de précision.
+
+    Bien que ce projet n'est pu aboutir à l'objectif initialement prévu, cela a 
+été un plaisir de travailler sur ce sujet. Du fait des nombreuses connaissances 
+qu'il demande dans des domaines variés, nous pouvons dire que c'est un projet 
+très enrichissant techniquement parlant. Et puisque nous avons dû faire appel à 
+de l'aide extérieure à l'EISTI afin d'obtenir certains de nos composants, nous 
+pouvons aussi dire que c'était enrichissant sur le plan relationnel. Car nous 
+avons dû faire de nombreuses démarche vers des entités extérieures à notre 
+école afin d'obtenir les derniers éléments qu'il nous manquait.
+
+    Mais nous n'aurions peut-être pas pu réussir ces démarches sans l'aide de 
+madame \textit{Nga Nguyen}, pour obtenir la participation de Polytech 
+Instrumentation et sans l'aide de madame \textit{Besma Zeddini}, pour obtenir 
+la participation de l'ENSEA. C'est pour cette raison que nous souhaitons 
+remercier les quatre noms cités ci-dessus, ainsi que les divers connaissances 
+qui nous ont aidé dans notre projet, à savoir pour la découpe du circuit et pour 
+divers conseils techniques.
+   
   \appendix
     \chapter{Suivi de projet}
       \section{Gestionnaire de version}
@@ -1200,16 +1285,17 @@ des moteurs.
 
 	  On peut remarquer que l'action sur les moteurs implique une 
 modification coordonnée de différents moteurs. En effet, si le drone est incliné 
-avec un $moteur_1$ trop bas, il sera nécessaire d'augmenter sa vitesse de 
-rotation afin qu'il gagne en altitude. Néanmoins, il est aussi nécessaire de 
-diminuer la vitesse du $moteur_3$ afin de conserver une altitude plus ou moins 
-stable. 
+avec un $moteur_1$ et un $moteur_4$ trop bas, il sera nécessaire d'augmenter sa 
+vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il est aussi 
+nécessaire de diminuer la vitesse du $moteur_2$ et du $moteur_3$ afin de 
+conserver une altitude plus ou moins stable. La Figure \ref{inclinaisondrone} 
+illustre cet exemple.
 
 	  \begin{figure}[htbp]
 	    \centering
 	    \includegraphics[scale = 0.5]{img/quadcopter.jpg}
-	    \caption{Inclinaison du drone, les moteurs 1 et 4 
-seront accelérés, alors que les 2 et 3 seront ralentis}
+	    \caption{Exemple d'action des moteurs suivant l'inclinaison du 
+drone}
 	    \label{inclinaisondrone}
 	  \end{figure}
 
