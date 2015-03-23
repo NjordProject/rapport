@@ -9,7 +9,7 @@
 \contentsline {chapter}{\numberline {2}Drone}{9}
 \contentsline {section}{\numberline {2.1}Composants}{9}
 \contentsline {subsection}{\numberline {2.1.1}Microcontr\IeC {\^o}leur}{10}
-\contentsline {subsection}{\numberline {2.1.2}Equilibrage et localisation}{10}
+\contentsline {subsection}{\numberline {2.1.2}\IeC {\'E}quilibrage et localisation}{10}
 \contentsline {subsection}{\numberline {2.1.3}Communication avec le serveur}{11}
 \contentsline {subsection}{\numberline {2.1.4}Contr\IeC {\^o}le moteur}{12}
 \contentsline {subsection}{\numberline {2.1.5}Moteurs}{12}
