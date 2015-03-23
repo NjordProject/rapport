@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {2.1.4}Contr\IeC {\^o}le moteur}{12}
 \contentsline {subsection}{\numberline {2.1.5}Moteurs}{12}
 \contentsline {subsection}{\numberline {2.1.6}Mesure de la topographie}{12}
-\contentsline {section}{\numberline {2.2}Assemblage}{12}
+\contentsline {section}{\numberline {2.2}Assemblage}{13}
 \contentsline {subsection}{\numberline {2.2.1}Circuit}{13}
 \contentsline {subsection}{\numberline {2.2.2}Fixations moteur}{13}
 \contentsline {subsection}{\numberline {2.2.3}Production des pi\IeC {\`e}ces manquantes}{15}
@@ -44,4 +44,7 @@
 \contentsline {subsection}{\numberline {B.2.2}Principe}{27}
 \contentsline {subsection}{\numberline {B.2.3}Le gyroscope dans notre montage}{29}
 \contentsline {subsection}{\numberline {B.2.4}Impl\IeC {\'e}mentation}{29}
-\contentsline {chapter}{\numberline {C}Calculs m\IeC {\'e}caniques}{31}
+\contentsline {chapter}{\numberline {C}Calculs m\IeC {\'e}caniques et \IeC {\'e}lectriques}{31}
+\contentsline {section}{\numberline {C.1}Th\IeC {\'e}orie physique pour le calcul de la puissance requise par les moteurs}{31}
+\contentsline {section}{\numberline {C.2}Calcul de l'autonomie de la batterie}{34}
+\contentsline {section}{\numberline {C.3}Pratique}{34}

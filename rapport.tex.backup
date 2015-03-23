@@ -13,6 +13,7 @@ une équipe de drones}
 \author{AIGREAULT Clément - HENRIO Jordan - PHAM Chitin}
 
 \begin{document}
+
   \maketitle
 
   \chapter*{Introduction}
@@ -78,7 +79,8 @@ serveur connait l'ensemble des drones utilisés dans l'application et peut
 donc communiquer avec eux. Aussi, si l'un des drones venait à tomber en panne 
 durant une analyse, cela n'empêcherait pas le bon déroulement de l'application 
 puisque le serveur pourrait continuer de communiquer avec le reste des drones, 
-contrairement à une topologie en anneau par exemple (qui au passage augmenterait 
+contrairement à une topologie en anneau par exemple (qui au passage 
+augmenterait 
 la latence de réception des données).
       
       \subsection{Fonctionnement interne du serveur}
@@ -340,12 +342,14 @@ demander que sa batterie soit rechargée pendant une session d'analyse.
     
     Parmi les drones déjà existants, le drone \textit{Crazyflie} de chez 
 \textit{Bitcraze}\cite{bitcraze} nous a intéressés par sa petite taille (voir 
-Figure \ref{crazyflie}), par le fait qu'il soit libre et qu'on puisse facilement 
+Figure \ref{crazyflie}), par le fait qu'il soit libre et qu'on puisse 
+facilement 
 acheter tous les composants séparément. Nous avons donc décidé de baser notre 
 modèle sur ce petit drone. Plus concrètement, le nôtre a une taille similaire 
 au Crazyflie et dispose de la même batterie, des mêmes moteurs et des mêmes 
 pales mais le reste des composants sont différents. Nous ne voulions pas passer 
-directement par un Crazyflie, car un de nos objectifs est de construire le robot 
+directement par un Crazyflie, car un de nos objectifs est de construire le 
+robot 
 de A à Z. De plus ce modèle n'est pas tout à fait adapté à ce que nous voulons 
 faire, car il est trop léger et est alors trop véloce. Aussi il ne possède 
 pas de capteur pour récolter des informations sur la zone survolée. Donc dans 
@@ -416,7 +420,8 @@ des exemples d'utilisation.
 	
 	Pendant un certain moment nous nous sommes demandé comment nous 
 pourrions connaître la position de notre drone dans l'espace. Naturellement 
-nous avons pensé au GPS, mais la précision de ces technologies (pour rester dans 
+nous avons pensé au GPS, mais la précision de ces technologies (pour rester 
+dans 
 un budget abordable) n'est clairement pas assez précise. Bien entendu, dans le 
 cadre où le drone devrait faire son analyse en extérieur sur une zone assez 
 grande, les GPS sont intéressants. Mais notre drone devra simplement analyser 
@@ -425,18 +430,24 @@ large. Nous aurions plutôt besoin d'une précision de l’ordre du décimètre.
 autre solution a été évoquée, créer notre propre système de localisation, en 
 créant une triangulation\cite{triangulation} à l’aide d’un réseau d’antennes. 
 Ce principe consiste à placer trois antennes autour d'une zone et qui emmettent 
-un signal. L'objet qu'on souhaite localiser réceptionne ces signaux et calcul 
-sa position dans l'espace en fonction de sa position par rapport à l'ensemble 
-des émetteurs. Toutefois, pour des raisons de coûts cette solution ne nous 
+un signal.
+L'objet que l'on souhaite localiser réceptionne ces signaux. Il détermine alors 
+la distance
+ qui le sépare des émetteurs. A l'aide de ces 3 distances, on  est alors en 
+mesure de determiner
+ sa position dans l'espace. Toutefois, pour des raisons de coûts, cette solution 
+ne nous 
 semble pas viable sur notre drone. Aussi, elle n'est pas conforme à la 
 problématique de notre projet, puisque nous partons du principe que nous ne 
-connaissons pas l'étendue de la zone. Ainsi, nous ne pourrions pas placer nos 
-antennes.
+connaissons pas l'étendue de la zone. Ainsi, nous ne serions pas en mesure de 
+placer nos antennes en périphérie de la zone.
+
 
 	Finalement une connaissance, nous a conseillé de travailler avec un 
 accéléromètre. Un accéléromètre est un module permettant de mesurer 
 l'accélération linéaire d’un système. En connaissant l'accélération de notre 
-drone, il sera alors possible de déterminer sa vitesse et donc, ses déplacements 
+drone, il sera alors possible de déterminer sa vitesse et donc, ses 
+déplacements 
 dans l’espace. Nous avons donc choisi de nous tourner vers cette solution. 
 C'est aussi pour cette raison que nous avons choisi le MPU6050 car il embarque 
 un accéléromètre.
@@ -534,7 +545,8 @@ message sur deux.
 vitesse du moteur ainsi que son sens de rotation. Il faut savoir qu'un ESC vaut 
 environ 16 \euro. Ce qui fait 64 \euro \space pour un quadcopter. Outre le prix 
 important de ces modules, leur poids (25 grammes/module) aussi nous oblige à 
-nous orienter vers une autre solution. Nous avons donc pensé à créer nos propres 
+nous orienter vers une autre solution. Nous avons donc pensé à créer nos 
+propres 
 ESC simplement en branchant un transistor entre chaque moteur et les broches de 
 sortie de l’Arduino. Les transistor on pour propriété de fonctionner comme des 
 interrupteur électrique. Ainsi en couplant les variations du signal électrique 
@@ -636,7 +648,8 @@ car il faut choisir entre un matériau léger mais coûteux et un matériau "lou
 et bon marché. Donc nous avons pensé que le circuit pourrait lui-même faire 
 office de châssis. Bien entendu, ce choix est risqué car le drone est plus 
 fragile. Mais notre application n'est pas vraiment "à risque" dans le sens où 
-notre drone n'est pas censé faire des acrobaties et que nous comptions mettre en 
+notre drone n'est pas censé faire des acrobaties et que nous comptions mettre 
+en 
 place des sécurités pour qu'il évite les obstacles de son environnement.
 
 	De plus les moteurs du Crazyflie ont une dimension assez particulière. 
@@ -753,34 +766,38 @@ photographie du résultat final.
 	    \label{droneres}
 	  \end{figure}
 	
-	  Lorsque nous avons enfin terminé d'assembler le drone notre premier 
-réflexe a été de vérifier s'il pouvait décoller. Nous avons alors pour cela 
-écrit simple code Arduino qui se contentait de faire tourner les moteurs à 
-mi-régime. Sans grande surprise cela ne suffisait pas à le faire décoller. Nous 
-avons alors essayé de les faire tourner à plein régime. Et nous avons pu 
-constater un problème. Lorsque l'Arduino délivre sa puissance maximum, les 
-moteurs ne tournent pas au maximum de leur capacité. En d'autres termes, 
-l'Arduino n'est pas capable de délivrer assez de courant pour faire tourner les 
-moteurs au maximum de leur capacité. Le drone n'a donc pas décollé.
+	
+	Une fois l'ensemble de ces étapes effectuées, il était donc possible de 
+tester notre drone. Notre premier reflexe étant bien evidemment de nous assurer 
+que ce dernier serait en mesure de décoller. Après diverses expérimentations, 
+il s'est avéré que les moteurs n'étaient pas en mesure de tourner à plein 
+régime. En effet, lorsque notre controleur (i.e l'arduino) délivre sa puissance 
+maximal, les moteurs n'atteignent pas leur maximum de rotation. En d'autres 
+termes, l'Arduino n'est pas en mesure de délivrer assez de courant pour faire 
+tourner les moteurs au maximum de leur capacité. Le drone n'a donc pas décollé.
 
-	  Nous avons eu ensuite une deuxième idée pour tester le décollage. 
-Faire un "by-pass" de l'Arduino. C'est à dire brancher les moteurs directement 
+	Afin de tester un éventuel décollage du drone, nous avons décider de 
+faire un "by-pass" de l'Arduino. C'est à dire brancher les moteurs directement 
 sur l'alimentation. En procédant de cette façon les moteurs tournent bien au 
-maximum de leur capacité. Mais nous avons constaté un deuxième problème. Un 
-moteur est défectueux. Ainsi, lors de notre premier essai sans passer par 
-l'Arduino le drone s'est soulevé d'un côté mais le manque de couple produit par 
-le moteur défectueux à fait que le drone s'est retourné.
+maximum de leur capacité, toutefois, nous ne sommes pas en mesure de contrôler 
+leur vitesse. Grâce à cette étape intermédiaire, nous avons pu constater qu'un 
+des moteurs présentait un défaut, et n'était pas capable de délivrer la même 
+puissance que les autres moteurs. Ainsi, lors de notre essai, le drone s'est 
+soulevé d'un côté mais le manque de couple produit par le moteur défectueux à 
+fait que le drone s'est retourné.
 
-	  Nous pensons donc que si nous possédions quatre moteurs en bon état, 
-le drone serait capable de décoller si on les branche directement sur 
-l'alimentation. Cependant, ce ne serait pas vraiment intéressant car on ne 
-pourrait pas contrôler leur vitesse. Ainsi, le drone ne pourrait que s'élever 
-verticalement. Nous ne pourrions pas le faire avancer ou aller sur les côtés. 
-De plus on serait dans l'incapacité de le faire s'arrêter.
+	  En analysant l'ensemble de ces problèmes, il semble raisonnable de 
+penser que la présence de 4 moteurs en bon état, et tournant à leur maximum de 
+puissance seraient capable de faire décoller notre drone. Toutefois, l'absence 
+de contrôle sur la vitesse des moteurs nous empecherait de controler la vitesse 
+des moteurs, limitant notre drone à des déplacement verticaux.  Nous ne 
+pourrions pas le faire avancer ou aller sur les côtés. De plus nous serions 
+dans l'incapacité de le faire s'arrêter.
 
 	  Nous avons alors compris que nous ne pourrions pas faire décoller ce 
 prototype. De plus, la soutenance approchait à grand pas. Nous n'étions qu'à 
-deux semaines de la présentation alors nous n'avions pas le temps de préparer un 
+deux semaines de la présentation alors nous n'avions pas le temps de préparer 
+un 
 second drone à partir d'autres composants. Nous avons toutefois préparé un code 
 pour la présentation, qui servait à montrer l'influence du gyroscope sur le 
 contrôle des moteurs. Lorsqu'on incline le drone, on peut voir que certains 
@@ -788,7 +805,7 @@ moteurs réagissent à cette inclinaison afin d'essayer le stabiliser. Par
 exemple, si on penche le drone vers l'avant, les moteurs avant vont accélérer 
 afin d'essayer de replacer le drone parallèlement au sol. De plus on peut 
 remarquer que plus l'angle d'inclinaison est important, plus les moteurs 
-accélèrent afin de produire plus de puissance pour essayer de stabiliser 
+accélèrent afin de produire plus de puissance pour essayer de redresser 
 l'appareil.
 
   \chapter{Analyse}
@@ -1008,18 +1025,79 @@ entraîner un changement radical dans la dimension de notre drone. En fait, un
 drone de la dimension du Crazyflie n'est pas forcemment un bon point de départ 
 pour des débutants comme nous car les composants sont assez spécifiques. Ainsi, 
 en nous ramenant à une dimension plus "normale", nous élargissons notre 
-catalogue de composants.
+catalogue de composants. Ce deuxième drone devrait alors faire environ 30 
+centimètres de diamètre pour un peu moins de 370 grammes.
+
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.25]{img/dys.jpg}
+	\caption{Image d'un moteur DYS BE1806-13}
+	\label{dys}
+      \end{figure}
+
+      Pour ces moteurs nous disposons d'une documentation assez complète. 
+Ainsi, nous sommes capable de faire nos calculs sans faire d'estimation. Ces 
+moteurs sont capable de fournir une puissance maximum de 89 watts. Pour un 
+drone de 370 grammes il faut compter une puissance 9 watts par moteur. Nous 
+pouvons donc remarquer que les moteurs choisis sont bien supérieurs à ce que 
+le drone requiert. Mais, cela nous permettrait d'avoir une grande marge de 
+manoeuvre sur la vitesse de rotation des moteurs. Aussi, cela nous permettrait 
+d'éviter de faire tourner les moteurs à plein régime de manière constante, ce 
+qui augmenterait leur durée de vie et qui déchagerait moins vite la batterie.
+
+      Dû aux nouveaux moteurs qui sont beaucoup plus puissants et à la 
+nouvelle dimension de notre drone, il nous faut choisir de nouvelles pales 
+(plus longues). Nous avons alors choisi des \textit{APC 6*2 .049} (voir Figure 
+\ref{pale}). Ces pales font six pouces de longueur (environ 15 centimètres).
+
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.4]{img/pale.jpg}
+	\caption{Image d'une pale APC 6x2 .049}
+	\label{pale}
+      \end{figure}
+      
+      Grâce à ces nouvelles pales plus longues, le drone pourra plus facilement 
+brasser l'air et donc décoller plus facilement. Par contre, nous perdrons en 
+vitesse, mais pour rappel, nous cherchons justement à obtenir un vol hybride 
+afin d'obtenir le plus d'information possible sans être lent au point de 
+pouvoir faire des prises de vue.
 
     \section{Batterie}
       Comme nous l'expliquions dans le chapitre précédent, nous avons un 
 problème de voltage sur notre premier drone. Les capteurs ultrasons ont besoin 
 d'une tension de 5V, tandis que la batterie fournit du 3.3V. Il nous faut alors 
 un voltage plus élevé. C'est pour cette raison que nous avons sélectionné une 
-\textit{Turnigy 1700Mah 7.4v}. On peut remarqué que la tension délivrée par 
-cette batterie est supérieure à 5V, mais comme nous l'avons expliqué une 
-tension peut se réduire à l'aide d'un pont diviseur de tension (par contre le 
-problème inverse est plus compliqué à résoudre).
+\textit{Turnigy 1700Mah 7.4v} (voir Figure \ref{batterie}). On peut remarqué 
+que la tension délivrée par cette batterie est supérieure à 5V, mais comme nous 
+l'avons expliqué une tension peut se réduire à l'aide d'un pont diviseur de 
+tension (par contre le problème inverse est plus compliqué à résoudre).
 
+      \begin{figure}[htbp]
+	\centering
+	\includegraphics[scale = 0.3]{img/nouvellebatterie.jpg}
+	\caption{Image d'une batterie Turnigy 1700Mah 7.4v}
+	\label{batterie}
+      \end{figure}
+
+      D'après nos calculs, le drone devrait avoir besoin de 1600mA par moteur 
+pour décoller et l'ensemble des autres composants demandent 124mA de manière 
+continue. Ainsi, avec cette batterie qui peut fournir 1700mAh, nous devrions 
+avoir une autonomie d'une quinzaine de minutes. L'autonomie de ce nouveau drone 
+est donc doublée par rapport au précédent, alors qu'il doit alimenter six 
+capteurs ultrasons ainsi que le transmetteur/récepteur radio (ce que ne faisait 
+pas l'ancien).
+
+    \section{Coût total}
+      Ce nouveau devis nous indique un prix beaucoup plus élevé que pour le 
+premier. En effet, nous arrivons à environ 75 \euro, tandis que le premier 
+drone nous a coûté environ 25 \euro. Ceci s'explique notamment que le prix des 
+batteries est proportionnel à leur capacité. Aussi, les moteurs du Crazyflie 
+sont vraiment bons marchés comparativement aux autres moteurs. Il n'est donc 
+pas étonnant d'aboutir à un prix plus élevé.
+
+      Aussi il ne faut pas oublier de changer l'Arduino Pro Mini 3.3V, en sa 
+version 5V. Cependant le prix est le même entre les deux versions.
   
   \chapter{Conclusion}
     Maintenant que toutes les étapes du projet ont été abordées, nous pouvons 
@@ -1030,7 +1108,8 @@ Premièrement nous pouvons discuter du serveur. Celui-ci est quasiment
 fonctionnel, dans le sens où il remplit bien sa fonction première à savoir, 
 dessiner la topographie de la zone étudiée. Cependant, il n'est pas entièrement 
 fonctionnel puisque sa deuxième fonction, envoyer des ordres aux drones, ne 
-fonctionne pas encore. En effet, le serveur arrive bien à déterminer si un ordre 
+fonctionne pas encore. En effet, le serveur arrive bien à déterminer si un 
+ordre 
 doit être envoyé puis à faire remonter cet ordre jusqu'à la première tâche 
 (c'est-à-dire, écrire l'ordre sur le port série de la machine). Cependant, nous 
 n'arrivons pas à faire en sorte que la première tâche écrive les messages des 
@@ -1090,7 +1169,8 @@ madame \textit{Nga Nguyen}, pour obtenir la participation de Polytech
 Instrumentation et sans l'aide de madame \textit{Besma Zeddini}, pour obtenir 
 la participation de l'ENSEA. C'est pour cette raison que nous souhaitons 
 remercier les quatre noms cités ci-dessus, ainsi que les divers connaissances 
-qui nous ont aidé dans notre projet, à savoir pour la découpe du circuit et pour 
+qui nous ont aidé dans notre projet, à savoir pour la découpe du circuit et 
+pour 
 divers conseils techniques.
    
   \appendix
@@ -1132,6 +1212,7 @@ construction d'un drone, sous une forme simple, en expliquant comment les
 choses fonctionnent.
 
       \section{Calculateur}
+	\label{sec:calculateur}
 	Après avoir établit nos différents calculs (autonomie de la batterie, 
 poussée requise, puissance requise, ...) nous avons pensé qu'il pourrait être 
 intéressant de créer un tableur qui réalise ces différents calculs 
@@ -1215,12 +1296,12 @@ de posséder un accéléromètre. Cet accéléromètre étant destiné à nous f
 des informations sur le déplacement, et la position de notre drone. 
  
 	  Ce capteur est constitué de trois axes (les axes X et Y étant 
-indiqués sur la carte, l'axe Z étant perpendiculaire à la plaque (voir figure 
-1)). Puisqu'il faut que l'effet gyroscopique puisse s'appliquer sur le 
-gyroscope, l'ensemble des angles pouvant être mesurés appartiennent à [-80,80]. 
-Passé cette valeur, la gravité serait trop proche de la composante crée par 
-l'effet gyroscopique, ce qui fausserait les mesures. Les mesures de rotations 
-autour de l'axe Z varient quant à elles entre -180 et 180.
+indiqués sur la carte, l'axe Z étant perpendiculaire à la plaque (voir 
+Figure \ref{mpu6050schema})). Puisqu'il faut que l'effet gyroscopique puisse 
+s'appliquer sur le gyroscope, l'ensemble des angles pouvant être mesurés 
+appartiennent à [-80,80]. Passé cette valeur, la gravité serait trop proche de 
+la composante crée par l'effet gyroscopique, ce qui fausserait les mesures. Les 
+mesures de rotations autour de l'axe Z varient quant à elles entre -180 et 180.
 
 	  Afin d'utiliser le MPU6050 dans notre montage, nous nous sommes 
 largement inspiré des travaux de Jeff Rowberg\cite{jeffrwork}, qui propose un 
@@ -1231,7 +1312,14 @@ traitement adéquat. Puisque notre drone à pour but de mesurer une topographie,
 il est nécessaire d'obtenir un drone en vol stationnaire, c'est-à-dire 
 parallèle au sol. les moteurs sont donc gouvernés par le gyroscope afin se 
 stabiliser.
-  
+
+	  \begin{figure}[htbp]
+	    \centering
+	    \includegraphics[scale = 0.6]{img/MPU6050_schema.png}
+	    \caption{Schéma du MPU6050}
+	    \label{mpu6050schema}
+	  \end{figure}
+	  
 	\subsection{Implémentation}
 	  Le programme est divisé en plusieurs parties. Le fichier 
 \textit{call\_gyroscope} permet d'appeler les diverses fonctions nécessaires au 
@@ -1274,17 +1362,18 @@ d'acquérir la valeur des angles d'orientations, grâce aux commandes suivantes 
 	  Puis on évalue la valeur de ces angles en testant :
 	  
 	  \begin{equation}
-	    \frac{ypr[1] * 18}{M_{PI}} * \frac{ypr[1] * 90}{M_{PI}} * 3
+	    \frac{ypr[1] * 360}{2*\pi} * \frac{ypr[1] * 360}{2*\pi} * 60
 	  \end{equation}
 
 	  Avec $ypr$ une table renvoyant le \textit{YawPitchRoll} (angle 
 d'inclinaison) de notre drone. Les facteurs $18$, $M_{PI}$ et $90$ sont des 
 facteurs permettant d'obtenir des valeurs en degrés (et non radians). Enfin le 
-facteur $3$ permet d'obtenir des actions ayant une influence sur la rotation 
+facteur $60$ permet d'obtenir des actions ayant une influence sur la rotation 
 des moteurs. 
 
 	  On peut remarquer que l'action sur les moteurs implique une 
-modification coordonnée de différents moteurs. En effet, si le drone est incliné 
+modification coordonnée de différents moteurs. En effet, si le drone est 
+incliné 
 avec un $moteur_1$ et un $moteur_4$ trop bas, il sera nécessaire d'augmenter sa 
 vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il est aussi 
 nécessaire de diminuer la vitesse du $moteur_2$ et du $moteur_3$ afin de 
@@ -1304,11 +1393,301 @@ l'inclinaison du drone afin de réévaluer la vitesse des bons moteurs. Une fois
 ceci effectué, on peut renvoyer notre table à l'Arduino qui n'aura alors qu'à 
 modifier la vitesse des moteurs
     
-    \chapter{Calculs mécaniques}
+    \chapter{Calculs mécaniques et électriques}
+      \section{Théorie physique pour le calcul de la puissance requise par les 
+moteurs}
+	Afin de choisir correctement les moteurs, il est nécessaire de 
+connaître la fonction $Puissance = f(Poids)$, soit la relation entre la 
+puissance fournie par les moteurs et le poids qu'ils permettent de porter. Afin 
+de determiner cette relation, on va considerer notre sytème comme un système 
+isolé (c'est-à-dire sans interactions avec l'extérieur). Il est formé par 
+trois parties, une partie centrale constituée de la pale, une inférieure 
+permettant à l'air d'entrer dans la pale, et une partie supérieure lui 
+permettant d'en sortir. 
+
+	  \begin{figure}[htbp]
+	    \centering
+	    \includegraphics[scale = 0.5]{img/systeme_isole.png}
+	    \caption{Schéma d'un système fermé}
+	    \label{systemisole}
+	  \end{figure}
+	  
+	Chaque partie a une pression particulière, ce qui a pour conséquence 
+d'appliquer une force sur les pales. On peut exprimer ces forces par l'équation 
+\ref{eq:forcepal}.
+
+	\begin{equation}
+	  \label{eq:forcepal}
+	  F(Pression) = Pression * Surface 
+	\end{equation}
+
+	Cette force étant dirigée vers les pales, il se crée deux forces de 
+directions opposées et donc un différentiel de force $F_{diff}$ tel que donné 
+par l'équation \ref{eq:fdiff}.
+
+	\begin{equation}
+	  \label{eq:fdiff}
+	  F_{diff}(Pression) = (Pression_{haut} - Pression_{bas}) * Surface
+	\end{equation}
+
+	Donc, du fait de la rotation des pales, il se crée une différence de 
+pression, ce qui a pour conséquence de favoriser la création d'une force. 
+Il est courant d'appeler des différence de force, \textit{sustentation}.
+
+	Maintenant que l'on est en mesure de comprendre le principe de 
+sustentation, il est nécessaire de l'estimer afin de connaître la 
+puissance à fournir pour que le drone puisse décoller. 
+
+	Considérons le débit de l'air ($Q$) :
+	
+	\begin{equation}
+	  \label{eq:debit}
+	  Q = \rho * Surface * Vitesse
+	\end{equation}
+	
+	avec :
+	
+	\begin{itemize}
+	  \item $\rho$ : masse volumique de l'air
+	  \item Surface : surface sur la portion considérée
+	  \item Vitesse : vitesse moyenne de l'air dans cette portion
+	\end{itemize}
+	
+	On peut exprimer la puissance du rotor par l'équation 
+\ref{eq:puissancerotor}.
+	
+	\begin{equation}
+	  \label{eq:puissancerotor}
+	  P_{r} = F_{n} * V_{1} 
+	\end{equation}
+	
+	En utilisant le théorème de la quantité de 
+mouvement\cite{thquantmouvement}, on obtient l'équation 
+\ref{eq:quantitemouvement}:
+
+	\begin{equation}
+	  \label{eq:quantitemouvement}
+	  \Sigma(quantit\acute{e}s \ de \ mouvement) = \Sigma (forces \ 
+ext\acute{e}rieures) 
+	\end{equation}
+	
+	Soit,
+	
+	\begin{equation}
+	  \label{eq:force}
+	  F_{n} = Q * V_{2} - Q * V_{0} 
+	\end{equation}
+	
+	Afin de simplifier nos calculs, nous devons considerer certaines 
+hypothèses. Ainsi, au sein du conduit, on peut négliger les échanges avec 
+l'extérieur (système fermé). Par conséquent, on peut utiliser la relation de 
+Bernouilli, soit :
+
+	\begin{equation}
+	  \label{eq:cinetique}
+	  E_{c} = \frac{1}{2} * \rho * V^{2} 
+	\end{equation}
+	
+	Si le système est considéré comme fermé, alors on peut en déduire que la 
+puissance utilisée se dissipe sous forme d'énergie cinétique. Pour le système 
+(rotor + pale), les seuls échanges possibles sont donc ceux avec les systèmes à 
+ses extrémités ({0} et {1}, voir figure \ref{systemisole}). On a donc :
+
+	\begin{equation}
+	  d_{Puissance} = (E_{c_{2}} - E_{c_{0}}) * d_{Surface}
+	\end{equation}
+
+	d'où en utilisant l'équation \ref{eq:cinetique}:
+	
+	\begin{equation}
+	  d_{Puissance} = \frac{1}{2} * \rho * (V_{2}^{2} - V_{0}^{2}) * 
+d_{Surface}
+	\end{equation}
+	
+	Soit l'équation de la puissance :
+	
+	\begin{equation}
+	  \label{eq:puissance}
+	  Puissance = \frac{1}{2} * Q(V_{2}^{2}-V_{0}^{2}) 
+	\end{equation}
+	
+	or d'après l'équation \ref{eq:puissancerotor} on avait :
+	
+	\begin{equation}
+	  \label{eq:puissance1}
+	  P_{r} = F_{n} * V_{1}
+	\end{equation}
+	
+	en remplaçant $F_{n}$, par l'équation \ref{eq:force}, dans 
+l'équation \ref{eq:puissancerotor} on obtient : 
+	
+	\begin{equation}
+	  \label{eq:puissance2}
+	  P_{r} = Q(V_{2}-V_{0})*V_{1} 
+	\end{equation}
+	
+	À partir des équations \ref{eq:puissance} et \ref{eq:puissance2}, on 
+peut établir l'équation suivante : 
+	
+	\begin{equation}
+	  Q(V_{2} - V_{0})*V_{1} = \frac{1}{2} * Q (V_{2}^{2}-V_{0}^{2})
+	\end{equation}
+	
+	Soit :
+	\begin{equation}
+	  \label{eq:vitessePale}
+	  V_{1} = \frac{(V_{2} + V_{0})}{2} 
+	\end{equation}
+	
+	De plus, d'après \ref{eq:force}, on avait : 
+	
+	\begin{equation}
+	  F_{n} =  Q*(V_{2} - V_{0}) 
+	\end{equation}
+	
+	Or d'après \ref{eq:vitessePale} on a : 
+	
+	\begin{equation}
+	  V_{2} = 2*(V_{1} - V_{0})
+	\end{equation}
+	
+	Donc, on obtient :
+	
+	\begin{equation}
+	  F_{n} = Q(2V_{1} - 2V_{0})
+	\end{equation}
+	
+	En utilisant \ref{eq:debit}, on obtient :
+	
+	\begin{equation}
+	  Fn = 2 \rho * Surface * V_{1} * (V_{1} - V_{0})
+	\end{equation}
+
+	d'où :
+	
+	\begin{equation}
+	  \label{eqForce}
+	  F_{n} =  2 \rho * Surface *V_{1} * V_{f}
+	\end{equation}
+	
+	avec $V_{f} = V_{1} - V_{0}$, la vitesse finale.
+	
+	Il est a noter qu'au décollage, on a V0= 0, on a donc :
+	
+	\begin{equation}
+	  \label{eq:decollage}
+	  F_{n} =  2 \rho * Surface * V_{1}^{2}
+	\end{equation}
+	
+	Enfin d'après \ref{eq:puissance1} on a :
+	
+	\begin{equation}
+	  V_{1} =  \frac{P_{r}}{F_{n}}
+	\end{equation}
+	
+	donc, d'après \ref{eq:decollage} :
+	
+	\begin{equation}
+	  F_{n} = 2 \rho * Surface * (\frac{P_{r}}{F_{n}})^{2}
+	\end{equation}
+	
+	ce qui revient à :
+	
+	\begin{equation}
+	  \label{eq:forceoutput}
+	  F_{n}^{3} = 2 \rho * Surface * P_{r}^{2}
+	\end{equation}
+	
+	avec :
+	
+	\begin{itemize}
+	  \item $F_{n}$ : force émise par la pale
+	  \item $\rho$ : masse volumique de l'air ($= 1,225kg.m^{-3}$)
+	  \item $S = \frac{\pi * {D}^{2}}{4}$, avec $D$ le diamètre des pales
+	\end{itemize}
+	
+	Dans le cadre de notre drone, on désire que la force des pales soit 
+supérieure au poids du drone. Donc :
+		
+	\begin{equation}
+	  F_{n}(total) > \Sigma (forces \ verticales) 
+	\end{equation}
+	
+	On suppose que chaque rotor fournit la même puissance, soit :
+	
+	\begin{equation}
+	  F_{n}(total) = 4 * F_{n} 
+	\end{equation}
+
+	De plus, la seule force verticale étant le poids, on a : 
+	\begin{equation}
+	  \Sigma (forces \ verticales) = m * g
+	\end{equation}
+	
+	avec :
+	
+	\begin{itemize}
+	  \item  m : masse totale du drone
+	  \item  g = valeur du champ de la pesanteur ($=9,81m.s^{-2}$
+	\end{itemize}
+
+	Donc, à l'aide de l'équation \ref{eq:forceoutput}, on a : 
+	
+	\begin{equation}
+	  4 * \sqrt[3]{2 \rho * Surface * P_{r}^{2}} > m*g
+	\end{equation}
+	
+	D'où l'équation finale \ref{eq:finale}:
+	
+	\begin{equation}
+	  \label{eq:finale}
+	  P_{r}  > \sqrt[2]{\frac{\frac{m*g}{4}^{3}}{2 \rho * Surface}}
+	\end{equation}
+	
+      \section{Calcul de l'autonomie de la batterie}
+	
+      \section{Pratique}
+	Grâce à la théorie, nous sommes en mesure de déterminer si un drone 
+peut voler ou non. Il est maintenant nécessaire de créer les outils permettant 
+d'exploiter ces calculs. 
+
+	On pourra remarquer que sur l'équation \ref{eq:finale}, les valeurs 
+caractéristiques de notre système sont :
+	\begin{itemize}
+	  \item $m$ : la masse de notre drone
+	  \item $Surface$ : la surface d'action des pales
+	  \item $Pr$ : la puissance générée par chaque moteur
+	\end{itemize}
+	
+	Nous avons donc crée un calculateur permettant de nous indiquer si 
+notre drone serait en mesure de décoller ou non (voir section 
+\ref{sec:calculateur}). 
+
+	  \begin{figure}[htbp]
+	    \centering
+	    \includegraphics[scale = 0.5]{img/calculateur.png}
+	    \caption{Exemple d'utilisation du calculateur}
+	    \label{calculateur}
+	  \end{figure}
+
+	Sur la figure \ref{calculateur}, on peut remarquer que notre 
+calculateur nous permet de renseigner certaines valeurs telles que le poids du 
+drone (nécessaire pour avoir $m$), mais aussi la taille des pales afin de 
+connaître leur surface d'action. À partir de ces informations on est en mesure 
+de calculer la puissance nécessaire par moteurs. On recueille ensuite les 
+informations sur les moteurs (courants, tension, facteur d'efficacité). 
+Notre drone sera alors en mesure de voler si :
+
+	\begin{equation}
+	  Power \ per \ motor > Power \ required \ per \ motor 
+	\end{equation}
+
+	Des informations telles que l'autonomie peuvent être obtenues en 
+renseignant les champs relatifs aux autres composants.
 
   \listoffigures
   
   \raggedright
   \bibliographystyle{unsrt}
   \bibliography{biblio}
-\end{document}          
+\end{document}

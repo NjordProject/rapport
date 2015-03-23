@@ -90,4 +90,8 @@ Calculateur de caractéristiques d'un drone.
 Travaux de jeff rowberg sur le mpu6050.
 \newblock http://www.i2cdevlib.com/devices/mpu6050.
 
+\bibitem{thquantmouvement}
+Article \textsc{W}ikipédia sur la quantité de mouvement.
+\newblock http://fr.wikipedia.org/wiki/Quantit%C3%A9\_de\_mouvement.
+
 \end{thebibliography}
