@@ -23,7 +23,7 @@ apprendre et communiquer. Une telle avancée permet des milliers d’application
 aussi bien pour le divertissement, la domotique, l’industrie, ou encore 
 l’assistance.
     
-    Parfois l’Homme peut être amené à devoir exécuter certaines missions sur 
+    Parfois l’homme peut être amené à devoir exécuter certaines missions sur 
 des terrains dont il ne possède pas une connaissance exacte (comme par exemple 
 une ville ayant subi une catastrophe naturelle). Ainsi un des problèmes majeurs 
 des agents de sécurité est de connaître exactement la situation afin de mettre 
@@ -49,7 +49,7 @@ nous avons faites et présente les résultats obtenus pendant les phases de test
   \chapter{Serveur}
     Le but de ce chapitre est de présenter le serveur mis en place. Dans un 
 premier temps nous expliquons le modèle de réseau utilisé pour la communication 
-entre les drones et le serveur, et le fonctionnement interne du serveur. Dans 
+entre les drones et le serveur, puis le fonctionnement interne du serveur. Dans 
 une deuxième partie nous abordons, la manière dont nous avons implémenté cela.
 
     \section{Principe de fonctionnement}
@@ -74,19 +74,18 @@ d'envoyer des ordres aux drones suivant certaines situations.
 	
 	Nous avons choisi ce modèle car il répond à nos besoins et qu'il est 
 plus simple à mettre en place qu'un réseau maillé par exemple. Chaque 
-drone peut communiquer avec le serveur mais pas les autres drones. Et le 
+drone peut communiquer avec le serveur, mais pas les autres drones. Et le 
 serveur connait l'ensemble des drones utilisés dans l'application et peut 
 donc communiquer avec eux. Aussi, si l'un des drones venait à tomber en panne 
 durant une analyse, cela n'empêcherait pas le bon déroulement de l'application 
 puisque le serveur pourrait continuer de communiquer avec le reste des drones, 
 contrairement à une topologie en anneau par exemple (qui au passage 
-augmenterait 
-la latence de réception des données).
+augmenterait la latence de réception des données).
       
       \subsection{Fonctionnement interne du serveur}
 	En ce qui concerne le fonctionnement interne du serveur nous avons 
 pensé qu'il serait plus judicieux de le découper en plusieurs entités, où 
-chacune d'elles serait associée à une tâche particulière. Ainsi, nous avons 
+chacune d'elle serait associée à une tâche particulière. Ainsi, nous avons 
 effectué le découpage suivant :
 
 \begin{itemize}
@@ -94,13 +93,13 @@ effectué le découpage suivant :
   \item Sauvegarde/Chargement des données
   \item Topographie/Décision d'ordre
 \end{itemize}
+
 	Le serveur est donc constitué de trois tâches qui tournent en 
-concurrence à "l'infinie". Enfait, si nous avions fait une seule et unique 
+concurrence à "l'infinie". En fait, si nous avions fait une seule et unique 
 tâche nous risquerions de perdre des données. En effet, le temps que le serveur 
-traite les informations qu'il a reçu, les drones continuent de lui envoyer des 
-données. Mais si le serveur n'écoute pas à ce moment là, alors ces données 
-seraient perdues.
-	
+traite les informations qu'il a reçues, les drones continuent de lui envoyer 
+des données. Mais si le serveur n'écoute pas à ce moment là, alors ces données 
+sont perdues.	
 
 	\begin{figure}[htbp]
 	  \centering
@@ -114,7 +113,7 @@ la Figure \ref{server_model}, en référence au composant utilisé pour la
 communication), se charge de lire les messages envoyés par les différents 
 drones et de les réécrire sur le port série du serveur. En effet, une partie du 
 serveur est constitué d'un montage à base d'\textit{Arduino} et c'est notre 
-seul moyen de faire passer les données du microcontrôleur (voir section 2.1.1) 
+seul moyen de faire passer les données du micro-contrôleur (voir section 2.1.1) 
 vers le serveur. Cette même tâche se charge dans un deuxième temps de lire le 
 port série, afin de vérifier s'il y a des ordres à envoyer aux drones. Si c'est 
 le cas elle se charge de les communiquer aux drones concernés.
@@ -134,9 +133,9 @@ avec chacune de ses composantes représentant l'altitude aux cordonnées
 correspondantes aux indices de la composante. Ainsi, si $M_{1, 1} = 150$ (avec 
 $M$ la matrice représentant la zone) cela signifie qu'au point $(1, 1)$ de la 
 zone un drone a mesuré une altitude de 150 centimètres. À chaque fois 
-qu'une donnée est inséré dans la matrice, cette tâche se charge de dessiner 
+qu'une donnée est insérée dans la matrice, cette tâche se charge de dessiner 
 le nouveau contenu à l'écran. Ce qui permet à l'utilisateur de suivre en 
-direct l'évolution de l'analyse, et ce de manière graphique. Dans un deuxième 
+direct l'évolution de l'analyse, et ce, de manière graphique. Dans un deuxième 
 temps cette tâche analyse si un ordre doit être envoyé. Cela dépend de 
 plusieurs paramètres. Par exemple, si une zone de la carte n'a pas encore été 
 dévoilée le serveur peut demander à un drone de s'y rendre pour y récolter des 
@@ -213,7 +212,7 @@ Figure \ref{message_serveur}) et le transmet au drone concerné.
 	  \item $d$ : identifiant du drone destinataire
 	  \item $x$ : position cible en abscisse
 	  \item $y$ : position cible en ordonnée
-	  \item $z$ : altitude cible du drone
+	  \item $z$ : altitude cible
 	  \item $e$ : code supplémentaire
 	\end{itemize}
 	
@@ -225,38 +224,39 @@ pourrait signifier "Je n'ai plus de batterie". Dans ce cas le serveur sait
 interpréter le cas où $e = 5$ et construirait un ordre en conséquence.
 
 	La deuxième tâche, quant à elle, est implémentée en 
-\textit{Python}\cite{python}. Nous avons choisi ce langage car nous n'avons pas 
-besoin d'un langage puissant comme le \textit{C/C++} et il est moins gourmand 
-que \textit{Java}. De plus, il possède une communauté énorme. Ainsi, il existe 
-des bibliothèques pour tout et n'importe quoi. Le langage étant très simple de 
-base, avec toutes ces bibliothèques il devient sûrement le langage le plus 
-simple pour déployer de petites applications. Par exemple, il existe une 
+\textit{Python}\cite{python}. Nous avons choisi ce langage, car nous n'avons 
+pas besoin d'un langage puissant comme le \textit{C/C++} et il est moins 
+gourmand que \textit{Java}. De plus, il possède une communauté énorme. Ainsi, 
+il existe des bibliothèques pour tout et n'importe quoi. Le langage étant très 
+simple de base, avec toutes ces bibliothèques il devient sûrement le langage le 
+plus simple pour déployer de petites applications. Par exemple, il existe une 
 bibliothèque pour accéder au port série de la machine, avec des fonctions très 
 simples d'utilisation.
 
 	Quand la deuxième tâche récupère un message elle doit l'insérer dans 
 une base de données. Notre application ne nécessite pas la puissance du 
-\textit{SQL}. En effet, tout ce que nous voulons faire ces récupérer tout le 
+\textit{SQL}. En effet, tout ce que nous voulons faire c'est récupérer tout le 
 contenu, entrée par entrée. Ainsi, nous n'avons pas besoin de faire des 
-requêtes avec des entrées classée dans un certain ordre, ou alors des requêtes 
+requêtes avec des entrées classées dans un certain ordre, ou alors des requêtes 
 avec des conditions, etc. C'est pour cette raison que nous avons choisi 
 d'utiliser une base de données \textit{Redis}\cite{redis}. C'est une base de 
 données basée sur des ensembles "clé-valeur". Ainsi, dans notre application la 
-zone étudiée (la clé) sera associée à une pile de message (la valeur). Un autre 
-point fort de notre choix d'implémentation est qu'il existe une bibliothèque 
-pour la manipulation de Redis avec Python. 
+zone étudiée (la clé) sera associée à une pile de messages (la valeur). Un 
+autre point fort de notre choix d'implémentation est qu'il existe une 
+bibliothèque pour la manipulation de Redis avec Python. 
 
-      La troisième tâche est elle aussi implémentée en Python. Dans la section 
+      La troisième tâche est aussi implémentée en Python. Dans la section 
 1.1.2 nous avons expliqué que nous représentons la zone étudiée par une 
 matrice. Nous partons du principe que nous ne connaissons pas la taille de la 
 zone. Ainsi, notre matrice doit être constamment redimensionnée. Il existe 
 encore une bibliothèque très utile en Python, nommée 
 \textit{Numpy}\cite{numpy}. C'est une bibliothèque scientifique qui propose 
-divers fonctions implémentant des algorithmes connus pour le calculs 
-scientifique, mais dans notre cas ce qui nous intéresse c'est les structures de 
-données qu'elle propose. En effet, les matrices Numpy sont très puissantes car 
-elles disposent de divers méthodes pour leur manipulation et notamment des 
+divers fonctions implémentant des algorithmes connus pour le calcul 
+scientifique, mais dans notre cas ce qui nous intéresse, ce sont les structures 
+de données qu'elle propose. En effet, les matrices Numpy sont très puissantes, 
+car elles disposent de divers méthodes pour leur manipulation et notamment des 
 méthodes de redimensionnement dynamique.
+
       Aussi, cette tâche doit représenter graphiquement le contenu de la 
 matrice. Numpy est très souvent couplé à une seconde bibliothèque nommée 
 \textit{MatPlotLib}\cite{matplotlib}. Celle-ci permet de dessiner des 
@@ -264,10 +264,11 @@ graphiques à l'écran. Elle fonctionne très bien avec Numpy puisque ses métho
 s'attendent déjà à recevoir des objets venant de cette dernière.
 
       Maintenant que nous avons présenté le fonctionnement du serveur nous 
-allons pouvoir vous présenté un exemple de résultat.
+allons pouvoir vous présenter un exemple de résultat.
 
     \section{Résultat}
-      La Figure\ref{exemple_topo} est une capture d'écran d'une topographie que 
+      La Figure \ref{exemple_topo} est une capture d'écran d'une topographie 
+que 
 nous avons obtenue par le biais du serveur.
 
 	\begin{figure}[htbp]
@@ -280,14 +281,15 @@ nous avons obtenue par le biais du serveur.
       On peut y voir un certain nombre d'éléments. Le plus visible est le 
 graphique lui-même. Il représente la zone étudiée en vue de dessus. Ainsi à 
 chaque coordonnée de la zone est associée une certaine hauteur. Le degré de 
-cette hauteur est représenté par une couleur plus ou moins foncé. Plus cette 
+cette hauteur est représenté par une couleur plus ou moins foncée. Plus cette 
 couleur est foncée plus le point est élevé. Sur la droite du graphique se 
 trouve sa légende. Elle indique la valeur en centimètres du degré de hauteur. 
-On remarque donc que pour des points blancs cela représente le sol, et que pour 
-des points noirs cela représente une hauteur de trois mètres. Cela est dû au 
-fait que les capteurs ultrasons que nous utilisons pour les mesures ont une 
-distance de mesure maximum. Mais le serveur lui peut fonctionner avec n'importe 
-quelle valeur.
+On remarque donc que les points blancs représentent le sol, et que les points 
+noirs représentent une hauteur de trois mètres. Cela est dû au fait que les 
+capteurs ultrasons que nous utilisons pour les mesures ont une distance de 
+mesure maximum. Mais le serveur lui peut fonctionner avec n'importe quelle 
+valeur. Il ne dépend donc pas du matériel utilisé, mais seulement de la forme 
+des messages reçus.
 
       Il faut noter que nous ne possédions pas de drone fonctionnel pour faire 
 les essais du serveur. Ainsi l'exemple de topographie montré par la 
@@ -295,7 +297,7 @@ Figure \ref{exemple_topo} ne représente rien de spécial. Nous avons fournit de
 coordonnées aléatoires pour chaque point et nous avons fait varier les mesures 
 du capteur en plaçant notre main devant et en jouant avec la distance.
 
-      Dans tous les cas, lors de cet essais la réception et la représentation 
+      Dans tous les cas, lors de ces essais la réception et la représentation 
 des messages se sont avérées fonctionnelles. Ainsi, si le serveur était utilisé 
 avec un drone qui fournit sa véritable position et les valeurs renvoyées par 
 ses capteurs, le serveur fournirait toujours les résultats attendus.
@@ -313,20 +315,21 @@ Cependant, nous n'arrivons pas encore à lire et écrire simultanément sur le
 port série, du côté Arduino. Donc nous ne sommes pas encore capable d'envoyer 
 les ordres aux drones.
 
-      De plus notre serveur ne détermine le besoin d'envoyer un ordre seulement 
-dans le cas d'une partie encore non dévoilée de la carte. Mais il devrait être 
-capable de déterminer des ordres en fonction des différents états du drone. Par 
-exemple dans le cas où le drone n'a plus de batterie, pour lui demander de 
-revenir à la "base". Pour établir une liste exhaustive de tous les états 
-nécessitant un ordre, il nous faudrait faire des essais à l'aide d'un drone 
-fonctionnel, ce que nous n'avons pas réussi à obtenir. Mais nous aborderons ce 
-problème dans la suite de ce rapport.
+      De plus notre serveur ne détermine pour, le moment, le besoin d'envoyer 
+un ordre seulement dans le cas d'une partie encore non dévoilée de la carte 
+alors qu'il devrait être aussi capable de déterminer des ordres en fonction des 
+différents états du drone. Par exemple dans le cas où le drone n'a plus de 
+batterie, pour lui demander de revenir à la "base". 
+
+      Pour établir une liste exhaustive de tous les états nécessitant un ordre, 
+il nous faudrait faire des essais à l'aide d'un drone fonctionnel. Mais nous 
+aborderons ce problème dans la suite de ce rapport.
 	
 
   \chapter{Drone}
     Étant donné notre cursus, nous ne savions pas réellement comment procéder 
 pour monter un drone. Nous avons commencé par nous renseigner sur ce qui se 
-fait en matière de drones. Il faut savoir qu'il en existe de plusieurs types, 
+fait dans le domaine. Il faut savoir qu'il en existe de plusieurs types, 
 des petits, des grands, des appareils avec un vol "agressif" (rapide et agile), 
 d'autres avec un vol optimisé pour la prise de vues, certains avec un vol dit 
 "hybride", etc.
@@ -340,8 +343,8 @@ rapide afin de prendre le plus d'informations possible. De plus, pour des
 questions pratiques, il faut que le drone ait assez d'autonomie pour ne pas 
 demander que sa batterie soit rechargée pendant une session d'analyse.
     
-    Parmi les drones déjà existants, le drone \textit{Crazyflie} de chez 
-\textit{Bitcraze}\cite{bitcraze} nous a intéressés par sa petite taille (voir 
+    Parmi les drones déjà existants, le \textit{Crazyflie} de chez 
+\textit{Bitcraze}\cite{bitcraze} nous a intéressé par sa petite taille (voir 
 Figure \ref{crazyflie}), par le fait qu'il soit libre et qu'on puisse 
 facilement 
 acheter tous les composants séparément. Nous avons donc décidé de baser notre 
@@ -366,19 +369,19 @@ tous les cas nous aurions été obligés de le modifier.
       L'objectif de cette section est de présenter les différents composants 
 que nous avons utilisés pour construire ce premier drone.
       
-      \subsection{Microcontrôleur}
-	Un microcontrôleur est un \textit{system on chip}, c'est-à-dire que 
-c'est une petite carte électronique proposant un certain nombre de 
-fonctionnalités et pouvant fonctionner seule. C'est souvent un micro-processeur 
-monté sur une carte avec plusieurs broches sur lesquelles l'utilisateur peut y 
-connecter d'autres composants. Ainsi il peut réaliser un montage complexe qu'il 
-pourra utiliser en programmant le micro-processeur.
+      \subsection{Micro-contrôleur}
+	Un micro-contrôleur est un \textit{system on chip}, c'est-à-dire une 
+petite carte électronique proposant un certain nombre de fonctionnalités et 
+pouvant fonctionner seule. C'est souvent un micro-processeur monté sur une 
+carte avec plusieurs broches sur lesquelles l'utilisateur peut y connecter 
+d'autres composants. Ainsi, il peut réaliser un montage complexe qu'il pourra 
+utiliser en programmant le micro-processeur.
 	Au début de notre année scolaire, nous avons eu un séminaire de cours 
 pour nous apprendre le langage \textit{Arduino}. Nous avons pu découvrir un 
 langage vraiment simple à prendre en main lorsque l'on a déjà quelques bases en 
 programmation avec des langages comme le \textit{C}, ou le \textit{C++}. Nous 
 nous sommes donc tournés vers les technologies proposées par Arduino pour le 
-choix du microcontrôleur. Finalement, nous avons opté pour une \textit{Arduino 
+choix du micro-contrôleur. Finalement, nous avons opté pour une \textit{Arduino 
 Pro Mini}. Le principal intérêt de cette carte se trouve dans sa petite taille 
 et sa légèreté, 18 sur 33 millimètres pour seulement deux grammes. De plus elle 
 propose un nombre suffisant de broches pour l'ensemble de notre montage.
@@ -407,7 +410,7 @@ contrôler de manière logicielle, en codant le microprocesseur grâce au langag
 Arduino. Le microprocesseur, lui, se chargera de les faire fonctionner 
 physiquement.  
 	
-      \subsection{Equilibrage et localisation}
+      \subsection{Équilibrage et localisation}
 	Il est important de disposer d'une technologie pour assister le drone à 
 se stabiliser. Pour cela, ce dernier doit connaître "en permanence" son angle 
 d'inclinaison. Nous avons donc besoin d'un gyroscope. Le large catalogue de 
@@ -1645,7 +1648,34 @@ supérieure au poids du drone. Donc :
 	\end{equation}
 	
       \section{Calcul de l'autonomie de la batterie}
+	L'autonomie de la batterie peut être connue à partir de la capacité de 
+celle-ci et de la consommation électrique de chaque composant :
+
+	\begin{equation}
+	  autonomie = \frac{capacit\acute{e}}{(consommation_{moteur} * 4) + 
+consommation_{autres}} * 60
+	\end{equation}
 	
+	avec :
+	
+	\begin{itemize}
+	  \item $capacit\acute{e}$ : la capacité de la batterie (en mAh)
+	  \item $consommation_{moteur}$ : la consommation électrique (en mA) 
+d'un moteur pour fournir la puissance $P_{r}$ requise pour le décollage (voir 
+\ref{eq:finale})
+	  \item $consommation_{autres}$ : la consommation électrique (en mA) 
+des autres composants
+	  \item un taux d'efficacité de 60\%
+	\end{itemize}
+	
+	La consommation électrique d'un moteur pour fournir la puissance 
+$P_{r}$ peut être calculée par l'équation suivante :
+
+	\begin{equation}
+	  consommation_{moteur} = \frac{P_{r}}{tension * taux \ 
+d'\acute{e}fficatit\acute{e}_{moteur}}*1000
+	\end{equation}
+
       \section{Pratique}
 	Grâce à la théorie, nous sommes en mesure de déterminer si un drone 
 peut voler ou non. Il est maintenant nécessaire de créer les outils permettant 

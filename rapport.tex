@@ -23,7 +23,7 @@ apprendre et communiquer. Une telle avancée permet des milliers d’application
 aussi bien pour le divertissement, la domotique, l’industrie, ou encore 
 l’assistance.
     
-    Parfois l’Homme peut être amené à devoir exécuter certaines missions sur 
+    Parfois l’homme peut être amené à devoir exécuter certaines missions sur 
 des terrains dont il ne possède pas une connaissance exacte (comme par exemple 
 une ville ayant subi une catastrophe naturelle). Ainsi un des problèmes majeurs 
 des agents de sécurité est de connaître exactement la situation afin de mettre 
@@ -49,7 +49,7 @@ nous avons faites et présente les résultats obtenus pendant les phases de test
   \chapter{Serveur}
     Le but de ce chapitre est de présenter le serveur mis en place. Dans un 
 premier temps nous expliquons le modèle de réseau utilisé pour la communication 
-entre les drones et le serveur, et le fonctionnement interne du serveur. Dans 
+entre les drones et le serveur, puis le fonctionnement interne du serveur. Dans 
 une deuxième partie nous abordons, la manière dont nous avons implémenté cela.
 
     \section{Principe de fonctionnement}
@@ -74,19 +74,18 @@ d'envoyer des ordres aux drones suivant certaines situations.
 	
 	Nous avons choisi ce modèle car il répond à nos besoins et qu'il est 
 plus simple à mettre en place qu'un réseau maillé par exemple. Chaque 
-drone peut communiquer avec le serveur mais pas les autres drones. Et le 
+drone peut communiquer avec le serveur, mais pas les autres drones. Et le 
 serveur connait l'ensemble des drones utilisés dans l'application et peut 
 donc communiquer avec eux. Aussi, si l'un des drones venait à tomber en panne 
 durant une analyse, cela n'empêcherait pas le bon déroulement de l'application 
 puisque le serveur pourrait continuer de communiquer avec le reste des drones, 
 contrairement à une topologie en anneau par exemple (qui au passage 
-augmenterait 
-la latence de réception des données).
+augmenterait la latence de réception des données).
       
       \subsection{Fonctionnement interne du serveur}
 	En ce qui concerne le fonctionnement interne du serveur nous avons 
 pensé qu'il serait plus judicieux de le découper en plusieurs entités, où 
-chacune d'elles serait associée à une tâche particulière. Ainsi, nous avons 
+chacune d'elle serait associée à une tâche particulière. Ainsi, nous avons 
 effectué le découpage suivant :
 
 \begin{itemize}
@@ -94,13 +93,13 @@ effectué le découpage suivant :
   \item Sauvegarde/Chargement des données
   \item Topographie/Décision d'ordre
 \end{itemize}
+
 	Le serveur est donc constitué de trois tâches qui tournent en 
-concurrence à "l'infinie". Enfait, si nous avions fait une seule et unique 
+concurrence à "l'infinie". En fait, si nous avions fait une seule et unique 
 tâche nous risquerions de perdre des données. En effet, le temps que le serveur 
-traite les informations qu'il a reçu, les drones continuent de lui envoyer des 
-données. Mais si le serveur n'écoute pas à ce moment là, alors ces données 
-seraient perdues.
-	
+traite les informations qu'il a reçues, les drones continuent de lui envoyer 
+des données. Mais si le serveur n'écoute pas à ce moment là, alors ces données 
+sont perdues.	
 
 	\begin{figure}[htbp]
 	  \centering
@@ -114,7 +113,7 @@ la Figure \ref{server_model}, en référence au composant utilisé pour la
 communication), se charge de lire les messages envoyés par les différents 
 drones et de les réécrire sur le port série du serveur. En effet, une partie du 
 serveur est constitué d'un montage à base d'\textit{Arduino} et c'est notre 
-seul moyen de faire passer les données du microcontrôleur (voir section 2.1.1) 
+seul moyen de faire passer les données du micro-contrôleur (voir section 2.1.1) 
 vers le serveur. Cette même tâche se charge dans un deuxième temps de lire le 
 port série, afin de vérifier s'il y a des ordres à envoyer aux drones. Si c'est 
 le cas elle se charge de les communiquer aux drones concernés.
@@ -134,9 +133,9 @@ avec chacune de ses composantes représentant l'altitude aux cordonnées
 correspondantes aux indices de la composante. Ainsi, si $M_{1, 1} = 150$ (avec 
 $M$ la matrice représentant la zone) cela signifie qu'au point $(1, 1)$ de la 
 zone un drone a mesuré une altitude de 150 centimètres. À chaque fois 
-qu'une donnée est inséré dans la matrice, cette tâche se charge de dessiner 
+qu'une donnée est insérée dans la matrice, cette tâche se charge de dessiner 
 le nouveau contenu à l'écran. Ce qui permet à l'utilisateur de suivre en 
-direct l'évolution de l'analyse, et ce de manière graphique. Dans un deuxième 
+direct l'évolution de l'analyse, et ce, de manière graphique. Dans un deuxième 
 temps cette tâche analyse si un ordre doit être envoyé. Cela dépend de 
 plusieurs paramètres. Par exemple, si une zone de la carte n'a pas encore été 
 dévoilée le serveur peut demander à un drone de s'y rendre pour y récolter des 
@@ -213,7 +212,7 @@ Figure \ref{message_serveur}) et le transmet au drone concerné.
 	  \item $d$ : identifiant du drone destinataire
 	  \item $x$ : position cible en abscisse
 	  \item $y$ : position cible en ordonnée
-	  \item $z$ : altitude cible du drone
+	  \item $z$ : altitude cible
 	  \item $e$ : code supplémentaire
 	\end{itemize}
 	
@@ -225,38 +224,39 @@ pourrait signifier "Je n'ai plus de batterie". Dans ce cas le serveur sait
 interpréter le cas où $e = 5$ et construirait un ordre en conséquence.
 
 	La deuxième tâche, quant à elle, est implémentée en 
-\textit{Python}\cite{python}. Nous avons choisi ce langage car nous n'avons pas 
-besoin d'un langage puissant comme le \textit{C/C++} et il est moins gourmand 
-que \textit{Java}. De plus, il possède une communauté énorme. Ainsi, il existe 
-des bibliothèques pour tout et n'importe quoi. Le langage étant très simple de 
-base, avec toutes ces bibliothèques il devient sûrement le langage le plus 
-simple pour déployer de petites applications. Par exemple, il existe une 
+\textit{Python}\cite{python}. Nous avons choisi ce langage, car nous n'avons 
+pas besoin d'un langage puissant comme le \textit{C/C++} et il est moins 
+gourmand que \textit{Java}. De plus, il possède une communauté énorme. Ainsi, 
+il existe des bibliothèques pour tout et n'importe quoi. Le langage étant très 
+simple de base, avec toutes ces bibliothèques il devient sûrement le langage le 
+plus simple pour déployer de petites applications. Par exemple, il existe une 
 bibliothèque pour accéder au port série de la machine, avec des fonctions très 
 simples d'utilisation.
 
 	Quand la deuxième tâche récupère un message elle doit l'insérer dans 
 une base de données. Notre application ne nécessite pas la puissance du 
-\textit{SQL}. En effet, tout ce que nous voulons faire ces récupérer tout le 
+\textit{SQL}. En effet, tout ce que nous voulons faire c'est récupérer tout le 
 contenu, entrée par entrée. Ainsi, nous n'avons pas besoin de faire des 
-requêtes avec des entrées classée dans un certain ordre, ou alors des requêtes 
+requêtes avec des entrées classées dans un certain ordre, ou alors des requêtes 
 avec des conditions, etc. C'est pour cette raison que nous avons choisi 
 d'utiliser une base de données \textit{Redis}\cite{redis}. C'est une base de 
 données basée sur des ensembles "clé-valeur". Ainsi, dans notre application la 
-zone étudiée (la clé) sera associée à une pile de message (la valeur). Un autre 
-point fort de notre choix d'implémentation est qu'il existe une bibliothèque 
-pour la manipulation de Redis avec Python. 
+zone étudiée (la clé) sera associée à une pile de messages (la valeur). Un 
+autre point fort de notre choix d'implémentation est qu'il existe une 
+bibliothèque pour la manipulation de Redis avec Python. 
 
-      La troisième tâche est elle aussi implémentée en Python. Dans la section 
+      La troisième tâche est aussi implémentée en Python. Dans la section 
 1.1.2 nous avons expliqué que nous représentons la zone étudiée par une 
 matrice. Nous partons du principe que nous ne connaissons pas la taille de la 
 zone. Ainsi, notre matrice doit être constamment redimensionnée. Il existe 
 encore une bibliothèque très utile en Python, nommée 
 \textit{Numpy}\cite{numpy}. C'est une bibliothèque scientifique qui propose 
-divers fonctions implémentant des algorithmes connus pour le calculs 
-scientifique, mais dans notre cas ce qui nous intéresse c'est les structures de 
-données qu'elle propose. En effet, les matrices Numpy sont très puissantes car 
-elles disposent de divers méthodes pour leur manipulation et notamment des 
+divers fonctions implémentant des algorithmes connus pour le calcul 
+scientifique, mais dans notre cas ce qui nous intéresse, ce sont les structures 
+de données qu'elle propose. En effet, les matrices Numpy sont très puissantes, 
+car elles disposent de divers méthodes pour leur manipulation et notamment des 
 méthodes de redimensionnement dynamique.
+
       Aussi, cette tâche doit représenter graphiquement le contenu de la 
 matrice. Numpy est très souvent couplé à une seconde bibliothèque nommée 
 \textit{MatPlotLib}\cite{matplotlib}. Celle-ci permet de dessiner des 
@@ -264,10 +264,11 @@ graphiques à l'écran. Elle fonctionne très bien avec Numpy puisque ses métho
 s'attendent déjà à recevoir des objets venant de cette dernière.
 
       Maintenant que nous avons présenté le fonctionnement du serveur nous 
-allons pouvoir vous présenté un exemple de résultat.
+allons pouvoir vous présenter un exemple de résultat.
 
     \section{Résultat}
-      La Figure\ref{exemple_topo} est une capture d'écran d'une topographie que 
+      La Figure \ref{exemple_topo} est une capture d'écran d'une topographie 
+que 
 nous avons obtenue par le biais du serveur.
 
 	\begin{figure}[htbp]
@@ -280,14 +281,15 @@ nous avons obtenue par le biais du serveur.
       On peut y voir un certain nombre d'éléments. Le plus visible est le 
 graphique lui-même. Il représente la zone étudiée en vue de dessus. Ainsi à 
 chaque coordonnée de la zone est associée une certaine hauteur. Le degré de 
-cette hauteur est représenté par une couleur plus ou moins foncé. Plus cette 
+cette hauteur est représenté par une couleur plus ou moins foncée. Plus cette 
 couleur est foncée plus le point est élevé. Sur la droite du graphique se 
 trouve sa légende. Elle indique la valeur en centimètres du degré de hauteur. 
-On remarque donc que pour des points blancs cela représente le sol, et que pour 
-des points noirs cela représente une hauteur de trois mètres. Cela est dû au 
-fait que les capteurs ultrasons que nous utilisons pour les mesures ont une 
-distance de mesure maximum. Mais le serveur lui peut fonctionner avec n'importe 
-quelle valeur.
+On remarque donc que les points blancs représentent le sol, et que les points 
+noirs représentent une hauteur de trois mètres. Cela est dû au fait que les 
+capteurs ultrasons que nous utilisons pour les mesures ont une distance de 
+mesure maximum. Mais le serveur lui peut fonctionner avec n'importe quelle 
+valeur. Il ne dépend donc pas du matériel utilisé, mais seulement de la forme 
+des messages reçus.
 
       Il faut noter que nous ne possédions pas de drone fonctionnel pour faire 
 les essais du serveur. Ainsi l'exemple de topographie montré par la 
@@ -295,7 +297,7 @@ Figure \ref{exemple_topo} ne représente rien de spécial. Nous avons fournit de
 coordonnées aléatoires pour chaque point et nous avons fait varier les mesures 
 du capteur en plaçant notre main devant et en jouant avec la distance.
 
-      Dans tous les cas, lors de cet essais la réception et la représentation 
+      Dans tous les cas, lors de ces essais la réception et la représentation 
 des messages se sont avérées fonctionnelles. Ainsi, si le serveur était utilisé 
 avec un drone qui fournit sa véritable position et les valeurs renvoyées par 
 ses capteurs, le serveur fournirait toujours les résultats attendus.
@@ -313,35 +315,36 @@ Cependant, nous n'arrivons pas encore à lire et écrire simultanément sur le
 port série, du côté Arduino. Donc nous ne sommes pas encore capable d'envoyer 
 les ordres aux drones.
 
-      De plus notre serveur ne détermine le besoin d'envoyer un ordre seulement 
-dans le cas d'une partie encore non dévoilée de la carte. Mais il devrait être 
-capable de déterminer des ordres en fonction des différents états du drone. Par 
-exemple dans le cas où le drone n'a plus de batterie, pour lui demander de 
-revenir à la "base". Pour établir une liste exhaustive de tous les états 
-nécessitant un ordre, il nous faudrait faire des essais à l'aide d'un drone 
-fonctionnel, ce que nous n'avons pas réussi à obtenir. Mais nous aborderons ce 
-problème dans la suite de ce rapport.
+      De plus notre serveur ne détermine pour, le moment, le besoin d'envoyer 
+un ordre seulement dans le cas d'une partie encore non dévoilée de la carte 
+alors qu'il devrait être aussi capable de déterminer des ordres en fonction des 
+différents états du drone. Par exemple dans le cas où le drone n'a plus de 
+batterie, pour lui demander de revenir à la "base". 
+
+      Pour établir une liste exhaustive de tous les états nécessitant un ordre, 
+il nous faudrait faire des essais à l'aide d'un drone fonctionnel. Mais nous 
+aborderons ce problème dans la suite de ce rapport.
 	
 
   \chapter{Drone}
     Étant donné notre cursus, nous ne savions pas réellement comment procéder 
 pour monter un drone. Nous avons commencé par nous renseigner sur ce qui se 
-fait en matière de drones. Il faut savoir qu'il en existe de plusieurs types, 
+fait dans le domaine. Il faut savoir qu'il en existe de plusieurs types, 
 des petits, des grands, des appareils avec un vol "agressif" (rapide et agile), 
 d'autres avec un vol optimisé pour la prise de vues, certains avec un vol dit 
 "hybride", etc.
     
     Pour l'application que nous voulons faire nous avons plutôt besoin d'un 
 drone avec un vol hybride. Le but est de dessiner la topographie d'une zone, 
-pour cela nous utilisons un capteur ultrason qui mesure la distance entre le 
+pour cela nous utilisons un capteur ultrasons qui mesure la distance entre le 
 drone et ce qu'il y a en dessous. Nous n'avons donc pas besoin d'un vol assez 
 lent pour faire des prises de vues, mais il ne faut pas que le drone soit trop 
 rapide afin de prendre le plus d'informations possible. De plus, pour des 
 questions pratiques, il faut que le drone ait assez d'autonomie pour ne pas 
 demander que sa batterie soit rechargée pendant une session d'analyse.
     
-    Parmi les drones déjà existants, le drone \textit{Crazyflie} de chez 
-\textit{Bitcraze}\cite{bitcraze} nous a intéressés par sa petite taille (voir 
+    Parmi les drones déjà existants, le \textit{Crazyflie} de chez 
+\textit{Bitcraze}\cite{bitcraze} nous a intéressé par sa petite taille (voir 
 Figure \ref{crazyflie}), par le fait qu'il soit libre et qu'on puisse 
 facilement 
 acheter tous les composants séparément. Nous avons donc décidé de baser notre 
@@ -366,19 +369,19 @@ tous les cas nous aurions été obligés de le modifier.
       L'objectif de cette section est de présenter les différents composants 
 que nous avons utilisés pour construire ce premier drone.
       
-      \subsection{Microcontrôleur}
-	Un microcontrôleur est un \textit{system on chip}, c'est-à-dire que 
-c'est une petite carte électronique proposant un certain nombre de 
-fonctionnalités et pouvant fonctionner seule. C'est souvent un micro-processeur 
-monté sur une carte avec plusieurs broches sur lesquelles l'utilisateur peut y 
-connecter d'autres composants. Ainsi il peut réaliser un montage complexe qu'il 
-pourra utiliser en programmant le micro-processeur.
+      \subsection{Micro-contrôleur}
+	Un micro-contrôleur est un \textit{system on chip}, c'est-à-dire une 
+petite carte électronique proposant un certain nombre de fonctionnalités et 
+pouvant fonctionner seule. C'est souvent un micro-processeur monté sur une 
+carte avec plusieurs broches sur lesquelles l'utilisateur peut y connecter 
+d'autres composants. Ainsi, il peut réaliser un montage complexe qu'il pourra 
+utiliser en programmant le micro-processeur.
 	Au début de notre année scolaire, nous avons eu un séminaire de cours 
 pour nous apprendre le langage \textit{Arduino}. Nous avons pu découvrir un 
 langage vraiment simple à prendre en main lorsque l'on a déjà quelques bases en 
 programmation avec des langages comme le \textit{C}, ou le \textit{C++}. Nous 
 nous sommes donc tournés vers les technologies proposées par Arduino pour le 
-choix du microcontrôleur. Finalement, nous avons opté pour une \textit{Arduino 
+choix du micro-contrôleur. Finalement, nous avons opté pour une \textit{Arduino 
 Pro Mini}. Le principal intérêt de cette carte se trouve dans sa petite taille 
 et sa légèreté, 18 sur 33 millimètres pour seulement deux grammes. De plus elle 
 propose un nombre suffisant de broches pour l'ensemble de notre montage.
@@ -400,11 +403,11 @@ propose un nombre suffisant de broches pour l'ensemble de notre montage.
 	  \label{arduino}
 	\end{figure}
 	
-      Une fois le microcontrôleur en main, il nous faut ajouter d'autres 
-composants nécessaire à la mise en place d'un drone. En branchant ces 
+      Une fois le micro-contrôleur en main, il nous faut ajouter d'autres 
+composants nécessaires à la mise en place d'un drone. En branchant ces 
 composants dans les trous sur l'extérieur de la carte nous pourrons les 
-contrôler de manière logicielle, en codant le microprocesseur grâce au langage 
-Arduino. Le microprocesseur, lui, se chargera de les faire fonctionner 
+contrôler de manière logicielle, en codant le micro-processeur grâce au langage 
+Arduino. Le micro-processeur, lui, se chargera de les faire fonctionner 
 physiquement.  
 	
       \subsection{Équilibrage et localisation}
@@ -413,7 +416,7 @@ se stabiliser. Pour cela, ce dernier doit connaître "en permanence" son angle
 d'inclinaison. Nous avons donc besoin d'un gyroscope. Le large catalogue de 
 modules Arduino propose une pièce qui fournit un gyroscope et un 
 accéléromètre, le \textit{MPU-6050} (voir Figure \ref{mpu6050}). Ce module a 
-une taille et un poids similaires à ceux du microcontrôleur, 25.5 sur 15.2 
+une taille et un poids similaires à ceux du micro-contrôleur, 25.5 sur 15.2 
 millimètres pour 1.5 grammes. Un autre point fort de ce circuit est qu'il est 
 très utilisé au sein de la communauté Arduino. Il est donc facile de trouver 
 des exemples d'utilisation.
@@ -432,16 +435,12 @@ créant une triangulation\cite{triangulation} à l’aide d’un réseau d’ant
 Ce principe consiste à placer trois antennes autour d'une zone et qui emmettent 
 un signal.
 L'objet que l'on souhaite localiser réceptionne ces signaux. Il détermine alors 
-la distance
- qui le sépare des émetteurs. A l'aide de ces 3 distances, on  est alors en 
-mesure de determiner
- sa position dans l'espace. Toutefois, pour des raisons de coûts, cette solution 
-ne nous 
-semble pas viable sur notre drone. Aussi, elle n'est pas conforme à la 
-problématique de notre projet, puisque nous partons du principe que nous ne 
-connaissons pas l'étendue de la zone. Ainsi, nous ne serions pas en mesure de 
-placer nos antennes en périphérie de la zone.
-
+la distance qui le sépare des émetteurs. À l'aide de ces trois distances, on 
+est alors en mesure de déterminer sa position dans l'espace. Toutefois, pour 
+des raisons de coûts, cette solution ne nous semble pas viable sur notre drone. 
+Aussi, elle n'est pas conforme à la problématique de notre projet, puisque nous 
+partons du principe que nous ne connaissons pas l'étendue de la zone. Ainsi, 
+nous ne serions pas en mesure de placer nos antennes en périphérie de la zone.
 
 	Finalement une connaissance, nous a conseillé de travailler avec un 
 accéléromètre. Un accéléromètre est un module permettant de mesurer 
@@ -449,30 +448,30 @@ l'accélération linéaire d’un système. En connaissant l'accélération de n
 drone, il sera alors possible de déterminer sa vitesse et donc, ses 
 déplacements 
 dans l’espace. Nous avons donc choisi de nous tourner vers cette solution. 
-C'est aussi pour cette raison que nous avons choisi le MPU6050 car il embarque 
+C'est aussi pour cette raison que nous avons choisi le MPU-6050 car il embarque 
 un accéléromètre.
 	
 	    \begin{figure}
 	      \begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[scale=0.2]{img/mpu-6050.jpg}
-		\caption{Image du MPU6050}
+		\caption{Image du MPU-6050}
 		\label{imagempu6050}
 	      \end{subfigure}%
 	      \begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[scale=0.06]{img/mpu6050.jpg}
-		\caption{Photographie de notre MPU6050}
+		\caption{Photographie de notre MPU-6050}
 		\label{photompu6050}
 	      \end{subfigure}
-	      \caption{Image et photographie du MPU6050}
+	      \caption{Image et photographie du MPU-6050}
 	      \label{mpu6050}
 	    \end{figure}
 	    
 	Pour pouvoir utiliser ce composant nous avons utilisé la bibliothèque 
 développée par Jeff Rowberg\cite{jeff_rowberg_lib}. Ses travaux permettent de 
 représenter logiciellement un gyroscope et de récupérer les valeurs calculées 
-par le MPU6050. Ainsi, en récupérant ces mesures nous pouvons déterminer la 
+par le MPU-6050. Ainsi, en récupérant ces mesures nous pouvons déterminer la 
 puissance requise pour chaque moteur afin d'équilibrer le drone.
 
 	Vous pouvez retrouver nos recherches à propos du fonctionnement d'un 
@@ -524,19 +523,19 @@ pour deux grammes.
 	    \end{figure}
 	    
 	Cependant ces composants sont un peu plus compliqués à prendre en main. 
-Mais heureusement, il existe de nombreuses bibliothèque. Nous avons donc créé 
+Mais heureusement, il existe de nombreuses bibliothèques. Nous avons donc créé 
 une surcouche de la bibliothèque \textit{RadioHead}\cite{radiohead}. Cette 
 bibliothèque permet de représenter logiciellement un transmetteur radio. À 
 partir de cet objet il est possible d'envoyer et lire des messages en 
 fournissant une adresse (qui représente un port entre le transmetteur et le 
-récepteur qui une autre instance de ce composant, sur une autre plaquette 
+récepteur qui est une autre instance de ce composant, sur une autre plaquette 
 Arduino). Notre surcouche nous permet de vérifier le bon envoi et la bonne 
 réception des données en retournant un code d'erreur en cas d'échec.
 
 	Toute fois le très faible coût de ces composants se ressent directement 
-sur la fiabilité de leur signaux. En effet, l'envoi et la réception des données 
-est malheureusement un peu aléatoire. Il n'est pas rare de ne recevoir qu'un 
-message sur deux.
+sur la fiabilité de leur signauxs. En effet, l'envoi et la réception des 
+données est malheureusement un peu aléatoire. Il n'est pas rare de ne recevoir 
+qu'un message sur deux.
 	
       
       \subsection{Contrôle moteur}
@@ -548,10 +547,10 @@ important de ces modules, leur poids (25 grammes/module) aussi nous oblige à
 nous orienter vers une autre solution. Nous avons donc pensé à créer nos 
 propres 
 ESC simplement en branchant un transistor entre chaque moteur et les broches de 
-sortie de l’Arduino. Les transistor on pour propriété de fonctionner comme des 
-interrupteur électrique. Ainsi en couplant les variations du signal électrique 
-généré par l'Arduino et la propriété du transistor nous obtenons un ESC fait 
-main.
+sortie de l’Arduino. Les transistor ont pour propriété de fonctionner comme des 
+interrupteurs électriques. Ainsi en couplant les variations du signal 
+électrique généré par l'Arduino et la propriété du transistor nous obtenons un 
+ESC fait main.
 
       \subsection{Moteurs}
 	Dans l'introduction nous avons expliqué que nous utilisons les mêmes 
@@ -559,13 +558,13 @@ moteurs que ceux du Crazyflie. Cependant, comme pour les autres composants il
 faut coder en Arduino leur contrôle. Ainsi nous avons implémenté une petite 
 bibliothèque permettant de représenter logiciellement parlant, un moteur. Cet 
 objet possède alors une méthode permettant de modifier sa vitesse. Vitesse qui 
-sera alors modifié logiciellement puis physiquement.
+sera alors modifiée logiciellement puis physiquement.
 
       \subsection{Mesure de la topographie}
-	Pour mesurer une distance il existe plusieurs types de capteur 
+	Pour mesurer une distance il existe plusieurs types de capteurs 
 différents, comme par exemple un laser. Cependant, nous ne possédons pas ce 
 genre d'outil mais lors du séminaire d'Arduino du début d'année nous avons 
-utilisé des capteurs ultrason (\textit{HC-SR04}). Pour ce projet nous avons 
+utilisé des capteurs ultrasons (\textit{HC-SR04}). Pour ce projet nous avons 
 donc choisi de réutiliser ces capteurs (pour des raisons économiques). 
 Toutefois, dû aux propriétés du déplacement d'une onde sonore dans l'espace, ce 
 genre de capteur n'est pas ce qu'il y a de plus fiable. L'onde sonore se 
@@ -602,8 +601,8 @@ ne sera pas vraiment dérengeant.
 	Le HC-SR04 (voir Figure \ref{hcsr04}) est lui aussi un composant très 
 répendu au sein de la communauté Arduino. Ainsi nous pouvons directement 
 utiliser une bibliothèque déjà implémentée, \textit{NewPing}\cite{newping}. 
-Elle permet de représentée logiciellement un capteur ultrason et de calculer la 
-distance d'un point par rapport au montage en mesurant le temps de retour de 
+Elle permet de représentée logiciellement un capteur ultrasons et de calculer 
+la distance d'un point par rapport au montage en mesurant le temps de retour de 
 l'onde sonore.
 	
     \section{Assemblage}
@@ -622,8 +621,8 @@ circuit imprimé. Pour cela nous avons utilisé le logiciel
 réaliser des schémas électroniques ainsi que le PCB associé (c'est à dire le 
 dessin qui va servir à la production du circuit). Ce logiciel propose de base 
 un large catalogue de composants mais il est aussi possible de créer les siens. 
-Aussi, un grand nombre de personnes utilisent ce logiciel, ce qui permet dans 
-la plupart des cas de ne pas avoir à créer de composants puisqu'il y a de 
+De plus, un grand nombre de personnes utilisent ce logiciel, ce qui permet 
+dans la plupart des cas de ne pas avoir à créer de composants puisqu'il y a de 
 grandes chances que des utilisateurs les aient déjà dessinés.
 
       \begin{figure}[htbp]%PCB du premier drone
@@ -649,11 +648,10 @@ et bon marché. Donc nous avons pensé que le circuit pourrait lui-même faire
 office de châssis. Bien entendu, ce choix est risqué car le drone est plus 
 fragile. Mais notre application n'est pas vraiment "à risque" dans le sens où 
 notre drone n'est pas censé faire des acrobaties et que nous comptions mettre 
-en 
-place des sécurités pour qu'il évite les obstacles de son environnement.
+en place des sécurités pour qu'il évite les obstacles de son environnement.
 
 	De plus les moteurs du Crazyflie ont une dimension assez particulière. 
-Habituellement les moteurs de drone sont plus gros ainsi il serait difficile de 
+Habituellement les moteurs de drone sont plus gros donc il serait difficile de 
 trouver un châssis qui soit compatible avec nos moteurs. De plus, souvent les 
 moteurs de drone se vissent sur le châssis, mais les moteurs du Crazyflie ne 
 possèdent pas de pas de vis. Nous étions donc dépendant de la solution utilisé 
@@ -721,7 +719,7 @@ par courrier deux semaines plus tard.
 plus que le circuit pour assembler le tout. Pour la production de ce dernier 
 nous avons eu l'idée de nous tourner vers l'\textit{ENSEA} qui est une école 
 d'ingénieur en électronique proche de la nôtre. Nous leur avons fournit les 
-fichiers généré par Fritzing puis ils ont lancé la production. Quelques jours 
+fichiers générés par Fritzing puis ils ont lancé la production. Quelques jours 
 plus tard nous avons pu aller récupérer notre circuit. Cependant, il restait 
 encore quelques modifications à faire dessus, afin qu'il soit vraiment 
 opérationel. En effet, il fallait encore le découper afin d'y créer des embouts 
@@ -768,15 +766,16 @@ photographie du résultat final.
 	
 	
 	Une fois l'ensemble de ces étapes effectuées, il était donc possible de 
-tester notre drone. Notre premier reflexe étant bien evidemment de nous assurer 
+tester notre drone. Notre premier réflexe étant bien évidemment de nous assurer 
 que ce dernier serait en mesure de décoller. Après diverses expérimentations, 
 il s'est avéré que les moteurs n'étaient pas en mesure de tourner à plein 
-régime. En effet, lorsque notre controleur (i.e l'arduino) délivre sa puissance 
-maximal, les moteurs n'atteignent pas leur maximum de rotation. En d'autres 
-termes, l'Arduino n'est pas en mesure de délivrer assez de courant pour faire 
-tourner les moteurs au maximum de leur capacité. Le drone n'a donc pas décollé.
+régime. En effet, lorsque notre contrôleur (c'est-à-dire l'Arduino) délivre sa 
+puissance maximale, les moteurs n'atteignent pas leur maximum de rotation. En 
+d'autres termes, l'Arduino n'est pas en mesure de délivrer assez de courant 
+pour faire tourner les moteurs au maximum de leur capacité. Le drone n'a donc 
+pas décollé.
 
-	Afin de tester un éventuel décollage du drone, nous avons décider de 
+	Afin de tester un éventuel décollage du drone, nous avons décidé de 
 faire un "by-pass" de l'Arduino. C'est à dire brancher les moteurs directement 
 sur l'alimentation. En procédant de cette façon les moteurs tournent bien au 
 maximum de leur capacité, toutefois, nous ne sommes pas en mesure de contrôler 
@@ -787,23 +786,22 @@ soulevé d'un côté mais le manque de couple produit par le moteur défectueux 
 fait que le drone s'est retourné.
 
 	  En analysant l'ensemble de ces problèmes, il semble raisonnable de 
-penser que la présence de 4 moteurs en bon état, et tournant à leur maximum de 
-puissance seraient capable de faire décoller notre drone. Toutefois, l'absence 
-de contrôle sur la vitesse des moteurs nous empecherait de controler la vitesse 
-des moteurs, limitant notre drone à des déplacement verticaux.  Nous ne 
+penser que la présence de quatres moteurs en bon état, et tournant à leur 
+maximum de puissance seraient capable de faire décoller notre drone. Toutefois, 
+l'absence de contrôle sur la vitesse des moteurs nous empêcherait de contrôler 
+leur vitesse, limitant notre drone à des déplacement verticaux. Nous ne 
 pourrions pas le faire avancer ou aller sur les côtés. De plus nous serions 
 dans l'incapacité de le faire s'arrêter.
 
 	  Nous avons alors compris que nous ne pourrions pas faire décoller ce 
 prototype. De plus, la soutenance approchait à grand pas. Nous n'étions qu'à 
 deux semaines de la présentation alors nous n'avions pas le temps de préparer 
-un 
-second drone à partir d'autres composants. Nous avons toutefois préparé un code 
-pour la présentation, qui servait à montrer l'influence du gyroscope sur le 
-contrôle des moteurs. Lorsqu'on incline le drone, on peut voir que certains 
+un second drone à partir d'autres composants. Nous avons toutefois préparé un 
+code pour la présentation, qui servait à montrer l'influence du gyroscope sur 
+le contrôle des moteurs. Lorsqu'on incline le drone, on peut voir que certains 
 moteurs réagissent à cette inclinaison afin d'essayer le stabiliser. Par 
 exemple, si on penche le drone vers l'avant, les moteurs avant vont accélérer 
-afin d'essayer de replacer le drone parallèlement au sol. De plus on peut 
+afin d'essayer de replacer le drone parallèlement au sol. Aussi, on peut 
 remarquer que plus l'angle d'inclinaison est important, plus les moteurs 
 accélèrent afin de produire plus de puissance pour essayer de redresser 
 l'appareil.
@@ -834,13 +832,13 @@ poids de chaque composant. Cependant, afin de connaître le poids total de
 notre drone nous avons dû estimer le poids de certains éléments (comme les 
 transistor, les diodes, les soudures, le circuit, etc...). Pour cela nous avons 
 pensé que le poids de ces éléments ne dépasserait pas 10\% de la somme calculée 
-précédement. Nous arrivions donc à un poids total de 35 grammes contre 19 
+précédemment. Nous arrivions donc à un poids total de 35 grammes contre 19 
 grammes pour le Crazyflie. Nous espérions donc que cette différence de poids 
 irait à notre avantage, en ramenant le vol du drone à celui que nous 
 attendions.
 	L'erreur que nous avons commise à ce moment là, c'est d'avoir confiance 
 en nos choix. Les moteurs du Crazyflie ont une documentation vraiment très 
-pauvre. À tel point que leur puissance n'est pas même pas mentionnée. Les 
+pauvre. À tel point que leur puissance n'est même pas mentionnée. Les 
 acheter en espérant que leur couple serait suffisant était vraiment une erreur 
 naïve de notre part.
 	Comme nous avons pu le constater lors de nos premiers essais, le couple 
@@ -863,7 +861,7 @@ aurions pu éviter ce problème en achetant que des composants fonctionnant en 5
 (et donc en choisissant une batterie autre que celle du Crazyflie). Nous 
 aurions pu garder les moteurs que nous avions choisis, il aurait juste fallu 
 créer un pont diviseur de tension\cite{pontdiviseur} à l'entrée de chaque 
-moteur. Un pont diviseur de tension est un montage de deux résistances très 
+moteur. Un pont diviseur de tension est un montage de deux résistances, très 
 simple à mettre en place, permettant de réduire une tension. Ainsi nous aurions 
 pu avoir un circuit qui fonctionne en 5V, sauf à l'entrée des moteurs où cette 
 tension aurait été réduite à 3.3V.
@@ -876,7 +874,7 @@ nos calculs (autonomie de la batterie, poussé des moteurs, puissance requise,
 réalité. Nous avions estimé l'autonomie de la batterie à sept minutes. Et en 
 réalité elle se décharge en cinq minutes en faisant tourner les moteurs à plein 
 régime. Cependant, il est important de noter qu'il n'y a ni les capteurs 
-ultrason ni le transmetteur/récepteur radio. L'autonomie est donc trop courte 
+ultrasons ni le transmetteur/récepteur radio. L'autonomie est donc trop courte 
 pour notre application. Aussi, lorsque les moteurs tournent à plein régime on 
 peut remarquer que le drone se soulève et que ce qui l'empêche de décoller est 
 le moteur défectueux. On peut donc en conclure que nos calculs mécaniques 
@@ -885,30 +883,30 @@ rapport.
     
     \section{Fournisseurs}
       Le rôle de cette section est de présenter les problèmes venant des 
-différents fournisseur et qui donc ne dépendent pas de nous.
+différents fournisseurs et qui donc ne dépendent pas de nous.
       \subsection{Délais}
-	Comme nous l'avons expliqué précédement, notre école étant une école 
+	Comme nous l'avons expliqué précédemment, notre école étant une école 
 d'informatique est donc peu adaptée à des projets qui ont pour objectif de 
 faire une réalisation matérielle. Nous avons alors eu besoin d'un support 
 extérieur pour les fixations moteur, la réalisation du circuit imprimé et sa 
 découpe. Mais la recherche de ces entités prend un certain temps, auquel il 
 faut ajouter le temps de création des éléments. Nous arrivons alors à un délai 
 conséquent, qui peut prendre plusieurs mois suivant l'entité. Par exemple si 
-l'on passe pas un faclab, il faut ajouter à cela le temps qu'il faut pour 
+l'on passe par un fablab, il faut ajouter à cela le temps qu'il faut pour 
 apprendre à se servir des machines. En ce qui nous concerne nous avons eu un 
 peu de chance en rencontrant Polytech Instrumentation. Car sans eux nous 
 aurions peut-être pris encore plus de temps pour trouver des imprimantes 3D. 
-De plus, il est important de noter que le temps de réceptions des différents 
-composants électronique prend un temps considérable (de l'ordre d'un mois). Par 
-fois ce temps peut être utilisé pour avancer d'autres parties du projet (comme 
-le serveur). Mais dans l'autre cas, c'est du temps de perdu car nous avons 
-besoin des composants pour apprendre à nous en servir, développer leur 
+De plus, il est important de noter que le temps de réception des différents 
+composants électroniques prend un temps considérable (de l'ordre d'un mois). 
+Parfois ce temps peut être utilisé pour avancer d'autres parties du projet 
+(comme le serveur). Mais dans l'autre cas, c'est du temps de perdu car nous 
+avons besoin des composants pour apprendre à nous en servir, développer leur 
 librairie et donc tout simplement avancer dans le projet.
 
 	Nos premiers essais ont été fait fin février. La soutenance étant 
 prévue pour le 16 mars, cela nous a laissé deux semaines de marge. Cependant, 
 ce laps de temps est loin d'être suffisant pour concevoir un second drone. 
-Ainsi, nous n'avons pas pu profiter de l'expérience aquise tout au long du 
+Ainsi, nous n'avons pas pu profiter de l'expérience acquise tout au long du 
 projet, pour mettre en place une seconde version du drone. Nous pensons alors 
 que les premiers essais auraient dû être fait fin 2014 pour nous laisser le 
 temps de produire un drone fonctionnel. Malheureusement, le projet de fin 
@@ -929,7 +927,7 @@ rencontrés. Après avoir reçu tous les composants commandés, l'Arduino manqua
 toujours à l'appel. Ainsi après avoir attendu plus de deux mois, nous avons 
 recontacté le vendeur qui nous a assuré que le composant était arrivé chez 
 nous. Nous avons alors demandé un remboursement et commandé chez un autre 
-fournisseur. Aussi, comme nous l'avons expliqué précédement, lors de 
+fournisseur. Aussi, comme nous l'avons expliqué précédemment, lors de 
 l'assemblage du drone, nous nous sommes rendus compte que l'Arduino que nous 
 avions commandé n'était pas une "Arduino Pro Mini" mais une "Arduino Mini Pro" 
 (donc une contrefaçon). Et les broches de l'alimentation étaient inversées, ce 
@@ -954,7 +952,7 @@ fournisseur vend donc un produit qui n'est pas du tout fiable.
 (nous avons pu monter un drone pour un peu moins de 30 \euro, tandis que le 
 Crazyflie vaut environ 120 \euro). Mais à vouloir trop chercher le moins cher, 
 on prend des risques sur la qualité des produits. Il faut donc mieux 
-rechercher, se méfier de la contrefaçon  et faire plus d'essais lors de la 
+rechercher, se méfier de la contrefaçon et faire plus d'essais lors de la 
 réception des pièces.
     
     \section{Assemblage}
@@ -963,7 +961,7 @@ n'avons pas prise en compte au moment de la conception. En effet, en
 choisissant les moteurs du Crazyflie, nous étions dépendant de leur dimension 
 atypique. Aussi, les moteurs de drones possèdent généralement des pas de vis 
 afin d'être vissés au châssis. Ce qui n'est pas le cas des moteurs que nous 
-possédons. Ainsi, nous avons plus ou moins été contraint d'utiliser le même 
+possédons. Ainsi, nous avons plus ou moins été contraints d'utiliser le même 
 système de fixation que le Crazyflie. Cependant, nous avons omis le fait que le 
 Crazyflie est assemblé par des machines et que pour notre drone c'est nous qui 
 allions devoir le monter. Or, les machines peuvent placer des éléments avec un 
@@ -972,7 +970,7 @@ humain. Donc, outre le fait que nos fixations risquaient de ne pas être
 parfaitement fiables (les imprimantes 3D étant une technologie assez récente) 
 nous serions incapable de fixer les moteurs parfaitement verticaux. Ce qui 
 entraînerait un défaut dans le vol de l'appareil. En effet, si un moteur était 
-pencher plus d'un côté que les autres, cela produirait une dérive dans la 
+penché plus d'un côté que les autres, cela produirait une dérive dans la 
 direction du drone. Aussi, suivant le défaut d'inclinaison des moteurs, cela 
 peut entraîner une perte de poussé des moteurs et donc rendre le décollage de 
 l'appareil plus difficile.
@@ -986,17 +984,17 @@ ingénieurs système. Ainsi même pour des personnes de cette profession, un tel
 projet nécessite plusieurs années.
 
       De plus nous avons eu affaire à des contraintes et réfléchir à des 
-problématiques auxquelles nous ne sommes pas habitué (comparer du matériel, 
+problématiques auxquelles nous ne sommes pas habitués (comparer du matériel, 
 prendre en compte des délais de livraison, contraintes système telles que la 
 tension, le courant, le poids, la puissance délivrée...). Nous avons commis 
 beaucoup de petites erreurs pour cette raison, mais si nous devions réfléchir à 
 une seconde version nous serions probablement mieux préparé car nous avons 
-appris beaucoup de ces erreurs.
+beaucoup appris de ces erreurs.
   
   \chapter{Deuxième drone}
     Bien que le temps ne nous permette pas de réaliser un second drone, nous 
 pouvons tout de même établir un nouveau devis afin d'utiliser une partie de 
-l'expérience que nous avons aquise.
+l'expérience que nous avons acquise.
 
     Pour rappel, les principaux problèmes de notre premier drone sont :
     
@@ -1006,8 +1004,8 @@ l'expérience que nous avons aquise.
 	\item Autonomie de la batterie
       \end{itemize}
       
-   Pour ce second drone nous changeront donc les moteurs et la batterie. Nous 
-garderont par contre les autres composants qui malgré leur manque de fiabilité 
+   Pour ce second drone nous changerons donc les moteurs et la batterie. Nous 
+garderons par contre les autres composants qui malgré leur manque de fiabilité 
 suffirait pour une simple présentation. Bien entendu, pour une application 
 réelle il faudrait voir à choisir des composants de meilleure qualité.
 
@@ -1020,11 +1018,11 @@ pas vraiment jouer sur leur vitesse de rotation.
       C'est pour cette raison que nous avons cherché des moteurs plus 
 puissants. Nous avons alors choisi les \textit{DYS BE1806-13} (voir Figure 
 \ref{dys}). Ces moteurs n'ont plus rien avoir avec ceux que nous avions avant 
-puisqu'il sont environ trois fois plus gros et douze fois plus lourd. Ceci va 
+puisqu'ils sont environ trois fois plus gros et douze fois plus lourd. Ceci va 
 entraîner un changement radical dans la dimension de notre drone. En fait, un 
-drone de la dimension du Crazyflie n'est pas forcemment un bon point de départ 
+drone de la dimension du Crazyflie n'est pas forcément un bon point de départ 
 pour des débutants comme nous car les composants sont assez spécifiques. Ainsi, 
-en nous ramenant à une dimension plus "normale", nous élargissons notre 
+en nous ramenant à une dimension plus "standard", nous élargissons notre 
 catalogue de composants. Ce deuxième drone devrait alors faire environ 30 
 centimètres de diamètre pour un peu moins de 370 grammes.
 
@@ -1036,14 +1034,14 @@ centimètres de diamètre pour un peu moins de 370 grammes.
       \end{figure}
 
       Pour ces moteurs nous disposons d'une documentation assez complète. 
-Ainsi, nous sommes capable de faire nos calculs sans faire d'estimation. Ces 
-moteurs sont capable de fournir une puissance maximum de 89 watts. Pour un 
+Ainsi, nous sommes capables de faire nos calculs sans faire d'estimation. Ces 
+moteurs sont capables de fournir une puissance maximum de 89 watts. Pour un 
 drone de 370 grammes il faut compter une puissance 9 watts par moteur. Nous 
 pouvons donc remarquer que les moteurs choisis sont bien supérieurs à ce que 
 le drone requiert. Mais, cela nous permettrait d'avoir une grande marge de 
 manoeuvre sur la vitesse de rotation des moteurs. Aussi, cela nous permettrait 
 d'éviter de faire tourner les moteurs à plein régime de manière constante, ce 
-qui augmenterait leur durée de vie et qui déchagerait moins vite la batterie.
+qui augmenterait leur durée de vie et qui déchargerait moins vite la batterie.
 
       Dû aux nouveaux moteurs qui sont beaucoup plus puissants et à la 
 nouvelle dimension de notre drone, il nous faut choisir de nouvelles pales 
@@ -1060,7 +1058,7 @@ nouvelle dimension de notre drone, il nous faut choisir de nouvelles pales
       Grâce à ces nouvelles pales plus longues, le drone pourra plus facilement 
 brasser l'air et donc décoller plus facilement. Par contre, nous perdrons en 
 vitesse, mais pour rappel, nous cherchons justement à obtenir un vol hybride 
-afin d'obtenir le plus d'information possible sans être lent au point de 
+afin d'obtenir le plus d'informations possible sans être lent au point de 
 pouvoir faire des prises de vue.
 
     \section{Batterie}
@@ -1068,14 +1066,14 @@ pouvoir faire des prises de vue.
 problème de voltage sur notre premier drone. Les capteurs ultrasons ont besoin 
 d'une tension de 5V, tandis que la batterie fournit du 3.3V. Il nous faut alors 
 un voltage plus élevé. C'est pour cette raison que nous avons sélectionné une 
-\textit{Turnigy 1700Mah 7.4v} (voir Figure \ref{batterie}). On peut remarqué 
+\textit{Turnigy 1700Mah 7.4v} (voir Figure \ref{batterie}). On peut remarquer 
 que la tension délivrée par cette batterie est supérieure à 5V, mais comme nous 
 l'avons expliqué une tension peut se réduire à l'aide d'un pont diviseur de 
 tension (par contre le problème inverse est plus compliqué à résoudre).
 
       \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale = 0.3]{img/nouvellebatterie.jpg}
+	\includegraphics[scale = 0.25]{img/nouvellebatterie.jpg}
 	\caption{Image d'une batterie Turnigy 1700Mah 7.4v}
 	\label{batterie}
       \end{figure}
@@ -1093,7 +1091,7 @@ pas l'ancien).
 premier. En effet, nous arrivons à environ 75 \euro, tandis que le premier 
 drone nous a coûté environ 25 \euro. Ceci s'explique notamment que le prix des 
 batteries est proportionnel à leur capacité. Aussi, les moteurs du Crazyflie 
-sont vraiment bons marchés comparativement aux autres moteurs. Il n'est donc 
+sont vraiment bon marché comparativement aux autres moteurs. Il n'est donc 
 pas étonnant d'aboutir à un prix plus élevé.
 
       Aussi il ne faut pas oublier de changer l'Arduino Pro Mini 3.3V, en sa 
@@ -1109,19 +1107,19 @@ fonctionnel, dans le sens où il remplit bien sa fonction première à savoir,
 dessiner la topographie de la zone étudiée. Cependant, il n'est pas entièrement 
 fonctionnel puisque sa deuxième fonction, envoyer des ordres aux drones, ne 
 fonctionne pas encore. En effet, le serveur arrive bien à déterminer si un 
-ordre 
-doit être envoyé puis à faire remonter cet ordre jusqu'à la première tâche 
-(c'est-à-dire, écrire l'ordre sur le port série de la machine). Cependant, nous 
-n'arrivons pas à faire en sorte que la première tâche écrive les messages des 
-drones sur le port série puis simultanément lise les ordres sur le port série. 
-Pour le moment on n'arrive qu'à faire l'un ou l'autre.
+ordre doit être envoyé puis à faire remonter cet ordre jusqu'à la première 
+tâche (c'est-à-dire, écrire l'ordre sur le port série de la machine). 
+Cependant, nous n'arrivons pas à faire en sorte que la première tâche écrive 
+les messages des drones sur le port série puis simultanément lise les ordres 
+sur le port série. Pour le moment nous ne pouvons faire seulement l'un ou 
+l'autre.
 
     En admettant que le serveur soit fonctionnel. Il nous faudrait quand même 
 un drone opérationel afin de faire de vrais essais. Ce qui nous permettrait 
 alors d'établir une liste complète des états du drone qui nécessitent un envoi 
 d'ordre. Car il est compliqué d'établir une liste exhaustive sans voir le 
-déroulement réel de notre application. Biensûr, nous pouvons commencer par 
-penser à quelques états. Mais il est quasiment certain que nous en oublirons. 
+déroulement réel de notre application. Bien sûr, nous pouvons commencer par 
+penser à quelques états. Mais il est quasiment certain que nous en oublierons. 
 C'est pour cette raison qu'un drone fonctionnel serait d'une grande utilité. 
 
     Dans un deuxième temps nous pouvons parler de la construction du drone. 
@@ -1129,12 +1127,12 @@ Ceci représentait un challenge énorme. En effet, ce projet requiert des
 connaissances pluridisciplinaires et complexes (mécanique, électronique, 
 informatique, physique, ...). Au vu de notre formation orientée informatique, 
 nous avons fait beaucoup trop de petites erreurs dans les domaines qui ne sont 
-pas notre spécialisation. Ces erreurs ont conduites à un drone ne pouvant pas 
+pas notre spécialisation. Ces erreurs ont conduit à un drone ne pouvant pas 
 voler. Cependant, nous avons beaucoup appris de nos erreurs. Mais ce projet 
 était un peu trop ambitieux. Nous ne disposions que de sept mois pour le 
 réaliser, alors qu'il faudrait plutôt partir sur un ou deux ans. De plus ce 
-manque de temps, ne nous a pas permis de profiter de l'expérience aquise durant 
-le projet.
+manque de temps, ne nous a pas permis de profiter de l'expérience acquise 
+durant le projet.
 
     Même si nous avions réussi à produire un drone qui est capable de voler. 
 Nous serions encore bloqué à la problématique de la détermination de la 
@@ -1142,10 +1140,10 @@ position du drone dans l'espace étudié. Il plutôt simple de localiser un dron
 sur une grande étendue (c'est-à-dire, lorsque l'on ne cherche pas à obtenir une 
 précision au décimètre près) en extérieur grâce au GPS. Cependant, nous savions 
 que nous devrions présenter le projet dans une pièce. Ainsi, la précision d'un 
-GPS n'est pas assez suffisante (de l'ordre de trois à cinq mètre). Donc, le GPS 
-ne détecterait quasiment aucun déplacement. C'est pour cette raison que nous 
-avons cherché d'autres solutions et que l'idée de calculer la position du drone 
-en mesurant et en intégrant deux fois son accélération (à l'aide d'un 
+GPS n'est pas assez suffisante (de l'ordre de trois à cinq mètres). Donc, le 
+GPS ne détecterait quasiment aucun déplacement. C'est pour cette raison que 
+nous avons cherché d'autres solutions et que l'idée de calculer la position du 
+drone en mesurant et en intégrant deux fois son accélération (à l'aide d'un 
 accéléromètre) nous est venue. Cependant, chaque intégration introduit une 
 erreur et dû à la double intégration, cela produit une erreur quadratique. 
 Ainsi, nous serions peut-être capable de localiser à peu près le drone au début 
@@ -1153,32 +1151,32 @@ de l'application, mais tout au long de son déroulement l'erreur introduite par
 l'intégration fausserait complètement nos résultats. Il est important de noter 
 que cette problématique est encore au stade de la recherche. Et que pour le 
 moment il n'existe peu (voir pas) de moyens fiable de localiser un objet en 
-mouvement avec beaucoup de précision.
+mouvement avec beaucoup de précision (avec un faible coût financier et 
+technique).
 
     Bien que ce projet n'est pu aboutir à l'objectif initialement prévu, cela a 
 été un plaisir de travailler sur ce sujet. Du fait des nombreuses connaissances 
-qu'il demande dans des domaines variés, nous pouvons dire que c'est un projet 
+qu'il demande dans des domaines variés, nous pouvons dire que c'était un projet 
 très enrichissant techniquement parlant. Et puisque nous avons dû faire appel à 
 de l'aide extérieure à l'EISTI afin d'obtenir certains de nos composants, nous 
 pouvons aussi dire que c'était enrichissant sur le plan relationnel. Car nous 
-avons dû faire de nombreuses démarche vers des entités extérieures à notre 
-école afin d'obtenir les derniers éléments qu'il nous manquait.
+avons dû faire de nombreuses démarches vers des entités extérieures à notre 
+école afin d'obtenir les derniers éléments qu'ils nous manquaient.
 
     Mais nous n'aurions peut-être pas pu réussir ces démarches sans l'aide de 
 madame \textit{Nga Nguyen}, pour obtenir la participation de Polytech 
-Instrumentation et sans l'aide de madame \textit{Besma Zeddini}, pour obtenir 
+Instrumentation ni sans l'aide de madame \textit{Besma Zeddini}, pour obtenir 
 la participation de l'ENSEA. C'est pour cette raison que nous souhaitons 
 remercier les quatre noms cités ci-dessus, ainsi que les divers connaissances 
-qui nous ont aidé dans notre projet, à savoir pour la découpe du circuit et 
-pour 
-divers conseils techniques.
+qui nous ont aidées dans notre projet, à savoir pour la découpe du circuit et 
+pour divers conseils techniques.
    
   \appendix
     \chapter{Suivi de projet}
       \section{Gestionnaire de version}
 	Pour ce projet nous avons choisi de former un groupe de trois 
-personnes. Travailler en équipe a ses avantages, notamment pour le partage de 
-tâches. Mais ceci peut entraîner des problèmes de version entre les travaux de 
+personnes. Travailler en équipe a ses avantages, notamment pour le partage des 
+tâches. Mais ceci peut entraîner des problèmes de versions entre les travaux de 
 chacun. Pour palier ce problème nous avons choisi d'utiliser le gestionnaire 
 de version Git\cite{git}. Cet outil est vraiment pratique, puisqu'il permet de 
 travailler à distance, de mettre à jour le code de chacun des membres, d'avoir 
@@ -1189,14 +1187,14 @@ Ainsi, si une personne compte faire un projet semblable au nôtre il pourra
 consulter, reprendre, modifier, améliorer... ce que nous avons fait.
 
 	Plus précisément nous avons créé une "organization"\cite{njordgit} sur 
-\textit{GitHub}\cite{github}. Ceci nous as permis de décomposer l'ensemble du 
+\textit{GitHub}\cite{github}. Ceci nous a permis de décomposer l'ensemble du 
 projet en plusieurs répertoires. Ainsi chacun peut accéder à la partie du 
 projet qui l'intéresse sans avoir à récupérer l'ensemble de l'application. Par 
 exemple si un utilisateur souhaite ne travailler que sur le drone, il peut le 
 faire sans avoir à télécharger en plus la partie qui s'occupe du serveur. Aussi 
 un projet bien découpé est plus compréhensible et plus facilement réutilisable. 
 De plus, une "organization" peut héberger un petit site web statique. Ce qui 
-nous as permis de mettre en place notre blog\cite{njordblog}. 
+nous a permis de mettre en place notre blog\cite{njordblog}. 
 	
       \section{Communication}
 	Dès le début du projet nous avons pensé qu'il serait intéressant de 
@@ -1206,8 +1204,8 @@ Internet. Cela peut donner des idées et résoudre des problématiques que l'on
 rencontre. Afin de pouvoir communiquer avec le plus de monde possible, il est 
 rédigé dans trois langues : anglais, français et japonais. Il présente 
 l'avancée du projet, nos choix de développement, quelques notions de physique 
-et les résultats de nos essais afin de guider les lecteur qui veulent créer une 
-application similaire. Nous avons souhaité présenter le processus de 
+et les résultats de nos essais afin de guider les lecteurs qui veulent créer 
+une application similaire. Nous avons souhaité présenter le processus de 
 construction d'un drone, sous une forme simple, en expliquant comment les 
 choses fonctionnent.
 
@@ -1219,14 +1217,14 @@ intéressant de créer un tableur qui réalise ces différents calculs
 automatiquement en lui fournissant les caractéristiques des différents 
 composants choisis par l'utilisateur. Ce tableur se trouve sur notre GitHub, 
 car nous avons pensé qu'il était important de partager ce genre de ressources. 
-Lors du début de notre projet nous aurions été content d'avoir ce genre 
-d'outils sous la main. Biensûr, il existe sur Internet quelques outils 
-similaires\cite{dronecalc} mais ils sont souvent payant ou demandent en entrée 
-des composants bien précis. Or, le nôtre demande les caractéristiques des 
-composants. Ce qui est plus intéressant quand les composants choisis par 
+Lors du début de notre projet nous aurions été contents d'avoir ce genre 
+d'outils sous la main. Bien sûr, il existe sur Internet quelques outils 
+similaires\cite{dronecalc} mais ils sont souvent payant et/ou demandent en 
+entrée des composants bien précis. Or, le nôtre demande les caractéristiques 
+des composants. Ce qui est plus intéressant quand les composants choisis par 
 l'utilisateur ne sont pas connus par le calculateur.
 	
-    \chapter{Fonctionnement d'un gyroscope et utilisation du MPU6050}
+    \chapter{Fonctionnement d'un gyroscope et utilisation du MPU-6050}
       \section{Historique}
 	Le gyroscope est un appareil inventé par Foucault en 1852. Suite à ses 
 travaux sur la rotation de la terre, avec notamment son pendule, il cherche à 
@@ -1243,7 +1241,7 @@ centrale (\textit{rotor}) qui est un tore avec une cavité centrale. Cette
 cavité est traversée par un axe en acier (\textit{spin axis}). Cet axe est 
 alors inséré dans un cadran en métal (\textit{gimbal}). Un enchainement de 
 cadrans est alors présent (\textit{gyroscope frame}), permettant à notre tore 
-centrale d'avoir trois degrées de libertés (trois rotations).
+centrale d'avoir trois degrés de liberté (trois rotations possibles).
 
 	  \begin{figure}[htbp]
 	    \centering
@@ -1260,7 +1258,7 @@ cas), il se crée un couple ($\omega_{p}$) perpendiculaire à cette force. Ce
 couple permet à notre système d'effectuer une rotation autour d'un axe (axe 
 défini par un point en contact avec un repère fixe) ce qui a pour effet 
 d'annuler la portée instable de la pesanteur. On obtient alors un système en 
-rotation parfaitement stable malgrè des angles d'inclinaisons importants.
+rotation parfaitement stable malgré des angles d'inclinaison importants.
 
 	  \begin{figure}[htbp]
 	    \centering
@@ -1285,11 +1283,11 @@ Galiléen.
 
 	  En étudiant les variations d'angles des anneaux extérieurs (puisque 
 l'axe du tore central est fixe par rapport au repère terrestre, il est possible 
-de connaitre la variation d'angle des cadrans) nous sommes en mesure de 
-connaitre l'orientation de l'appareil par rapport au sol.
+de connaître la variation d'angle des cadrans) nous sommes en mesure de 
+connaître l'orientation de l'appareil par rapport au sol.
 
 	\subsection{Le gyroscope dans notre montage}
-	  Le gyroscope choisi pour intégré notre drone est un MPU6050. Ce type 
+	  Le gyroscope choisi pour intégré notre drone est un MPU-6050. Ce type 
 de gyroscope, particulièrement répandu dans l'industrie, présente l'avantage 
 d'être compatible avec notre montage, relativement abordable financièrement et 
 de posséder un accéléromètre. Cet accéléromètre étant destiné à nous fournir 
@@ -1300,23 +1298,24 @@ indiqués sur la carte, l'axe Z étant perpendiculaire à la plaque (voir
 Figure \ref{mpu6050schema})). Puisqu'il faut que l'effet gyroscopique puisse 
 s'appliquer sur le gyroscope, l'ensemble des angles pouvant être mesurés 
 appartiennent à [-80,80]. Passé cette valeur, la gravité serait trop proche de 
-la composante crée par l'effet gyroscopique, ce qui fausserait les mesures. Les 
-mesures de rotations autour de l'axe Z varient quant à elles entre -180 et 180.
+la composante créée par l'effet gyroscopique, ce qui fausserait les mesures. 
+Les mesures de rotations autour de l'axe Z varient quant à elles entre -180 et 
+180.
 
-	  Afin d'utiliser le MPU6050 dans notre montage, nous nous sommes 
-largement inspiré des travaux de Jeff Rowberg\cite{jeffrwork}, qui propose un 
+	  Afin d'utiliser le MPU-6050 dans notre montage, nous nous sommes 
+largement inspirés des travaux de Jeff Rowberg\cite{jeffrwork}, qui propose un 
 code permettant de mesurer les valeurs obtenues par les capteurs. Fort de ces 
 informations, une analyse est effectuée afin de définir l'inclinaison de notre 
 drone. Il convient ensuite de piloter les moteurs afin d'effectuer le 
 traitement adéquat. Puisque notre drone à pour but de mesurer une topographie, 
 il est nécessaire d'obtenir un drone en vol stationnaire, c'est-à-dire 
-parallèle au sol. les moteurs sont donc gouvernés par le gyroscope afin se 
-stabiliser.
+parallèle au sol. Les moteurs sont donc gouvernés par le gyroscope afin de 
+stabiliser l'appareil.
 
 	  \begin{figure}[htbp]
 	    \centering
 	    \includegraphics[scale = 0.6]{img/MPU6050_schema.png}
-	    \caption{Schéma du MPU6050}
+	    \caption{Schéma du MPU-6050}
 	    \label{mpu6050schema}
 	  \end{figure}
 	  
@@ -1329,7 +1328,7 @@ bon fonctionnement du gyroscope.
 fichiers disponibles sur le compte GitHub de Jeff 
 Roswberg\cite{jeff_rowberg_lib}. Ces fichiers permettent la gestion matérielle 
 du gyroscope. Ainsi, d'un signal purement électrique et sans grande 
-signification, ces bibliothèqyes permettent d'obtenir des valeurs plus 
+signification, ces bibliothèques permettent d'obtenir des valeurs plus 
 intuitives (angles, différentiels de forces, ...).
 
 	  \textit{gyro\_lib} est l'application développée afin d'assurer la 
@@ -1351,7 +1350,8 @@ il sera nécessaire d'augmenter (respectivement diminuer) la vitesse des
 moteurs. 
 
 	  Pour avoir une idée de l'action à mener sur chaque moteur, on décide 
-d'acquérir la valeur des angles d'orientations, grâce aux commandes suivantes : 
+d'acquérir la valeur des angles d'orientations, grâce aux instructions 
+suivantes : 
 
 	  \begin{verbatim}
 	    mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -1373,12 +1373,11 @@ des moteurs.
 
 	  On peut remarquer que l'action sur les moteurs implique une 
 modification coordonnée de différents moteurs. En effet, si le drone est 
-incliné 
-avec un $moteur_1$ et un $moteur_4$ trop bas, il sera nécessaire d'augmenter sa 
-vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il est aussi 
-nécessaire de diminuer la vitesse du $moteur_2$ et du $moteur_3$ afin de 
-conserver une altitude plus ou moins stable. La Figure \ref{inclinaisondrone} 
-illustre cet exemple.
+incliné avec un $moteur_1$ et un $moteur_4$ trop bas, il sera nécessaire 
+d'augmenter sa vitesse de rotation afin qu'il gagne en altitude. Néanmoins, il 
+est aussi nécessaire de diminuer la vitesse du $moteur_2$ et du $moteur_3$ afin 
+de conserver une altitude plus ou moins stable. La Figure 
+\ref{inclinaisondrone} illustre cet exemple.
 
 	  \begin{figure}[htbp]
 	    \centering
@@ -1398,17 +1397,17 @@ modifier la vitesse des moteurs
 moteurs}
 	Afin de choisir correctement les moteurs, il est nécessaire de 
 connaître la fonction $Puissance = f(Poids)$, soit la relation entre la 
-puissance fournie par les moteurs et le poids qu'ils permettent de porter. Afin 
-de determiner cette relation, on va considerer notre sytème comme un système 
+puissance fournie par les moteurs et le poids qu'ils permettent de porter. Pour 
+déterminer cette relation, on va considérer notre sytème comme un système 
 isolé (c'est-à-dire sans interactions avec l'extérieur). Il est formé par 
 trois parties, une partie centrale constituée de la pale, une inférieure 
-permettant à l'air d'entrer dans la pale, et une partie supérieure lui 
+permettant à l'air d'entrer dans la pale et une partie supérieure lui 
 permettant d'en sortir. 
 
 	  \begin{figure}[htbp]
 	    \centering
 	    \includegraphics[scale = 0.5]{img/systeme_isole.png}
-	    \caption{Schéma d'un système fermé}
+	    \caption{Schéma d'un système isolé}
 	    \label{systemisole}
 	  \end{figure}
 	  
@@ -1432,7 +1431,7 @@ par l'équation \ref{eq:fdiff}.
 
 	Donc, du fait de la rotation des pales, il se crée une différence de 
 pression, ce qui a pour conséquence de favoriser la création d'une force. 
-Il est courant d'appeler des différence de force, \textit{sustentation}.
+Il est courant d'appeler des différences de force, \textit{sustentation}.
 
 	Maintenant que l'on est en mesure de comprendre le principe de 
 sustentation, il est nécessaire de l'estimer afin de connaître la 
@@ -1478,7 +1477,7 @@ ext\acute{e}rieures)
 	  F_{n} = Q * V_{2} - Q * V_{0} 
 	\end{equation}
 	
-	Afin de simplifier nos calculs, nous devons considerer certaines 
+	Afin de simplifier nos calculs, nous devons considérer certaines 
 hypothèses. Ainsi, au sein du conduit, on peut négliger les échanges avec 
 l'extérieur (système fermé). Par conséquent, on peut utiliser la relation de 
 Bernouilli, soit :
@@ -1511,15 +1510,8 @@ d_{Surface}
 	  Puissance = \frac{1}{2} * Q(V_{2}^{2}-V_{0}^{2}) 
 	\end{equation}
 	
-	or d'après l'équation \ref{eq:puissancerotor} on avait :
-	
-	\begin{equation}
-	  \label{eq:puissance1}
-	  P_{r} = F_{n} * V_{1}
-	\end{equation}
-	
-	en remplaçant $F_{n}$, par l'équation \ref{eq:force}, dans 
-l'équation \ref{eq:puissancerotor} on obtient : 
+	or d'après l'équation \ref{eq:puissancerotor} et en remplaçant 
+$F_{n}$, par l'équation \ref{eq:force} on obtient : 
 	
 	\begin{equation}
 	  \label{eq:puissance2}
@@ -1539,19 +1531,14 @@ peut établir l'équation suivante :
 	  V_{1} = \frac{(V_{2} + V_{0})}{2} 
 	\end{equation}
 	
-	De plus, d'après \ref{eq:force}, on avait : 
-	
-	\begin{equation}
-	  F_{n} =  Q*(V_{2} - V_{0}) 
-	\end{equation}
-	
-	Or d'après \ref{eq:vitessePale} on a : 
+	on a alors :
 	
 	\begin{equation}
 	  V_{2} = 2*(V_{1} - V_{0})
 	\end{equation}
 	
-	Donc, on obtient :
+	de plus, d'après \ref{eq:force}, en remplaçant $V_{2}$ par 
+\ref{eq:vitessePale} on a :
 	
 	\begin{equation}
 	  F_{n} = Q(2V_{1} - 2V_{0})
@@ -1572,7 +1559,7 @@ peut établir l'équation suivante :
 	
 	avec $V_{f} = V_{1} - V_{0}$, la vitesse finale.
 	
-	Il est a noter qu'au décollage, on a V0= 0, on a donc :
+	Il est a noter qu'au décollage, on a $V_{0} = 0$, donc :
 	
 	\begin{equation}
 	  \label{eq:decollage}
@@ -1608,7 +1595,7 @@ peut établir l'équation suivante :
 	
 	Dans le cadre de notre drone, on désire que la force des pales soit 
 supérieure au poids du drone. Donc :
-		
+
 	\begin{equation}
 	  F_{n}(total) > \Sigma (forces \ verticales) 
 	\end{equation}
@@ -1686,7 +1673,7 @@ caractéristiques de notre système sont :
 	  \item $Pr$ : la puissance générée par chaque moteur
 	\end{itemize}
 	
-	Nous avons donc crée un calculateur permettant de nous indiquer si 
+	Nous avons donc créé un calculateur permettant de nous indiquer si 
 notre drone serait en mesure de décoller ou non (voir section 
 \ref{sec:calculateur}). 
 
